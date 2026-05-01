@@ -1,0 +1,41 @@
+; GENERATED WITH Auto_Martini M3FF for PSBA
+; Developed by: Kiran Kanekal, Tristan Bereau, and Andrew Abi-Mansour
+; updated to Martini 3 force field by Magdalena Szczuka
+; supervised by Matthieu Chavent, Pierre Poulain and Paulo C. T. Souza 
+; SMILES code : CC(C)C(=O)OCC[N+](C)(C)CCCS(=O)(=O)[O-]
+
+
+[moleculetype]
+; molname       nrexcl
+  PSBA          2
+
+[atoms]
+; id      type   resnr residue atom    cgnr    charge  mass ;  smiles    ; atom_num
+   1       SC1     1   PSBA    C01       1        0    54   ;   CCC      ; atoms: C0, C1, C2,          
+   2       TN5a    1   PSBA    N01       2        0    36   ;   C=O      ; atoms: C3, O4,          
+   3       TP2a    1   PSBA    P01       3        0    36   ;   CO       ; atoms: O5, C6,          
+   4       Q1      1   PSBA    101       4        1    72   ;   C[N+](C)C ; atoms: C7, N8, C9, C10,          
+   5       SC1     1   PSBA    C02       5        0    54   ;   CCC      ; atoms: C11, C12, C13,          
+   6       Q1      1   PSBA    102       6       -1    72   ;   O=[SH](=O)[O-] ; atoms: S14, O15, O16, O17,          
+
+
+[bonds]
+;  i   j     funct   length   force.c.
+   1   2     1       0.24       100000.00
+   2   3     1       0.24       25000.00
+   3   4     1       0.31       5000.00
+   4   5     1       0.33       7000.00
+   5   6     1       0.26       7000.00
+
+[angles]
+;  i  j  k    funct  angle  force.c.
+   1  2  3       1    122.2   45.0
+   1  2  4       1    110.1   45.0
+   1  2  5       1    121.6   45.0
+   1  2  6       1    106.3   45.0
+   1  3  4       1    91.1   100.0
+   1  4  5       1    125.8  100.0
+   1  5  6       1    111.2  100.0
+   2  3  5       1    144.6  250.0
+   2  3  6       1    138.1  180.0
+   3  4  6       1    97.6   100.0

@@ -1,0 +1,1 @@
+ERROR conda.cli.main_run:execute(127): `conda run python -m auto_martiniM3 --smi CC(C)C(=O)OCC[N+](C)(C) --mol PMTC --canon -v --fpred` failed. (See above for error)

@@ -1,0 +1,1274 @@
+2026-05-01 13:11:36,115 [INFO](__main__:<module>:107): Running auto_martiniM3 v0.0.0
+2026-05-01 13:11:36,138 [INFO](auto_martiniM3.solver:__init__:104): Entering cg_molecule()
+2026-05-01 13:11:36,152 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3)] -64.80627287748963
+2026-05-01 13:11:36,153 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4)] -52.21628797517059
+2026-05-01 13:11:36,153 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5)] -69.509737409297
+2026-05-01 13:11:36,154 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6)] -58.989878274489755
+2026-05-01 13:11:36,154 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7)] -55.89538288079417
+2026-05-01 13:11:36,154 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(8)] -53.984547309753
+2026-05-01 13:11:36,155 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(9)] -31.802195820911773
+2026-05-01 13:11:36,155 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(10)] -41.746092861641756
+2026-05-01 13:11:36,155 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4)] -73.77068602606285
+2026-05-01 13:11:36,156 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5)] -90.8942711622607
+2026-05-01 13:11:36,156 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6)] -83.77891653595778
+2026-05-01 13:11:36,156 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7)] -80.71613357952396
+2026-05-01 13:11:36,157 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(8)] -78.81854899386978
+2026-05-01 13:11:36,157 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(9)] -56.680597357380606
+2026-05-01 13:11:36,157 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(10)] -66.54010230936079
+2026-05-01 13:11:36,157 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3)] -71.07217969556868
+2026-05-01 13:11:36,158 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4)] -58.58598344684984
+2026-05-01 13:11:36,158 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5)] -75.65170030895948
+2026-05-01 13:11:36,158 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6)] -65.16918643287579
+2026-05-01 13:11:36,159 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7)] -62.032413437297734
+2026-05-01 13:11:36,159 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(8)] -60.07578697799974
+2026-05-01 13:11:36,159 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(9)] -37.95672829021858
+2026-05-01 13:11:36,160 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(10)] -47.73386568726043
+2026-05-01 13:11:36,160 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6)] -91.23188094744111
+2026-05-01 13:11:36,160 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7)] -92.65321057101266
+2026-05-01 13:11:36,161 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(8)] -90.82385951439747
+2026-05-01 13:11:36,161 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(9)] -68.72364929965349
+2026-05-01 13:11:36,161 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(10)] -78.6020110255939
+2026-05-01 13:11:36,162 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5)] -77.8040058951996
+2026-05-01 13:11:36,162 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6)] -74.99855745642722
+2026-05-01 13:11:36,162 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7)] -76.37668483331741
+2026-05-01 13:11:36,163 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(8)] -74.59156571807918
+2026-05-01 13:11:36,163 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(9)] -52.4900378869878
+2026-05-01 13:11:36,163 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(10)] -62.42074784802657
+2026-05-01 13:11:36,164 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7)] -89.45493372179583
+2026-05-01 13:11:36,164 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(8)] -91.51219850794186
+2026-05-01 13:11:36,164 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(9)] -69.38817186741196
+2026-05-01 13:11:36,164 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(10)] -79.29746127311554
+2026-05-01 13:11:36,165 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(8)] -76.75656351130678
+2026-05-01 13:11:36,165 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(9)] -58.521048332150514
+2026-05-01 13:11:36,165 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(10)] -68.58972672714921
+2026-05-01 13:11:36,166 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(7), np.int64(9)] -51.285936667348864
+2026-05-01 13:11:36,166 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(7), np.int64(10)] -61.35601780510383
+2026-05-01 13:11:36,167 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6)] -124.80736151752417
+2026-05-01 13:11:36,167 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7)] -126.32810200452582
+2026-05-01 13:11:36,167 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(8)] -124.58865078168634
+2026-05-01 13:11:36,168 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(9)] -102.56406073264205
+2026-05-01 13:11:36,168 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(10)] -112.31632610215001
+2026-05-01 13:11:36,169 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5)] -114.88202694761645
+2026-05-01 13:11:36,169 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6)] -112.27359741191474
+2026-05-01 13:11:36,169 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7)] -113.75113565223504
+2026-05-01 13:11:36,170 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(8)] -112.0559163707725
+2026-05-01 13:11:36,170 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(9)] -90.03000870538091
+2026-05-01 13:11:36,170 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(10)] -99.8346223099872
+2026-05-01 13:11:36,171 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7)] -126.98668027282699
+2026-05-01 13:11:36,171 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(8)] -129.13384489274873
+2026-05-01 13:11:36,172 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(9)] -107.08543841791854
+2026-05-01 13:11:36,172 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(10)] -116.86863146718972
+2026-05-01 13:11:36,172 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(8)] -114.57522879918427
+2026-05-01 13:11:36,173 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(9)] -96.41533378572782
+2026-05-01 13:11:36,173 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(10)] -106.35791582429405
+2026-05-01 13:11:36,174 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7), np.int64(9)] -89.27963298435627
+2026-05-01 13:11:36,174 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7), np.int64(10)] -99.22361776567874
+2026-05-01 13:11:36,174 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5)] -136.20077541976804
+2026-05-01 13:11:36,175 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6)] -133.63377039257074
+2026-05-01 13:11:36,175 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7)] -135.14302107015277
+2026-05-01 13:11:36,176 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(8)] -133.46105277407725
+2026-05-01 13:11:36,176 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(9)] -111.47954496103765
+2026-05-01 13:11:36,176 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(10)] -121.19976647689415
+2026-05-01 13:11:36,177 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7)] -148.20870139281615
+2026-05-01 13:11:36,177 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(8)] -150.36911699812487
+2026-05-01 13:11:36,177 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(9)] -128.3651103756468
+2026-05-01 13:11:36,178 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(10)] -138.06391133616813
+2026-05-01 13:11:36,178 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(8)] -139.21500541306483
+2026-05-01 13:11:36,179 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(9)] -121.09951025196035
+2026-05-01 13:11:36,179 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(10)] -130.95770020177682
+2026-05-01 13:11:36,179 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7), np.int64(9)] -113.9955218878506
+2026-05-01 13:11:36,180 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7), np.int64(10)] -123.85511458042328
+2026-05-01 13:11:36,180 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6)] -130.98465470616298
+2026-05-01 13:11:36,181 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7)] -132.46311759128216
+2026-05-01 13:11:36,181 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(8)] -130.67787548018583
+2026-05-01 13:11:36,181 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(9)] -108.71657823220167
+2026-05-01 13:11:36,182 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(10)] -118.30208395802148
+2026-05-01 13:11:36,182 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5)] -121.12576353113192
+2026-05-01 13:11:36,183 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6)] -118.55467925415378
+2026-05-01 13:11:36,183 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7)] -119.98993989259156
+2026-05-01 13:11:36,183 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(8)] -118.24892972287223
+2026-05-01 13:11:36,184 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(9)] -96.28631485854069
+2026-05-01 13:11:36,184 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(10)] -105.92416881945886
+2026-05-01 13:11:36,184 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7)] -132.9977519411667
+2026-05-01 13:11:36,185 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(8)] -135.09912567283166
+2026-05-01 13:11:36,185 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(9)] -113.11401199906155
+2026-05-01 13:11:36,186 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(10)] -122.73044540464457
+2026-05-01 13:11:36,186 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(8)] -120.57785483799078
+2026-05-01 13:11:36,186 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(9)] -102.48125262559441
+2026-05-01 13:11:36,187 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(10)] -112.25707502047248
+2026-05-01 13:11:36,187 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7), np.int64(9)] -95.30327422234033
+2026-05-01 13:11:36,188 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7), np.int64(10)] -105.08049935997471
+2026-05-01 13:11:36,188 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(8)] -146.50332678845723
+2026-05-01 13:11:36,188 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(9)] -128.425573049098
+2026-05-01 13:11:36,189 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(10)] -138.30261977287466
+2026-05-01 13:11:36,189 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7), np.int64(9)] -125.80569726499354
+2026-05-01 13:11:36,190 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7), np.int64(10)] -135.68414673152648
+2026-05-01 13:11:36,190 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7)] -134.89857811065343
+2026-05-01 13:11:36,190 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(8)] -137.1714591863781
+2026-05-01 13:11:36,191 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(9)] -115.20387636929783
+2026-05-01 13:11:36,191 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(10)] -124.97388233887776
+2026-05-01 13:11:36,192 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(8)] -130.3272537888486
+2026-05-01 13:11:36,192 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(9)] -112.24818243314192
+2026-05-01 13:11:36,192 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(10)] -122.17757739201699
+2026-05-01 13:11:36,193 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7), np.int64(9)] -109.58510440235617
+2026-05-01 13:11:36,193 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7), np.int64(10)] -119.51590210398746
+2026-05-01 13:11:36,193 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7), np.int64(9)] -122.42533356924582
+2026-05-01 13:11:36,194 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7), np.int64(10)] -132.33471071554195
+2026-05-01 13:11:36,195 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(8)] -179.92400444627546
+2026-05-01 13:11:36,196 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(9)] -161.921870872616
+2026-05-01 13:11:36,196 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(10)] -171.67282123996017
+2026-05-01 13:11:36,196 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7), np.int64(9)] -159.40140595194168
+2026-05-01 13:11:36,197 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7), np.int64(10)] -169.15375906204207
+2026-05-01 13:11:36,197 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7)] -171.73189641702973
+2026-05-01 13:11:36,198 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(8)] -174.0946773265301
+2026-05-01 13:11:36,198 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(9)] -152.20271467514962
+2026-05-01 13:11:36,199 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(10)] -161.84662428829702
+2026-05-01 13:11:36,199 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(8)] -167.44749083207122
+2026-05-01 13:11:36,200 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(9)] -149.4440396420644
+2026-05-01 13:11:36,200 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(10)] -159.24733824450695
+2026-05-01 13:11:36,201 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7), np.int64(9)] -146.8803724747087
+2026-05-01 13:11:36,201 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7), np.int64(10)] -156.68507381990753
+2026-05-01 13:11:36,202 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7), np.int64(9)] -159.87789737371193
+2026-05-01 13:11:36,202 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7), np.int64(10)] -169.66117816357553
+2026-05-01 13:11:36,203 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7)] -192.88813225620686
+2026-05-01 13:11:36,203 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(8)] -195.26416415109418
+2026-05-01 13:11:36,204 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(9)] -173.41660135206575
+2026-05-01 13:11:36,204 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(10)] -182.97611887646337
+2026-05-01 13:11:36,205 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(8)] -188.6584021651397
+2026-05-01 13:11:36,205 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(9)] -170.69935082748495
+2026-05-01 13:11:36,206 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(10)] -180.41825734117765
+2026-05-01 13:11:36,206 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7), np.int64(9)] -168.167396097391
+2026-05-01 13:11:36,207 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7), np.int64(10)] -177.88770535383995
+2026-05-01 13:11:36,207 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7), np.int64(9)] -180.9950566984656
+2026-05-01 13:11:36,208 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7), np.int64(10)] -190.69394539957946
+2026-05-01 13:11:36,208 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(8)] -185.92461551533475
+2026-05-01 13:11:36,209 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(9)] -167.98577474273534
+2026-05-01 13:11:36,209 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(10)] -177.56996546639135
+2026-05-01 13:11:36,210 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7), np.int64(9)] -165.4230322201785
+2026-05-01 13:11:36,210 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7), np.int64(10)] -175.00862568659082
+2026-05-01 13:11:36,211 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7)] -177.84474176922245
+2026-05-01 13:11:36,211 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(8)] -180.16173179046606
+2026-05-01 13:11:36,212 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(9)] -158.3330619401456
+2026-05-01 13:11:36,212 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(10)] -167.8102119096049
+2026-05-01 13:11:36,213 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(8)] -173.55189055473076
+2026-05-01 13:11:36,213 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(9)] -155.611732165784
+2026-05-01 13:11:36,213 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(10)] -165.24827112453835
+2026-05-01 13:11:36,214 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7), np.int64(9)] -153.00578739654577
+2026-05-01 13:11:36,214 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7), np.int64(10)] -162.64372909805644
+2026-05-01 13:11:36,215 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7), np.int64(9)] -165.7755797235322
+2026-05-01 13:11:36,215 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7), np.int64(10)] -175.3921008697077
+2026-05-01 13:11:36,216 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -167.61396467701502
+2026-05-01 13:11:36,217 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -177.38405838718745
+2026-05-01 13:11:36,219 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -204.36810023682625
+2026-05-01 13:11:36,220 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -214.01209759056619
+2026-05-01 13:11:36,221 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -225.4194742807679
+2026-05-01 13:11:36,221 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -234.97907954575803
+2026-05-01 13:11:36,223 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -210.36755627049956
+2026-05-01 13:11:36,223 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -219.84479398055134
+2026-05-01 13:11:36,224 [INFO](auto_martiniM3.solver:__init__:145): Max. number of attempts: 49
+2026-05-01 13:11:36,226 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:36,233 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:37,242 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:37,245 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:37,265 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:38,232 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:38,236 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:38,258 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:39,218 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:39,224 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:39,247 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:40,234 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:40,237 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:40,263 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:41,150 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:41,155 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:41,173 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:42,079 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:42,082 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:42,103 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:43,038 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:43,042 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:43,062 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:44,056 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:44,059 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:44,081 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:45,056 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:45,060 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:45,084 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:46,029 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:46,033 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:46,056 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:46,993 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:46,998 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:47,021 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:47,977 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:47,982 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:48,002 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:49,067 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:49,071 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:49,096 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:50,064 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:50,069 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:50,091 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:51,006 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:51,011 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:51,037 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:51,993 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:51,996 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:52,020 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:52,962 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:52,966 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:52,993 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:53,920 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:53,925 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:53,950 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:54,965 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:54,970 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:54,992 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:55,925 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:55,930 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:55,954 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:56,940 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:56,945 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:56,965 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:57,886 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:57,891 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:57,917 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:11:59,040 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:11:59,044 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:11:59,064 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:11:59,980 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:11:59,984 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:00,009 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:12:00,982 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:12:00,985 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:01,003 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:12:01,960 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:12:01,963 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:01,975 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:12:02,992 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:12:02,994 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:04,050 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:12:05,075 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:12:05,076 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:06,070 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:12:07,027 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:12:07,030 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:08,026 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:12:09,048 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:12:09,050 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:10,160 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:12:12,127 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:12:12,129 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:12,141 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'Q1']
+2026-05-01 13:12:13,101 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.8513 (whole vs sum: -0.8034 vs. -0.1195)
+2026-05-01 13:12:13,108 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:14,089 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:12:15,065 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:12:15,069 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:16,027 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 13:12:16,978 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 13:12:16,984 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:17,977 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:12:19,013 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:12:19,016 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:19,991 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:12:20,948 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:12:20,951 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:22,026 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:12:22,985 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:12:22,990 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:24,000 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:12:24,966 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:12:24,970 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:25,943 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:12:26,919 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:12:26,925 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:27,942 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:12:29,029 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:12:29,034 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:30,041 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 13:12:30,975 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 13:12:30,979 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:31,001 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'Q1']
+2026-05-01 13:12:32,083 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.8513 (whole vs sum: -0.8034 vs. -0.1195)
+2026-05-01 13:12:32,088 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:33,054 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:12:34,120 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:12:34,124 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:35,075 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:12:36,047 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:12:36,051 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:37,001 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:12:37,908 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:12:37,913 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:39,111 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:12:40,049 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:12:40,053 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:41,046 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:12:42,030 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:12:42,034 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:42,957 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 13:12:43,900 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 13:12:43,903 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:44,977 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:12:45,944 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:12:45,947 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:45,973 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:12:46,945 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:12:46,951 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:46,977 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:12:47,980 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:12:47,985 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:48,007 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:12:49,096 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:12:49,102 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:49,117 [WARNING](auto_martiniM3.topology:gen_molecule_smi:69): Error. Only one molecule may be provided.
+2026-05-01 13:12:49,117 [WARNING](auto_martiniM3.topology:gen_molecule_smi:70): C.C=O
+2026-05-01 13:12:55,495 [INFO](__main__:<module>:107): Running auto_martiniM3 v0.0.0
+2026-05-01 13:12:55,515 [INFO](auto_martiniM3.solver:__init__:104): Entering cg_molecule()
+2026-05-01 13:12:55,529 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3)] -64.80627287748963
+2026-05-01 13:12:55,529 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4)] -52.21628797517059
+2026-05-01 13:12:55,529 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5)] -69.509737409297
+2026-05-01 13:12:55,530 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6)] -58.989878274489755
+2026-05-01 13:12:55,530 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7)] -55.89538288079417
+2026-05-01 13:12:55,530 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(8)] -53.984547309753
+2026-05-01 13:12:55,531 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(9)] -31.802195820911773
+2026-05-01 13:12:55,531 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(10)] -41.746092861641756
+2026-05-01 13:12:55,531 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4)] -73.77068602606285
+2026-05-01 13:12:55,532 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5)] -90.8942711622607
+2026-05-01 13:12:55,532 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6)] -83.77891653595778
+2026-05-01 13:12:55,532 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7)] -80.71613357952396
+2026-05-01 13:12:55,533 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(8)] -78.81854899386978
+2026-05-01 13:12:55,533 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(9)] -56.680597357380606
+2026-05-01 13:12:55,533 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(10)] -66.54010230936079
+2026-05-01 13:12:55,534 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3)] -71.07217969556868
+2026-05-01 13:12:55,534 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4)] -58.58598344684984
+2026-05-01 13:12:55,534 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5)] -75.65170030895948
+2026-05-01 13:12:55,535 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6)] -65.16918643287579
+2026-05-01 13:12:55,535 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7)] -62.032413437297734
+2026-05-01 13:12:55,535 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(8)] -60.07578697799974
+2026-05-01 13:12:55,536 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(9)] -37.95672829021858
+2026-05-01 13:12:55,536 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(10)] -47.73386568726043
+2026-05-01 13:12:55,536 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6)] -91.23188094744111
+2026-05-01 13:12:55,537 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7)] -92.65321057101266
+2026-05-01 13:12:55,537 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(8)] -90.82385951439747
+2026-05-01 13:12:55,537 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(9)] -68.72364929965349
+2026-05-01 13:12:55,538 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(10)] -78.6020110255939
+2026-05-01 13:12:55,538 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5)] -77.8040058951996
+2026-05-01 13:12:55,538 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6)] -74.99855745642722
+2026-05-01 13:12:55,539 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7)] -76.37668483331741
+2026-05-01 13:12:55,539 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(8)] -74.59156571807918
+2026-05-01 13:12:55,539 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(9)] -52.4900378869878
+2026-05-01 13:12:55,540 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(10)] -62.42074784802657
+2026-05-01 13:12:55,540 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7)] -89.45493372179583
+2026-05-01 13:12:55,540 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(8)] -91.51219850794186
+2026-05-01 13:12:55,540 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(9)] -69.38817186741196
+2026-05-01 13:12:55,541 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(10)] -79.29746127311554
+2026-05-01 13:12:55,541 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(8)] -76.75656351130678
+2026-05-01 13:12:55,541 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(9)] -58.521048332150514
+2026-05-01 13:12:55,542 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(10)] -68.58972672714921
+2026-05-01 13:12:55,542 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(7), np.int64(9)] -51.285936667348864
+2026-05-01 13:12:55,542 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(7), np.int64(10)] -61.35601780510383
+2026-05-01 13:12:55,543 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6)] -124.80736151752417
+2026-05-01 13:12:55,543 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7)] -126.32810200452582
+2026-05-01 13:12:55,544 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(8)] -124.58865078168634
+2026-05-01 13:12:55,544 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(9)] -102.56406073264205
+2026-05-01 13:12:55,544 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(10)] -112.31632610215001
+2026-05-01 13:12:55,545 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5)] -114.88202694761645
+2026-05-01 13:12:55,545 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6)] -112.27359741191474
+2026-05-01 13:12:55,546 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7)] -113.75113565223504
+2026-05-01 13:12:55,546 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(8)] -112.0559163707725
+2026-05-01 13:12:55,546 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(9)] -90.03000870538091
+2026-05-01 13:12:55,547 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(10)] -99.8346223099872
+2026-05-01 13:12:55,547 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7)] -126.98668027282699
+2026-05-01 13:12:55,547 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(8)] -129.13384489274873
+2026-05-01 13:12:55,548 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(9)] -107.08543841791854
+2026-05-01 13:12:55,548 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(10)] -116.86863146718972
+2026-05-01 13:12:55,549 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(8)] -114.57522879918427
+2026-05-01 13:12:55,549 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(9)] -96.41533378572782
+2026-05-01 13:12:55,549 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(10)] -106.35791582429405
+2026-05-01 13:12:55,550 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7), np.int64(9)] -89.27963298435627
+2026-05-01 13:12:55,550 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7), np.int64(10)] -99.22361776567874
+2026-05-01 13:12:55,551 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5)] -136.20077541976804
+2026-05-01 13:12:55,551 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6)] -133.63377039257074
+2026-05-01 13:12:55,551 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7)] -135.14302107015277
+2026-05-01 13:12:55,552 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(8)] -133.46105277407725
+2026-05-01 13:12:55,552 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(9)] -111.47954496103765
+2026-05-01 13:12:55,552 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(10)] -121.19976647689415
+2026-05-01 13:12:55,553 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7)] -148.20870139281615
+2026-05-01 13:12:55,553 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(8)] -150.36911699812487
+2026-05-01 13:12:55,554 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(9)] -128.3651103756468
+2026-05-01 13:12:55,554 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(10)] -138.06391133616813
+2026-05-01 13:12:55,554 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(8)] -139.21500541306483
+2026-05-01 13:12:55,555 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(9)] -121.09951025196035
+2026-05-01 13:12:55,555 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(10)] -130.95770020177682
+2026-05-01 13:12:55,555 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7), np.int64(9)] -113.9955218878506
+2026-05-01 13:12:55,556 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7), np.int64(10)] -123.85511458042328
+2026-05-01 13:12:55,556 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6)] -130.98465470616298
+2026-05-01 13:12:55,557 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7)] -132.46311759128216
+2026-05-01 13:12:55,557 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(8)] -130.67787548018583
+2026-05-01 13:12:55,557 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(9)] -108.71657823220167
+2026-05-01 13:12:55,558 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(10)] -118.30208395802148
+2026-05-01 13:12:55,558 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5)] -121.12576353113192
+2026-05-01 13:12:55,559 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6)] -118.55467925415378
+2026-05-01 13:12:55,559 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7)] -119.98993989259156
+2026-05-01 13:12:55,559 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(8)] -118.24892972287223
+2026-05-01 13:12:55,560 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(9)] -96.28631485854069
+2026-05-01 13:12:55,560 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(10)] -105.92416881945886
+2026-05-01 13:12:55,561 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7)] -132.9977519411667
+2026-05-01 13:12:55,561 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(8)] -135.09912567283166
+2026-05-01 13:12:55,561 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(9)] -113.11401199906155
+2026-05-01 13:12:55,562 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(10)] -122.73044540464457
+2026-05-01 13:12:55,562 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(8)] -120.57785483799078
+2026-05-01 13:12:55,563 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(9)] -102.48125262559441
+2026-05-01 13:12:55,563 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(10)] -112.25707502047248
+2026-05-01 13:12:55,563 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7), np.int64(9)] -95.30327422234033
+2026-05-01 13:12:55,564 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7), np.int64(10)] -105.08049935997471
+2026-05-01 13:12:55,564 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(8)] -146.50332678845723
+2026-05-01 13:12:55,565 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(9)] -128.425573049098
+2026-05-01 13:12:55,565 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(10)] -138.30261977287466
+2026-05-01 13:12:55,565 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7), np.int64(9)] -125.80569726499354
+2026-05-01 13:12:55,566 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7), np.int64(10)] -135.68414673152648
+2026-05-01 13:12:55,566 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7)] -134.89857811065343
+2026-05-01 13:12:55,566 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(8)] -137.1714591863781
+2026-05-01 13:12:55,567 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(9)] -115.20387636929783
+2026-05-01 13:12:55,567 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(10)] -124.97388233887776
+2026-05-01 13:12:55,568 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(8)] -130.3272537888486
+2026-05-01 13:12:55,568 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(9)] -112.24818243314192
+2026-05-01 13:12:55,568 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(10)] -122.17757739201699
+2026-05-01 13:12:55,569 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7), np.int64(9)] -109.58510440235617
+2026-05-01 13:12:55,569 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7), np.int64(10)] -119.51590210398746
+2026-05-01 13:12:55,570 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7), np.int64(9)] -122.42533356924582
+2026-05-01 13:12:55,570 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7), np.int64(10)] -132.33471071554195
+2026-05-01 13:12:55,571 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(8)] -179.92400444627546
+2026-05-01 13:12:55,572 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(9)] -161.921870872616
+2026-05-01 13:12:55,572 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(10)] -171.67282123996017
+2026-05-01 13:12:55,573 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7), np.int64(9)] -159.40140595194168
+2026-05-01 13:12:55,573 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7), np.int64(10)] -169.15375906204207
+2026-05-01 13:12:55,573 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7)] -171.73189641702973
+2026-05-01 13:12:55,574 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(8)] -174.0946773265301
+2026-05-01 13:12:55,574 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(9)] -152.20271467514962
+2026-05-01 13:12:55,575 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(10)] -161.84662428829702
+2026-05-01 13:12:55,575 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(8)] -167.44749083207122
+2026-05-01 13:12:55,576 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(9)] -149.4440396420644
+2026-05-01 13:12:55,576 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(10)] -159.24733824450695
+2026-05-01 13:12:55,577 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7), np.int64(9)] -146.8803724747087
+2026-05-01 13:12:55,577 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7), np.int64(10)] -156.68507381990753
+2026-05-01 13:12:55,578 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7), np.int64(9)] -159.87789737371193
+2026-05-01 13:12:55,578 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7), np.int64(10)] -169.66117816357553
+2026-05-01 13:12:55,579 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7)] -192.88813225620686
+2026-05-01 13:12:55,579 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(8)] -195.26416415109418
+2026-05-01 13:12:55,580 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(9)] -173.41660135206575
+2026-05-01 13:12:55,580 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(10)] -182.97611887646337
+2026-05-01 13:12:55,581 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(8)] -188.6584021651397
+2026-05-01 13:12:55,581 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(9)] -170.69935082748495
+2026-05-01 13:12:55,582 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(10)] -180.41825734117765
+2026-05-01 13:12:55,582 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7), np.int64(9)] -168.167396097391
+2026-05-01 13:12:55,583 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7), np.int64(10)] -177.88770535383995
+2026-05-01 13:12:55,583 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7), np.int64(9)] -180.9950566984656
+2026-05-01 13:12:55,584 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7), np.int64(10)] -190.69394539957946
+2026-05-01 13:12:55,584 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(8)] -185.92461551533475
+2026-05-01 13:12:55,585 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(9)] -167.98577474273534
+2026-05-01 13:12:55,585 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(10)] -177.56996546639135
+2026-05-01 13:12:55,586 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7), np.int64(9)] -165.4230322201785
+2026-05-01 13:12:55,586 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7), np.int64(10)] -175.00862568659082
+2026-05-01 13:12:55,587 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7)] -177.84474176922245
+2026-05-01 13:12:55,587 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(8)] -180.16173179046606
+2026-05-01 13:12:55,588 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(9)] -158.3330619401456
+2026-05-01 13:12:55,588 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(10)] -167.8102119096049
+2026-05-01 13:12:55,589 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(8)] -173.55189055473076
+2026-05-01 13:12:55,589 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(9)] -155.611732165784
+2026-05-01 13:12:55,589 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(10)] -165.24827112453835
+2026-05-01 13:12:55,590 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7), np.int64(9)] -153.00578739654577
+2026-05-01 13:12:55,590 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7), np.int64(10)] -162.64372909805644
+2026-05-01 13:12:55,591 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7), np.int64(9)] -165.7755797235322
+2026-05-01 13:12:55,591 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7), np.int64(10)] -175.3921008697077
+2026-05-01 13:12:55,592 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -167.61396467701502
+2026-05-01 13:12:55,593 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -177.38405838718745
+2026-05-01 13:12:55,595 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -204.36810023682625
+2026-05-01 13:12:55,595 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -214.01209759056619
+2026-05-01 13:12:55,597 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -225.4194742807679
+2026-05-01 13:12:55,597 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -234.97907954575803
+2026-05-01 13:12:55,598 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -210.36755627049956
+2026-05-01 13:12:55,599 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -219.84479398055134
+2026-05-01 13:12:55,600 [INFO](auto_martiniM3.solver:__init__:145): Max. number of attempts: 49
+2026-05-01 13:12:55,601 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:55,608 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:12:56,629 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:12:56,634 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:56,655 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:12:57,563 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:12:57,567 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:57,585 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:12:58,517 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:12:58,522 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:58,540 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:12:59,573 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:12:59,578 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:12:59,600 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:13:00,517 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:13:00,520 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:00,539 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:01,523 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:01,528 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:01,551 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:13:02,488 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:13:02,494 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:02,516 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:03,514 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:03,518 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:03,539 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:13:04,522 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:13:04,527 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:04,551 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:05,608 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:05,614 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:05,638 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:13:06,604 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:13:06,608 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:06,623 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:07,526 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:07,530 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:07,555 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:13:08,496 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:13:08,501 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:08,524 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:13:09,581 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:13:09,586 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:09,620 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:10,545 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:10,549 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:10,575 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:11,546 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:11,549 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:11,571 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:12,560 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:12,564 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:12,582 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:13:13,587 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:13:13,591 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:13,616 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:14,606 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:14,610 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:14,632 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:15,620 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:15,624 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:15,643 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:16,556 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:16,560 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:16,584 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:13:17,647 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:13:17,651 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:17,672 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:18,604 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:18,608 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:18,633 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:13:19,690 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:13:19,691 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:19,700 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:20,778 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:20,781 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:20,801 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:13:21,834 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:13:21,838 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:21,862 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:13:22,963 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:13:22,966 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:24,010 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:13:25,076 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:13:25,079 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:26,156 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:13:27,291 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:13:27,294 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:28,400 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:13:29,339 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:13:29,343 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:30,425 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:13:31,378 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:13:31,381 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:31,400 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'Q1']
+2026-05-01 13:13:32,346 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.8513 (whole vs sum: -0.8034 vs. -0.1195)
+2026-05-01 13:13:32,351 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:33,261 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:13:34,268 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:13:34,269 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:35,254 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 13:13:36,240 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 13:13:36,242 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:37,180 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:13:38,119 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:13:38,120 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:39,152 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:13:40,100 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:13:40,102 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:41,138 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:13:42,034 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:13:42,036 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:42,965 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:13:43,860 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:13:43,863 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:44,851 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:13:45,954 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:13:45,957 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:46,914 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:13:47,875 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:13:47,879 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:49,145 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 13:13:50,120 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 13:13:50,123 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:50,144 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'Q1']
+2026-05-01 13:13:51,144 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.8513 (whole vs sum: -0.8034 vs. -0.1195)
+2026-05-01 13:13:51,146 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:52,183 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:13:53,104 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:13:53,105 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:54,043 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:13:55,253 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:13:55,256 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:56,274 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:13:57,245 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:13:57,248 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:13:58,183 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:13:59,230 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:13:59,232 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:00,259 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:14:01,211 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:14:01,214 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:02,242 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 13:14:03,225 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 13:14:03,228 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:04,144 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:14:05,093 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:14:05,096 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:05,114 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:06,351 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:06,356 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:06,378 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:07,334 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:07,338 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:07,354 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:08,368 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:08,375 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:08,384 [WARNING](auto_martiniM3.topology:gen_molecule_smi:69): Error. Only one molecule may be provided.
+2026-05-01 13:14:08,385 [WARNING](auto_martiniM3.topology:gen_molecule_smi:70): C.C=O
+2026-05-01 13:14:14,657 [INFO](__main__:<module>:107): Running auto_martiniM3 v0.0.0
+2026-05-01 13:14:14,677 [INFO](auto_martiniM3.solver:__init__:104): Entering cg_molecule()
+2026-05-01 13:14:14,692 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3)] -64.80627287748963
+2026-05-01 13:14:14,692 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4)] -52.21628797517059
+2026-05-01 13:14:14,693 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5)] -69.509737409297
+2026-05-01 13:14:14,693 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6)] -58.989878274489755
+2026-05-01 13:14:14,693 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7)] -55.89538288079417
+2026-05-01 13:14:14,694 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(8)] -53.984547309753
+2026-05-01 13:14:14,694 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(9)] -31.802195820911773
+2026-05-01 13:14:14,694 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(10)] -41.746092861641756
+2026-05-01 13:14:14,695 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4)] -73.77068602606285
+2026-05-01 13:14:14,695 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5)] -90.8942711622607
+2026-05-01 13:14:14,695 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6)] -83.77891653595778
+2026-05-01 13:14:14,696 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7)] -80.71613357952396
+2026-05-01 13:14:14,696 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(8)] -78.81854899386978
+2026-05-01 13:14:14,696 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(9)] -56.680597357380606
+2026-05-01 13:14:14,697 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(10)] -66.54010230936079
+2026-05-01 13:14:14,697 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3)] -71.07217969556868
+2026-05-01 13:14:14,697 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4)] -58.58598344684984
+2026-05-01 13:14:14,697 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5)] -75.65170030895948
+2026-05-01 13:14:14,698 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6)] -65.16918643287579
+2026-05-01 13:14:14,698 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7)] -62.032413437297734
+2026-05-01 13:14:14,698 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(8)] -60.07578697799974
+2026-05-01 13:14:14,699 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(9)] -37.95672829021858
+2026-05-01 13:14:14,699 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(10)] -47.73386568726043
+2026-05-01 13:14:14,699 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6)] -91.23188094744111
+2026-05-01 13:14:14,700 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7)] -92.65321057101266
+2026-05-01 13:14:14,700 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(8)] -90.82385951439747
+2026-05-01 13:14:14,700 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(9)] -68.72364929965349
+2026-05-01 13:14:14,701 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(10)] -78.6020110255939
+2026-05-01 13:14:14,701 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5)] -77.8040058951996
+2026-05-01 13:14:14,701 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6)] -74.99855745642722
+2026-05-01 13:14:14,702 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7)] -76.37668483331741
+2026-05-01 13:14:14,702 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(8)] -74.59156571807918
+2026-05-01 13:14:14,702 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(9)] -52.4900378869878
+2026-05-01 13:14:14,703 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(10)] -62.42074784802657
+2026-05-01 13:14:14,703 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7)] -89.45493372179583
+2026-05-01 13:14:14,703 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(8)] -91.51219850794186
+2026-05-01 13:14:14,704 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(9)] -69.38817186741196
+2026-05-01 13:14:14,704 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(10)] -79.29746127311554
+2026-05-01 13:14:14,704 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(8)] -76.75656351130678
+2026-05-01 13:14:14,705 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(9)] -58.521048332150514
+2026-05-01 13:14:14,705 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(10)] -68.58972672714921
+2026-05-01 13:14:14,705 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(7), np.int64(9)] -51.285936667348864
+2026-05-01 13:14:14,706 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(7), np.int64(10)] -61.35601780510383
+2026-05-01 13:14:14,706 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6)] -124.80736151752417
+2026-05-01 13:14:14,707 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7)] -126.32810200452582
+2026-05-01 13:14:14,707 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(8)] -124.58865078168634
+2026-05-01 13:14:14,707 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(9)] -102.56406073264205
+2026-05-01 13:14:14,708 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(10)] -112.31632610215001
+2026-05-01 13:14:14,708 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5)] -114.88202694761645
+2026-05-01 13:14:14,709 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6)] -112.27359741191474
+2026-05-01 13:14:14,709 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7)] -113.75113565223504
+2026-05-01 13:14:14,709 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(8)] -112.0559163707725
+2026-05-01 13:14:14,710 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(9)] -90.03000870538091
+2026-05-01 13:14:14,710 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(10)] -99.8346223099872
+2026-05-01 13:14:14,711 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7)] -126.98668027282699
+2026-05-01 13:14:14,711 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(8)] -129.13384489274873
+2026-05-01 13:14:14,711 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(9)] -107.08543841791854
+2026-05-01 13:14:14,712 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(10)] -116.86863146718972
+2026-05-01 13:14:14,712 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(8)] -114.57522879918427
+2026-05-01 13:14:14,713 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(9)] -96.41533378572782
+2026-05-01 13:14:14,713 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(10)] -106.35791582429405
+2026-05-01 13:14:14,713 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7), np.int64(9)] -89.27963298435627
+2026-05-01 13:14:14,714 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7), np.int64(10)] -99.22361776567874
+2026-05-01 13:14:14,714 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5)] -136.20077541976804
+2026-05-01 13:14:14,715 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6)] -133.63377039257074
+2026-05-01 13:14:14,715 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7)] -135.14302107015277
+2026-05-01 13:14:14,715 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(8)] -133.46105277407725
+2026-05-01 13:14:14,716 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(9)] -111.47954496103765
+2026-05-01 13:14:14,716 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(10)] -121.19976647689415
+2026-05-01 13:14:14,717 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7)] -148.20870139281615
+2026-05-01 13:14:14,717 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(8)] -150.36911699812487
+2026-05-01 13:14:14,717 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(9)] -128.3651103756468
+2026-05-01 13:14:14,718 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(10)] -138.06391133616813
+2026-05-01 13:14:14,718 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(8)] -139.21500541306483
+2026-05-01 13:14:14,718 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(9)] -121.09951025196035
+2026-05-01 13:14:14,719 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(10)] -130.95770020177682
+2026-05-01 13:14:14,719 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7), np.int64(9)] -113.9955218878506
+2026-05-01 13:14:14,720 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7), np.int64(10)] -123.85511458042328
+2026-05-01 13:14:14,720 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6)] -130.98465470616298
+2026-05-01 13:14:14,720 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7)] -132.46311759128216
+2026-05-01 13:14:14,721 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(8)] -130.67787548018583
+2026-05-01 13:14:14,721 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(9)] -108.71657823220167
+2026-05-01 13:14:14,722 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(10)] -118.30208395802148
+2026-05-01 13:14:14,722 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5)] -121.12576353113192
+2026-05-01 13:14:14,722 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6)] -118.55467925415378
+2026-05-01 13:14:14,723 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7)] -119.98993989259156
+2026-05-01 13:14:14,723 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(8)] -118.24892972287223
+2026-05-01 13:14:14,724 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(9)] -96.28631485854069
+2026-05-01 13:14:14,724 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(10)] -105.92416881945886
+2026-05-01 13:14:14,724 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7)] -132.9977519411667
+2026-05-01 13:14:14,725 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(8)] -135.09912567283166
+2026-05-01 13:14:14,725 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(9)] -113.11401199906155
+2026-05-01 13:14:14,726 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(10)] -122.73044540464457
+2026-05-01 13:14:14,726 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(8)] -120.57785483799078
+2026-05-01 13:14:14,726 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(9)] -102.48125262559441
+2026-05-01 13:14:14,727 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(10)] -112.25707502047248
+2026-05-01 13:14:14,727 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7), np.int64(9)] -95.30327422234033
+2026-05-01 13:14:14,728 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7), np.int64(10)] -105.08049935997471
+2026-05-01 13:14:14,728 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(8)] -146.50332678845723
+2026-05-01 13:14:14,728 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(9)] -128.425573049098
+2026-05-01 13:14:14,729 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(10)] -138.30261977287466
+2026-05-01 13:14:14,729 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7), np.int64(9)] -125.80569726499354
+2026-05-01 13:14:14,730 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7), np.int64(10)] -135.68414673152648
+2026-05-01 13:14:14,730 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7)] -134.89857811065343
+2026-05-01 13:14:14,730 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(8)] -137.1714591863781
+2026-05-01 13:14:14,731 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(9)] -115.20387636929783
+2026-05-01 13:14:14,731 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(10)] -124.97388233887776
+2026-05-01 13:14:14,732 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(8)] -130.3272537888486
+2026-05-01 13:14:14,732 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(9)] -112.24818243314192
+2026-05-01 13:14:14,733 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(10)] -122.17757739201699
+2026-05-01 13:14:14,733 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7), np.int64(9)] -109.58510440235617
+2026-05-01 13:14:14,734 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7), np.int64(10)] -119.51590210398746
+2026-05-01 13:14:14,734 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7), np.int64(9)] -122.42533356924582
+2026-05-01 13:14:14,734 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7), np.int64(10)] -132.33471071554195
+2026-05-01 13:14:14,736 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(8)] -179.92400444627546
+2026-05-01 13:14:14,737 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(9)] -161.921870872616
+2026-05-01 13:14:14,737 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(10)] -171.67282123996017
+2026-05-01 13:14:14,737 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7), np.int64(9)] -159.40140595194168
+2026-05-01 13:14:14,738 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7), np.int64(10)] -169.15375906204207
+2026-05-01 13:14:14,738 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7)] -171.73189641702973
+2026-05-01 13:14:14,739 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(8)] -174.0946773265301
+2026-05-01 13:14:14,739 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(9)] -152.20271467514962
+2026-05-01 13:14:14,740 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(10)] -161.84662428829702
+2026-05-01 13:14:14,740 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(8)] -167.44749083207122
+2026-05-01 13:14:14,741 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(9)] -149.4440396420644
+2026-05-01 13:14:14,741 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(10)] -159.24733824450695
+2026-05-01 13:14:14,742 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7), np.int64(9)] -146.8803724747087
+2026-05-01 13:14:14,742 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7), np.int64(10)] -156.68507381990753
+2026-05-01 13:14:14,743 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7), np.int64(9)] -159.87789737371193
+2026-05-01 13:14:14,743 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7), np.int64(10)] -169.66117816357553
+2026-05-01 13:14:14,744 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7)] -192.88813225620686
+2026-05-01 13:14:14,745 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(8)] -195.26416415109418
+2026-05-01 13:14:14,745 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(9)] -173.41660135206575
+2026-05-01 13:14:14,746 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(10)] -182.97611887646337
+2026-05-01 13:14:14,746 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(8)] -188.6584021651397
+2026-05-01 13:14:14,747 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(9)] -170.69935082748495
+2026-05-01 13:14:14,747 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(10)] -180.41825734117765
+2026-05-01 13:14:14,748 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7), np.int64(9)] -168.167396097391
+2026-05-01 13:14:14,748 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7), np.int64(10)] -177.88770535383995
+2026-05-01 13:14:14,749 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7), np.int64(9)] -180.9950566984656
+2026-05-01 13:14:14,749 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7), np.int64(10)] -190.69394539957946
+2026-05-01 13:14:14,750 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(8)] -185.92461551533475
+2026-05-01 13:14:14,750 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(9)] -167.98577474273534
+2026-05-01 13:14:14,751 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(10)] -177.56996546639135
+2026-05-01 13:14:14,751 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7), np.int64(9)] -165.4230322201785
+2026-05-01 13:14:14,752 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7), np.int64(10)] -175.00862568659082
+2026-05-01 13:14:14,752 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7)] -177.84474176922245
+2026-05-01 13:14:14,753 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(8)] -180.16173179046606
+2026-05-01 13:14:14,753 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(9)] -158.3330619401456
+2026-05-01 13:14:14,754 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(10)] -167.8102119096049
+2026-05-01 13:14:14,754 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(8)] -173.55189055473076
+2026-05-01 13:14:14,755 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(9)] -155.611732165784
+2026-05-01 13:14:14,755 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(10)] -165.24827112453835
+2026-05-01 13:14:14,756 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7), np.int64(9)] -153.00578739654577
+2026-05-01 13:14:14,756 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7), np.int64(10)] -162.64372909805644
+2026-05-01 13:14:14,757 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7), np.int64(9)] -165.7755797235322
+2026-05-01 13:14:14,757 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7), np.int64(10)] -175.3921008697077
+2026-05-01 13:14:14,758 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -167.61396467701502
+2026-05-01 13:14:14,758 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -177.38405838718745
+2026-05-01 13:14:14,761 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -204.36810023682625
+2026-05-01 13:14:14,761 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -214.01209759056619
+2026-05-01 13:14:14,763 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -225.4194742807679
+2026-05-01 13:14:14,763 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -234.97907954575803
+2026-05-01 13:14:14,764 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -210.36755627049956
+2026-05-01 13:14:14,765 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -219.84479398055134
+2026-05-01 13:14:14,766 [INFO](auto_martiniM3.solver:__init__:145): Max. number of attempts: 49
+2026-05-01 13:14:14,767 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:14,774 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:15,690 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:15,691 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:15,698 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:16,757 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:16,760 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:16,770 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:17,733 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:17,737 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:17,748 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:18,717 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:18,720 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:18,728 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:19,669 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:19,673 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:19,695 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:20,669 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:20,675 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:20,694 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:21,776 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:21,778 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:21,788 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:22,762 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:22,765 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:22,774 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:23,715 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:23,719 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:23,730 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:24,741 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:24,742 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:24,749 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:25,696 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:25,699 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:25,717 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:26,788 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:26,789 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:26,796 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:27,697 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:27,700 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:27,718 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:28,660 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:28,662 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:28,682 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:30,116 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:30,119 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:30,134 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:31,104 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:31,109 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:31,128 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:32,093 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:32,096 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:32,111 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:33,033 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:33,036 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:33,055 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:34,064 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:34,067 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:34,088 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:35,068 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:35,072 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:35,094 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:36,108 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:36,111 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:36,130 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:37,284 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:37,287 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:37,306 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:38,249 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:38,253 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:38,273 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:39,233 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:39,237 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:39,253 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:40,244 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:40,248 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:40,266 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 13:14:41,176 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 13:14:41,181 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:41,198 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 13:14:42,069 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 13:14:42,073 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:43,012 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:14:43,967 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:14:43,970 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:44,977 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:14:46,001 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:14:46,004 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:47,068 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:14:48,116 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:14:48,119 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:49,223 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:14:50,204 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:14:50,207 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:50,222 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'Q1']
+2026-05-01 13:14:51,233 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.8513 (whole vs sum: -0.8034 vs. -0.1195)
+2026-05-01 13:14:51,235 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:52,256 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:14:53,223 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:14:53,225 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:54,146 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 13:14:55,056 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 13:14:55,059 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:56,045 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:14:56,946 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:14:56,950 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:14:57,944 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:14:59,216 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:14:59,220 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:15:00,166 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:15:01,121 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:15:01,123 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:15:02,143 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:15:03,150 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:15:03,152 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:15:04,132 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 13:15:05,055 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 13:15:05,058 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:15:06,080 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 13:15:07,025 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 13:15:07,027 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:15:07,973 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 13:15:09,061 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 13:15:09,064 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 13:15:09,084 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'Q1']
+2026-05-01 15:16:54,447 [INFO](__main__:<module>:107): Running auto_martiniM3 v0.0.0
+2026-05-01 15:16:54,470 [INFO](auto_martiniM3.solver:__init__:104): Entering cg_molecule()
+2026-05-01 15:16:54,485 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3)] -64.80627287748963
+2026-05-01 15:16:54,485 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4)] -52.21628797517059
+2026-05-01 15:16:54,486 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5)] -69.509737409297
+2026-05-01 15:16:54,486 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6)] -58.989878274489755
+2026-05-01 15:16:54,486 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7)] -55.89538288079417
+2026-05-01 15:16:54,487 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(8)] -53.984547309753
+2026-05-01 15:16:54,487 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(9)] -31.802195820911773
+2026-05-01 15:16:54,487 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(10)] -41.746092861641756
+2026-05-01 15:16:54,488 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4)] -73.77068602606285
+2026-05-01 15:16:54,488 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5)] -90.8942711622607
+2026-05-01 15:16:54,488 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6)] -83.77891653595778
+2026-05-01 15:16:54,489 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7)] -80.71613357952396
+2026-05-01 15:16:54,489 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(8)] -78.81854899386978
+2026-05-01 15:16:54,489 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(9)] -56.680597357380606
+2026-05-01 15:16:54,490 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(10)] -66.54010230936079
+2026-05-01 15:16:54,490 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3)] -71.07217969556868
+2026-05-01 15:16:54,490 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4)] -58.58598344684984
+2026-05-01 15:16:54,490 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5)] -75.65170030895948
+2026-05-01 15:16:54,491 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6)] -65.16918643287579
+2026-05-01 15:16:54,491 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7)] -62.032413437297734
+2026-05-01 15:16:54,491 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(8)] -60.07578697799974
+2026-05-01 15:16:54,492 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(9)] -37.95672829021858
+2026-05-01 15:16:54,492 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(10)] -47.73386568726043
+2026-05-01 15:16:54,492 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6)] -91.23188094744111
+2026-05-01 15:16:54,493 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7)] -92.65321057101266
+2026-05-01 15:16:54,493 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(8)] -90.82385951439747
+2026-05-01 15:16:54,493 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(9)] -68.72364929965349
+2026-05-01 15:16:54,494 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(10)] -78.6020110255939
+2026-05-01 15:16:54,494 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5)] -77.8040058951996
+2026-05-01 15:16:54,494 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6)] -74.99855745642722
+2026-05-01 15:16:54,495 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7)] -76.37668483331741
+2026-05-01 15:16:54,495 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(8)] -74.59156571807918
+2026-05-01 15:16:54,495 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(9)] -52.4900378869878
+2026-05-01 15:16:54,496 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(10)] -62.42074784802657
+2026-05-01 15:16:54,496 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7)] -89.45493372179583
+2026-05-01 15:16:54,496 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(8)] -91.51219850794186
+2026-05-01 15:16:54,497 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(9)] -69.38817186741196
+2026-05-01 15:16:54,497 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(10)] -79.29746127311554
+2026-05-01 15:16:54,497 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(8)] -76.75656351130678
+2026-05-01 15:16:54,498 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(9)] -58.521048332150514
+2026-05-01 15:16:54,498 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(6), np.int64(10)] -68.58972672714921
+2026-05-01 15:16:54,498 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(7), np.int64(9)] -51.285936667348864
+2026-05-01 15:16:54,499 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(7), np.int64(10)] -61.35601780510383
+2026-05-01 15:16:54,499 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6)] -124.80736151752417
+2026-05-01 15:16:54,499 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7)] -126.32810200452582
+2026-05-01 15:16:54,500 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(8)] -124.58865078168634
+2026-05-01 15:16:54,500 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(9)] -102.56406073264205
+2026-05-01 15:16:54,501 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(10)] -112.31632610215001
+2026-05-01 15:16:54,501 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5)] -114.88202694761645
+2026-05-01 15:16:54,501 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6)] -112.27359741191474
+2026-05-01 15:16:54,502 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7)] -113.75113565223504
+2026-05-01 15:16:54,502 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(8)] -112.0559163707725
+2026-05-01 15:16:54,503 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(9)] -90.03000870538091
+2026-05-01 15:16:54,503 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(10)] -99.8346223099872
+2026-05-01 15:16:54,503 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7)] -126.98668027282699
+2026-05-01 15:16:54,504 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(8)] -129.13384489274873
+2026-05-01 15:16:54,504 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(9)] -107.08543841791854
+2026-05-01 15:16:54,505 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(10)] -116.86863146718972
+2026-05-01 15:16:54,505 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(8)] -114.57522879918427
+2026-05-01 15:16:54,506 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(9)] -96.41533378572782
+2026-05-01 15:16:54,506 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(6), np.int64(10)] -106.35791582429405
+2026-05-01 15:16:54,506 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7), np.int64(9)] -89.27963298435627
+2026-05-01 15:16:54,507 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(7), np.int64(10)] -99.22361776567874
+2026-05-01 15:16:54,507 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5)] -136.20077541976804
+2026-05-01 15:16:54,508 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6)] -133.63377039257074
+2026-05-01 15:16:54,508 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7)] -135.14302107015277
+2026-05-01 15:16:54,509 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(8)] -133.46105277407725
+2026-05-01 15:16:54,509 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(9)] -111.47954496103765
+2026-05-01 15:16:54,509 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(10)] -121.19976647689415
+2026-05-01 15:16:54,510 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7)] -148.20870139281615
+2026-05-01 15:16:54,510 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(8)] -150.36911699812487
+2026-05-01 15:16:54,510 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(9)] -128.3651103756468
+2026-05-01 15:16:54,511 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(10)] -138.06391133616813
+2026-05-01 15:16:54,511 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(8)] -139.21500541306483
+2026-05-01 15:16:54,512 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(9)] -121.09951025196035
+2026-05-01 15:16:54,512 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(6), np.int64(10)] -130.95770020177682
+2026-05-01 15:16:54,512 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7), np.int64(9)] -113.9955218878506
+2026-05-01 15:16:54,513 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(7), np.int64(10)] -123.85511458042328
+2026-05-01 15:16:54,513 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6)] -130.98465470616298
+2026-05-01 15:16:54,513 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7)] -132.46311759128216
+2026-05-01 15:16:54,514 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(8)] -130.67787548018583
+2026-05-01 15:16:54,514 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(9)] -108.71657823220167
+2026-05-01 15:16:54,515 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(10)] -118.30208395802148
+2026-05-01 15:16:54,515 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5)] -121.12576353113192
+2026-05-01 15:16:54,516 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6)] -118.55467925415378
+2026-05-01 15:16:54,516 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7)] -119.98993989259156
+2026-05-01 15:16:54,516 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(8)] -118.24892972287223
+2026-05-01 15:16:54,517 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(9)] -96.28631485854069
+2026-05-01 15:16:54,517 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(10)] -105.92416881945886
+2026-05-01 15:16:54,518 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7)] -132.9977519411667
+2026-05-01 15:16:54,518 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(8)] -135.09912567283166
+2026-05-01 15:16:54,518 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(9)] -113.11401199906155
+2026-05-01 15:16:54,519 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(10)] -122.73044540464457
+2026-05-01 15:16:54,519 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(8)] -120.57785483799078
+2026-05-01 15:16:54,520 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(9)] -102.48125262559441
+2026-05-01 15:16:54,520 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(6), np.int64(10)] -112.25707502047248
+2026-05-01 15:16:54,520 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7), np.int64(9)] -95.30327422234033
+2026-05-01 15:16:54,521 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(7), np.int64(10)] -105.08049935997471
+2026-05-01 15:16:54,521 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(8)] -146.50332678845723
+2026-05-01 15:16:54,521 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(9)] -128.425573049098
+2026-05-01 15:16:54,522 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(6), np.int64(10)] -138.30261977287466
+2026-05-01 15:16:54,522 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7), np.int64(9)] -125.80569726499354
+2026-05-01 15:16:54,523 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(3), np.int64(7), np.int64(10)] -135.68414673152648
+2026-05-01 15:16:54,523 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7)] -134.89857811065343
+2026-05-01 15:16:54,524 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(8)] -137.1714591863781
+2026-05-01 15:16:54,524 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(9)] -115.20387636929783
+2026-05-01 15:16:54,524 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(10)] -124.97388233887776
+2026-05-01 15:16:54,525 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(8)] -130.3272537888486
+2026-05-01 15:16:54,525 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(9)] -112.24818243314192
+2026-05-01 15:16:54,525 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(6), np.int64(10)] -122.17757739201699
+2026-05-01 15:16:54,526 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7), np.int64(9)] -109.58510440235617
+2026-05-01 15:16:54,526 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(7), np.int64(10)] -119.51590210398746
+2026-05-01 15:16:54,527 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7), np.int64(9)] -122.42533356924582
+2026-05-01 15:16:54,527 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(5), np.int64(7), np.int64(10)] -132.33471071554195
+2026-05-01 15:16:54,528 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(8)] -179.92400444627546
+2026-05-01 15:16:54,529 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(9)] -161.921870872616
+2026-05-01 15:16:54,529 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(6), np.int64(10)] -171.67282123996017
+2026-05-01 15:16:54,530 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7), np.int64(9)] -159.40140595194168
+2026-05-01 15:16:54,530 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(3), np.int64(7), np.int64(10)] -169.15375906204207
+2026-05-01 15:16:54,531 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7)] -171.73189641702973
+2026-05-01 15:16:54,531 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(8)] -174.0946773265301
+2026-05-01 15:16:54,531 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(9)] -152.20271467514962
+2026-05-01 15:16:54,532 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(10)] -161.84662428829702
+2026-05-01 15:16:54,532 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(8)] -167.44749083207122
+2026-05-01 15:16:54,533 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(9)] -149.4440396420644
+2026-05-01 15:16:54,533 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(6), np.int64(10)] -159.24733824450695
+2026-05-01 15:16:54,534 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7), np.int64(9)] -146.8803724747087
+2026-05-01 15:16:54,534 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(7), np.int64(10)] -156.68507381990753
+2026-05-01 15:16:54,535 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7), np.int64(9)] -159.87789737371193
+2026-05-01 15:16:54,535 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(5), np.int64(7), np.int64(10)] -169.66117816357553
+2026-05-01 15:16:54,536 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7)] -192.88813225620686
+2026-05-01 15:16:54,537 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(8)] -195.26416415109418
+2026-05-01 15:16:54,537 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(9)] -173.41660135206575
+2026-05-01 15:16:54,538 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(10)] -182.97611887646337
+2026-05-01 15:16:54,538 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(8)] -188.6584021651397
+2026-05-01 15:16:54,539 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(9)] -170.69935082748495
+2026-05-01 15:16:54,539 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(6), np.int64(10)] -180.41825734117765
+2026-05-01 15:16:54,540 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7), np.int64(9)] -168.167396097391
+2026-05-01 15:16:54,540 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(7), np.int64(10)] -177.88770535383995
+2026-05-01 15:16:54,540 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7), np.int64(9)] -180.9950566984656
+2026-05-01 15:16:54,541 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(5), np.int64(7), np.int64(10)] -190.69394539957946
+2026-05-01 15:16:54,542 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(8)] -185.92461551533475
+2026-05-01 15:16:54,542 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(9)] -167.98577474273534
+2026-05-01 15:16:54,543 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(6), np.int64(10)] -177.56996546639135
+2026-05-01 15:16:54,543 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7), np.int64(9)] -165.4230322201785
+2026-05-01 15:16:54,543 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(3), np.int64(7), np.int64(10)] -175.00862568659082
+2026-05-01 15:16:54,544 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7)] -177.84474176922245
+2026-05-01 15:16:54,544 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(8)] -180.16173179046606
+2026-05-01 15:16:54,545 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(9)] -158.3330619401456
+2026-05-01 15:16:54,545 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(10)] -167.8102119096049
+2026-05-01 15:16:54,546 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(8)] -173.55189055473076
+2026-05-01 15:16:54,546 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(9)] -155.611732165784
+2026-05-01 15:16:54,547 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(6), np.int64(10)] -165.24827112453835
+2026-05-01 15:16:54,547 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7), np.int64(9)] -153.00578739654577
+2026-05-01 15:16:54,548 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(7), np.int64(10)] -162.64372909805644
+2026-05-01 15:16:54,548 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7), np.int64(9)] -165.7755797235322
+2026-05-01 15:16:54,549 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(5), np.int64(7), np.int64(10)] -175.3921008697077
+2026-05-01 15:16:54,549 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -167.61396467701502
+2026-05-01 15:16:54,550 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -177.38405838718745
+2026-05-01 15:16:54,552 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -204.36810023682625
+2026-05-01 15:16:54,553 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(0), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -214.01209759056619
+2026-05-01 15:16:54,555 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -225.4194742807679
+2026-05-01 15:16:54,555 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -234.97907954575803
+2026-05-01 15:16:54,556 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7), np.int64(9)] -210.36755627049956
+2026-05-01 15:16:54,557 [INFO](auto_martiniM3.optimization:find_bead_pos:380): ; [np.int64(2), np.int64(4), np.int64(5), np.int64(7), np.int64(10)] -219.84479398055134
+2026-05-01 15:16:54,558 [INFO](auto_martiniM3.solver:__init__:145): Max. number of attempts: 49
+2026-05-01 15:16:54,559 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:16:54,567 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:16:55,504 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:16:55,506 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:16:55,519 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:16:56,455 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:16:56,457 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:16:56,469 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:16:57,595 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:16:57,597 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:16:57,605 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:16:58,552 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:16:58,554 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:16:58,561 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:16:59,573 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:16:59,575 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:16:59,589 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:00,515 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:00,518 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:00,532 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:17:01,607 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:17:01,609 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:01,621 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:02,664 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:02,666 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:02,678 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:17:03,785 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:17:03,787 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:03,800 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:04,881 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:04,882 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:04,899 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:17:05,917 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:17:05,919 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:05,931 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:07,036 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:07,038 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:07,052 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:17:08,142 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:17:08,144 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:08,158 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:17:09,225 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:17:09,228 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:09,239 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:10,247 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:10,248 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:10,260 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:11,221 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:11,223 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:11,234 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:12,154 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:12,156 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:12,170 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:17:13,264 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:17:13,266 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:13,280 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:14,243 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:14,245 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:14,257 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:15,193 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:15,195 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:15,205 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:16,164 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:16,166 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:16,180 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:17:17,268 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:17:17,270 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:17,281 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:18,338 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:18,340 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:18,352 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:17:19,296 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:17:19,298 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:19,310 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:20,278 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:20,280 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:20,291 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:17:21,194 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:17:21,196 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:21,208 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'SP2a', 'SQ1']
+2026-05-01 15:17:22,210 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.3685 (whole vs sum: -0.8034 vs.  1.0994)
+2026-05-01 15:17:22,211 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:23,252 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 15:17:24,224 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 15:17:24,225 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:25,206 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 15:17:26,129 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 15:17:26,131 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:27,113 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 15:17:28,080 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 15:17:28,082 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:29,058 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 15:17:29,996 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 15:17:29,998 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:30,010 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'Q1']
+2026-05-01 15:17:31,056 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.8513 (whole vs sum: -0.8034 vs. -0.1195)
+2026-05-01 15:17:31,057 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:32,076 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 15:17:33,028 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 15:17:33,029 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:34,046 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 15:17:35,011 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 15:17:35,013 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:36,031 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 15:17:37,032 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 15:17:37,034 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:38,073 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 15:17:39,072 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 15:17:39,074 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:40,174 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 15:17:41,171 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 15:17:41,173 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:42,361 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 15:17:43,463 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 15:17:43,465 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:44,514 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 15:17:45,624 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 15:17:45,626 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:46,661 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 15:17:47,675 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 15:17:47,677 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:48,728 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 15:17:49,909 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 15:17:49,911 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:49,926 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'Q1']
+2026-05-01 15:17:51,065 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.8513 (whole vs sum: -0.8034 vs. -0.1195)
+2026-05-01 15:17:51,068 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:52,115 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 15:17:53,032 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 15:17:53,035 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:54,061 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 15:17:54,990 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 15:17:54,993 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:55,993 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 15:17:57,048 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 15:17:57,049 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:17:58,250 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 15:17:59,258 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 15:17:59,259 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:18:00,273 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['N3a', 'SP2a', 'SQ1']
+2026-05-01 15:18:01,190 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  4.6294 (whole vs sum: -0.8034 vs.  2.9159)
+2026-05-01 15:18:01,191 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:18:02,098 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'SN6a', 'Q1']
+2026-05-01 15:18:03,064 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.7620 (whole vs sum: -0.8034 vs. -0.1912)
+2026-05-01 15:18:03,065 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:18:04,093 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'P2a', 'Q1']
+2026-05-01 15:18:05,167 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  0.5835 (whole vs sum: -0.8034 vs. -0.3346)
+2026-05-01 15:18:05,170 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:18:05,181 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:18:06,065 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:18:06,066 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:18:06,073 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:18:07,087 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:18:07,089 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:18:07,099 [INFO](auto_martiniM3.solver:check_additivity:60): ; Bead types: ['SC1', 'TN5a', 'TP2a', 'Q1']
+2026-05-01 15:18:08,210 [INFO](auto_martiniM3.solver:check_additivity:73): ; Mapping additivity assumption ratio:  2.8742 (whole vs sum: -0.8034 vs.  1.5057)
+2026-05-01 15:18:08,211 [INFO](auto_martiniM3.solver:__init__:201): ; Atom partitioning: {atom_partitioning}
+2026-05-01 15:18:08,216 [WARNING](auto_martiniM3.topology:gen_molecule_smi:69): Error. Only one molecule may be provided.
+2026-05-01 15:18:08,216 [WARNING](auto_martiniM3.topology:gen_molecule_smi:70): C.C=O

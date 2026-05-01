@@ -179,9 +179,11 @@ Section numbers below refer to §3 architecture; phases to §4.
 | 2026-04-30 | scope revised (drop CG sim; AA-projection scoring instead) | done   |
 | 2026-04-30 | first-cut `program.md` drafted                            | done   |
 | 2026-05-01 | architecture committed: MCP server + portable skill + program.md | done   |
-| —          | Phase 0: reproduce octanol fixture                         | next   |
-| —          | Phase 0: reproduce PMETAC + PSBMA fixtures                 | next   |
+| 2026-05-01 | Phase 0: `autom3` env + AutoMARTINI3 M3 (commit 1fff05a) installed | done |
+| 2026-05-01 | Phase 0: octanol golden fixture captured                   | done   |
+| 2026-05-01 | Phase 0: PMETAC + PSBMA fixtures captured (M3 fork; behavior diverges from email predictions — see `tests/fixtures/README.md`) | done |
 | —          | Phase 0: ingest first AA trajectory from collaborators     | blocked on data |
+| —          | Phase 0: confirm PSBMA M3 mapping with Chris/Seonghan      | needs review |
 | —          | Phase 1: backends.md                                       |        |
 | —          | Phase 2: classifier + dispatcher                           |        |
 | —          | Phase 3: AA→CG projection + scoring                        |        |
