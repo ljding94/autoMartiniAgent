@@ -1,0 +1,10 @@
+.claude/settings.local.json
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.ipynb_checkpoints/
+*.egg-info/
+build/
+dist/
