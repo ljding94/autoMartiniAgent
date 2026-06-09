@@ -1,74 +1,132 @@
-# autoMartiniAgent — Progress Tracker
+# autoMartiniAgent — Project Outline
 
-**Project goal**: build an agent-runnable research protocol (`program.md`) that, combined with the `auto-martini-agent` Claude Code skill, automatically converts AA simulation data + structure into a Martini 3 coarse-grained mapping (atom-to-bead assignment with bead types and sizes).
+**Goal**: an agent-runnable workflow that takes AA simulation data + chemical structure (SMILES / mol / pdb) and produces a validated Martini 3 mapping — atom-index → bead, bead type, bead size — plus a score report and provenance log. The mapping is the deliverable. We do not run CG simulations. Validation is in-the-loop: project the AA trajectory through the proposed mapping and score bead-bead distance and angle distributions.
 
-The mapping is the deliverable. We do not run CG simulations. Validation is in-the-loop: project the AA trajectory through the proposed mapping and inspect bead–bead distance and angle distributions.
-
-Collaborators (ORNL): Lijie Ding (driver), Seonghan Kim (pipeline + reproduction notes, AA data), Chris Walker (chemistry validation, AA data), Jan Michael Carrillo.
+Collaborators (ORNL): Lijie Ding (driver, dingl1@ornl.gov), Seonghan Kim (kimsn@ornl.gov), Chris Walker (walkercc@ornl.gov), Jan Michael Carrillo (carrillojy@ornl.gov).
 
 ---
 
-## 1. What the email chain established
+## The four ingredients
 
-**Seonghan's reproducible pipeline (verified on 1-octanol):**
-- env: conda `autom3`, Python 3.10, GROMACS ≥ 2021
-- backend: [Auto-MartiniM3](https://github.com/Martini-Force-Field-Initiative/Automartini_M3) (`pip install -e .` from source) + RDKit
-- force field files staged in `ff/`: `martini_v3.0.0.itp`, `martini_v3.0.0_solvents_v1.itp`, `water.gro`
-- Pipeline: `auto_martiniM3 --smi … --mol … --canon -v` → `gmx insert-molecules` → `gmx solvate -radius 0.21` → `gmx grompp` → `gmx mdrun` (steep EM, emtol 100)
-- Naming gotcha: `MOL=OCT` collides with octane in `martini_v3.0.0_solvents_v1.itp` → use `OCOL`. Always check solvents.itp before naming.
-- (The CG-sim half of this pipeline is now out of scope for our deliverable, but the `.itp` generation half stays.)
+The project closes a loop: **stage → propose → evaluate → repair → re-evaluate**. Each ingredient must exist for the loop to close.
 
-**Seonghan's proposed three-stage workflow** (we adopt the routing logic, drop the CG-sim validation):
-- *Initial CG generation* — classifier routes by molecule type:
-  - small (≤25 heavy atoms) → AutoMARTINI3
-  - medium / oligomer → fragment + AutoMARTINI3 + assembly
-  - polymer / repeat unit → Polyply
-  - protein / peptide → Martinize2
-- *Refinement* — atomistic ref traj → bonded distribution targets → BI or Swarm-CG. **In our scope this is a post-process on the final mapping, not part of the inner loop.**
-- *Validation via CG sim* — **dropped**. Replaced by AA-projected distribution scoring.
+### 1. Stage — atomistic reference data
 
-**Chris's stress-test (the real research problem):**
-- PSBMA monomer (zwitterionic, ammonium + sulfonate, ~22 heavy atoms, SMILES `CC(C)C(=O)OCC[N+](C)(C)CCCS(=O)(=O)[O-]`): AutoMARTINI3 hangs >30 min, no convergence.
-- Without `--fpred`, ALOGPS fragment lookup fails → flag is mandatory in our wrapper.
-- Smaller PMETAC (`CC(C)C(=O)OCC[N+](C)(C)`) succeeds in ~1 min but the mapping violates Martini 3 sizing rules: emits Regular (R) bead labels for fragments holding only 2–3 heavy atoms. Example output:
+The substrate the agent reasons over.
 
-  | bead | type | atoms       | heavy | should be |
-  |------|------|-------------|-------|-----------|
-  | C01  | C3   | CCC         | 3     | S-bead    |
-  | P01  | P1   | OC=O        | 3     | S-bead    |
-  | C02  | C5   | CC          | 2     | T-bead    |
-  | Q01  | Qd   | C[N+]C      | 3     | S-bead    |
+**Need**: AA trajectory + topology + chemical structure for each test molecule. Trajectory must be long enough that bead-bead distance and angle distributions are converged.
 
-  Martini 3 sizing: R = 4 heavy atoms, S = 3, T = 2.
+**Have**:
+- **AA PEO-20 (delivered by Seonghan 2026-05-15, inspected 2026-05-19)** at `reference/gromacs/`:
+  - 20 ETHOX residues, 142 atoms total; **asymmetric end groups** — residue 1 is hydroxyl terminus (`OG311+HGP1`, 8 atoms), residue 20 is ethyl-ether terminus (`CG331+3×HGA3`, 8 atoms). Net chain is **HO-CH₂-CH₂-O-(CH₂-CH₂-O)₁₈-CH₂-CH₃** (i.e. HO-(CH₂CH₂O)₁₉-CH₂-CH₃; *not* `-CH₂-CH₂-CH₃` — only one methylene between the last ether O and the methyl C).
+  - **CHARMM36 General** force field (via CHARMM-GUI converter), **TIP3P** water (4022 molecules), no ions.
+  - Production: `step5_200.xtc` / `step5_200_center.xtc` — 200 ns, 2 fs timestep, PME, Force-switch vdW (1.0/1.2 nm), NPT 300 K / 1 bar, h-bond LINCS.
+  - Reference structure: `step4.0_minimization.gro` or `equil.tpr`.
+- **AA 20-mer charged-polymer archive on Kronos (Chris, available not yet pulled)**: PMETAC, PMPC, PSBMA, PNOMA, P2VPPS — all 300+ ns, 8 atactic sequences averaged. *All out of current v1 scope (charged)* — could broaden scope to include them.
+- Seonghan's pipeline (`reference/email_chain.md`) is **CG-only** — never to be confused with AA.
+- CG references: `tests/fixtures/octanol/OCOL.itp` (golden), `tests/fixtures/psbma/PSBA.itp` (out-of-scope zwitterion baseline), `reference/polyply_PEO20/` (Polyply CG reference for PEO-20 — pair with AA above; now also holds the AA→CG mapping artifact, see #2 status entry 2026-06-09).
 
-- Required capability: **(a) change the number of CG beads, (b) re-pick bead size class, (c) recover when the underlying tool stalls.**
+**Open gap**: PDMAEMA monomer AA **is not** in Chris's archive (he has PMETAC, the charged-methylated version, not the neutral PDMAEMA). v1 small-molecule headline test currently has no AA data. Three options on the table — see "Scope decision (open)" below.
+
+**Chris's process notes (worth honoring)**:
+- Convergence check: bonded distributions in 50 ns chunks; discard unequilibrated head.
+- One atactic sequence is sufficient for bonds/angles. Torsions need averaging across multiple sequences → defer torsions in v1.
+
+**Sampling-sufficiency check** is part of this ingredient: trajectory must show converged second moments before the scorer (#3) is allowed to call rule violations. Under-sampled AA looks spuriously non-Gaussian.
+
+**Fallback if no AA trajectories arrive**: build a thin AA-prep pipeline ourselves (SMILES → LigParGen → GROMACS solvate with TIP3P → NPT eq → NVT production) under `scripts/aa_prep/`. Adds scope but makes the project self-contained.
+
+### 2. Process — initial AA→CG mapping generation
+
+The cold start: chemical structure → first-cut mapping, before any AA-driven scoring.
+
+**v1 scope** (per Seonghan 2026-05-10): **neutral small molecules + polymers in the Polyply built-in library** only. Charged / zwitterionic molecules drop from v1 — both small-molecule backends fail on them (AutoMARTINI3 rejects via ALOGPS; Martini Mapper silently mis-types because it has no Q-bead dictionary, which is dangerous in an automated pipeline).
+
+**Small-molecule backends — two, run in parallel for v1**:
+- **AutoMARTINI3** (M3 fork, `vendor/Automartini_M3` @ `1fff05a`). logP-based strategy. ≤25 heavy atoms. Fully CLI. **Always invoke with `--fpred`**.
+- **Martini Mapper**. SMARTS rule-based strategy. No heavy-atom cap. Currently interactive — needs a `pexpect`-style wrapper.
+
+When both produce identical bead types → high confidence cold start. When they disagree (e.g., PDMAEMA gives same 3-bead grouping but conflicting types) → the disagreement is a **research signal** the refiner agent adjudicates using AA distributions.
+
+**Polymer backend**: **Polyply**, restricted in v1 to its built-in Martini 3 library: PEO, PS, PMMA, PE, PVA, PDMS, PSS. Out-of-library polymers defer to v2 (would need monomer parameterization first). Input contract from Seonghan's email:
+```
+polyply gen_params -lib martini3 -seq <NAME>:<N> -o <NAME><N>.itp -name <NAME><N>
+polyply gen_coords -p topol.top -o <NAME><N>.gro -name <NAME><N> -box X Y Z
+# random-walk coords need: gmx grompp/mdrun (EM) → gmx trjconv -pbc mol -center
+```
+
+**Cold-start fallback chain** (inside #2, so the loop always sees iter 0 with *some* mapping):
+1. AutoMARTINI3 (small) or Polyply (polymer).
+2. On crash / cap-exceeded: BRICS-fragment-and-assemble (fragment with RDKit BRICS → AutoMARTINI3 per fragment → reconnect using bond inference).
+3. On all-backends-fail: naive 1-bead-per-heavy-atom.
+
+**Dispatcher** (our code, not yet written):
+- `agent/classify.py` — RDKit heuristics: heavy-atom count, peptide-bond detection, charge (refuses if charged in v1), aromaticity → category ∈ {small, polymer}. Out-of-scope categories return a clear error.
+- `agent/dispatch.py` — route to backend; emit uniform mapping schema regardless of which backend ran; tag provenance (which backend, which fallback step).
+
+**Naming traps**: never use `MOL=OCT` (collides with octane in `martini_v3.0.0_solvents_v1.itp`); always check the solvents `.itp` before naming.
+
+**Known backend behavior** (from Phase 0 + Seonghan's update):
+- **Octanol**: both backends succeed; golden reference.
+- **PDMAEMA** (`CC(C(=O)OCCN(C)C)C`, neutral monomer): both backends produce 3-bead mappings with identical atom groupings but **conflicting bead types**. v1 headline test case.
+- **PEO-20**: Polyply built-in `gen_params` produces a 20-bead `SN3r` chain. Polymer-route reference.
+- **PMETAC + PSBMA** (charged): out of v1 scope. Kept under `tests/fixtures/known_failures/` as smoke tests for "tool refuses / silently mis-types charged groups."
+
+### 3. Evaluation — distribution-based mapping scorer
+
+The signal the agent optimizes against. Replaces the CG-simulation validation step from Seonghan's original three-stage workflow.
+
+**Projector** (not yet written): `agent/project.py` — read AA trajectory + topology + proposed mapping; compute mass-weighted COM per bead per frame; emit a CG trajectory. Backed by MDAnalysis.
+
+**Scorer** (not yet written): `agent/score.py` — over the CG trajectory:
+- **Terms scored** (per Lijie 2026-05-10):
+  - Bonded distance distributions (1-2 bead pairs along the chain).
+  - 1-3 bead distance distributions (next-nearest along the chain — captures angle stiffness as an independent check).
+  - Bonded angle distributions (1-2-3 triples).
+- **Per-term metric**: fit a Gaussian to the histogram (unit-area normalized), report **RMSE between histogram and fit**. Lower = closer to the harmonic Martini ideal.
+- Martini-rule checker (binary): R/S/T sizing (R = 4, S = 3, T = 2 heavy atoms), functional-group integrity, symmetry, bead-count plausibility, no Q-beads with neutral types in places that should be charged (defensive).
+- Output: `{bond_distributions, angle_distributions, gaussian_fit_rmse_per_term, rule_violations, scalar_score, backend_disagreement}`. The last is a flag from #2 noting whether AutoMARTINI3 and Martini Mapper agreed on bead types.
+
+**Acceptance criterion** (per Lijie 2026-05-10):
+- Inner loop **minimizes scalar score within budget**, not against a fixed RMSE threshold (an outer autoresearch loop can re-engage with more budget if needed).
+- Stop conditions: (a) zero rule violations AND no improvement in scalar score over last *K* iterations (plateau), or (b) iteration budget hit (default 10), or (c) wall-clock budget hit (default 10 min). Returns the best mapping seen.
+
+**Bootstrap without AA data**: the scorer can be developed and unit-tested against a synthetic harmonic CG system (project a known-good model, assert score ≈ Gaussian and rules-clean). #3 does not block on #1.
+
+### 4. Agent loop — iterative repair
+
+Closure of the loop: score report → mapping revision → re-score, until acceptance criteria met or budget exhausted.
+
+**Two modes, selected via CLI flag at runtime** (per Lijie 2026-05-10):
+- `--mode tight` — deterministic repair only (verbs: `relabel_size_class`, `merge_beads`, `split_bead`). LLM acts as referee on ties / on parsing the score report into a repair choice. Reproducible.
+- `--mode loose` — adds LLM-driven structural verbs (`change_bead_type`, `reassign_atom`). The agent reads the score report + AA-derived chemistry context + Martini-rule prose and proposes structured edits. Higher flexibility, lower reproducibility.
+
+**Action vocabulary** (loose mode = full set, tight mode = first three only):
+- `relabel_size_class(bead_id, R|S|T)` — fix R/S/T sizing without changing bead count.
+- `merge_beads(bead_ids[])` — combine adjacent under-filled beads.
+- `split_bead(bead_id, into=[{atoms[]}, ...])` — split an over-loaded bead.
+- `change_bead_type(bead_id, new_type)` — adjudicate bead-type conflict (the dominant verb when the two backends disagreed in #2; e.g., PDMAEMA case).
+- `reassign_atom(atom_id, from_bead, to_bead)` — move an atom between beads.
+
+Each verb emits a structured JSON edit logged to a provenance trail.
+
+**QA + repair** (not yet written):
+- `agent/qa.py` — interpret the score report; decide accept / repair / escalate. Includes the plateau detector and budget tracker.
+- `agent/repair.py` — chooses + applies action verbs based on score report; tight mode picks deterministically, loose mode delegates to LLM with structured-JSON output guard.
+- Stall / crash recovery handled in #2 (cold-start fallback chain), not here.
+
+**Packaging** (not yet written):
+- `mcp_server/` — Python MCP server (stdio), runs in `autom3` env. Exposes: `classify`, `propose_mapping`, `project_trajectory`, `score_mapping`, `repair_mapping`, `martini_rules.lookup`. Large data passed by path.
+- `skill/SKILL.md` (Claude Code) + `skill/AGENTS.md` (mirror for Codex / OpenCode / Cursor / Continue) — same content, two filenames. When and how to invoke the tools, decision rules, recovery strategies.
+- `program.md` (already drafted) — agent-agnostic protocol that drives the loop end-to-end. References MCP tool names only; no agent-specific syntax.
+
+**Headline demonstration**: drop a new monomer + AA trajectory + `program.md` into any MCP-aware agent with the skill loaded → agent autonomously produces a validated Martini 3 mapping, no human in the loop.
 
 ---
 
-## 2. Scope (revised 2026-04-30)
+## Architecture
 
-**In scope**
-- Input: AA trajectory + topology + chemical structure (SMILES / mol / pdb).
-- Output: a *mapping* — atom-index → bead, bead type, bead size — plus a score report and provenance log.
-- Inner-loop validator: AA→CG projection followed by bond/angle distribution scoring (Gaussianness + Martini-rule compliance).
-- Repair loop on top of AutoMARTINI3 / Polyply: relabel size class, re-fragment, recover from stalls.
-- A `program.md` protocol file that lets the agent run the full procedure end-to-end given inputs.
-- Demonstration on Chris's PMETAC and PSBMA AA trajectories.
-
-**Out of scope (for v1)**
-- Running CG simulations (`gmx mdrun`, EM, NVT, NPT).
-- Fitting bonded force-field parameters as part of the loop. (Optional post-process only.)
-- Free-energy / partition-coefficient validation.
-- Membranes, proteins beyond a Martinize2 stub.
-- A GUI; the deliverable is CLI + `program.md`.
-
-**Headline demonstration**: drop a new monomer + AA trajectory + `program.md` into any MCP-aware agent (Claude Code, Codex CLI, OpenCode, Cursor, Continue, …) with the skill loaded → agent autonomously produces a validated Martini 3 mapping, no human in the loop. This is the autoresearch-style proof point, in the Karpathy `program.md` lineage.
-
----
-
-## 3. Deliverable architecture
-
-The product is **agent-agnostic** — three portable layers:
+Three portable layers:
 
 ```
 autoMartiniAgent/
@@ -77,117 +135,109 @@ autoMartiniAgent/
 │   └── src/auto_martini_mcp/
 ├── skill/
 │   ├── SKILL.md        # Claude Code skill format
-│   ├── AGENTS.md       # cross-agent community standard (mirror of SKILL.md)
+│   ├── AGENTS.md       # cross-agent mirror
 │   └── scripts/        # deterministic helpers callable without an LLM
-├── program.md         # the autoresearch protocol
+├── program.md          # the autoresearch protocol
 ├── tests/fixtures/
 └── PROGRESS.md
 ```
 
-**Layer 1 — MCP server.** Single Python process exposing the tools below over stdio MCP. Runs inside the `autom3` conda env so AutoMARTINI3 + RDKit are available. Any MCP-aware agent mounts it. Large data (AA trajectories) passed by **path**, not contents.
-
-**Layer 2 — Portable skill.** Markdown instructions on *when* and *how* to invoke the tools, plus reasoning prose (decision rules, recovery strategies). `SKILL.md` for Claude Code, `AGENTS.md` for Codex/OpenCode/etc. — same content, two filenames.
-
-**Layer 3 — Research protocol.** `program.md`, plain markdown, agent-agnostic. References MCP tool names. No agent-specific syntax anywhere.
-
-### MCP-registered tools
-
-- `classify(structure)` → `category ∈ {small, medium, oligomer, polymer, peptide}`
-- `propose_mapping(structure, category)` → initial mapping spec (cold-start via AutoMARTINI3 / Polyply / Martinize2 / fragment+assemble)
-- `project_trajectory(aa_traj, aa_top, mapping)` → CG bead trajectory (per-frame mass-weighted COM)
-- `score_mapping(cg_traj, mapping)` → `{bond_distributions, angle_distributions, gaussianness_per_term, rule_violations, scalar_score}`
-- `repair_mapping(mapping, score_report, structure)` → revised mapping + change_log
-- `martini_rules.lookup(group_smiles)` → recommended bead type/size for a chemical fragment
-
-Portability invariant: nothing in the skill prose or `program.md` may reference Claude-Code-specific syntax, agent built-ins, or non-MCP tool names.
+Portability invariant: nothing in `skill/` or `program.md` may reference Claude-Code-specific syntax, agent built-ins, or non-MCP tool names.
 
 ---
 
-## 4. Phases
+## Alignment with Seonghan's three-stage workflow
 
-### Phase 0 — Environment + fixtures (week 1)
-- Stand up `autom3` env per Seonghan's notes (Python 3.10, AutoMARTINI3 from source, RDKit). GROMACS not strictly required for the inner loop; needed only for replaying Seonghan's octanol reproduction.
-- Reproduce 1-octanol `.itp` generation; capture as golden fixture.
-- Reproduce Chris's PMETAC mis-sized output and PSBMA stall as regression fixtures.
-- Ingest first AA trajectory from collaborators.
-- **Deliverable**: `tests/fixtures/{octanol, pmetac, psbma}/` with `.itp`, AA `.xtc/.tpr` where available.
+We adopt his Stage 1 as-is, reinterpret Stage 2, and absorb Stage 3 into the inner loop:
 
-### Phase 1 — Read backends (week 1–2)
-- AutoMARTINI3 source: fragmentation routine, bead-type assignment, the optimization loop that stalls on PSBMA, what `--fpred` swaps in, where size class is decided.
-- Polyply: monomer `.itp` → polymer topology + coords; document input contract.
-- Martinize2: identify the protein entry point (stub for v1).
-- Martini 3 paper: bead types, R/S/T size rules, fragment-selection heuristics, ±1 polarity-shift soft rule.
-- **Deliverable**: `notes/backends.md` — one-page contract per backend.
+| | Seonghan's framing | Ours (v1) |
+|---|---|---|
+| **Stage 1 — initial CG generation** | AutoMARTINI3 / Polyply / Martinize2 → first-cut `.itp` | Same. v1 small route runs **AutoMARTINI3 + Martini Mapper in parallel** so the agent has a backend-disagreement signal to adjudicate. |
+| **Stage 2 — refinement** | AA reference → bonded distribution targets → **BI or Swarm-CG** → refined `.itp` (parameter fitting) | AA reference → **AA→CG projection + Gaussian-fit RMSE scoring** → **agent-driven mapping repair** (atom-bead grouping + bead types). *Not* parameter fitting. |
+| **Stage 3 — validation** | Separate CG simulation → compare with AA-mapped distributions → report | Folded into Stage 2's inner loop. Optional v2: add Seonghan's CG-sim as a forward check on the final mapping. |
 
-### Phase 2 — Classifier + dispatcher (week 2)
-- Input parser: SMILES, `.mol`, `.pdb`, `--repeat-unit` flag.
-- Heuristics: heavy-atom count via RDKit, peptide-bond detection, charge detection, ring/aromatic detection.
-- Routing policy table (mirrors Seonghan's stage-1 logic).
-- **Deliverable**: `agent/classify.py`, `agent/dispatch.py`, unit tests.
-
-### Phase 3 — AA→CG projection + distribution scoring (week 3)
-- AA→CG projector (mass-weighted center-of-mass per bead per frame), backed by MDAnalysis.
-- Distribution scorer: bond/angle histograms; KL-divergence-vs-Gaussian, skew, kurtosis, GMM-component count (BIC).
-- Rule checker: R/S/T sizing, functional-group integrity, symmetry, bead-count plausibility.
-- **Deliverable**: `agent/project.py`, `agent/score.py`. Reproduces a sensible score on the AA-mapped octanol fixture.
-
-### Phase 4 — QA + repair loop (week 4–5, the central research piece)
-- Repair strategies, in priority order: relabel (R↔S↔T), re-fragment by merging adjacent under-filled beads, re-fragment by splitting over-loaded beads, LLM-in-the-loop for chemistry-judgment ties.
-- Stall recovery: subprocess timeout on AutoMARTINI3; on timeout, fall back to fragment-and-assemble (BRICS fragmentation → AutoMARTINI3 per fragment → reconnect using bond inference from AA reference).
-- **Deliverable**: `agent/qa.py`, `agent/repair.py`. Regression: PMETAC produces a Martini-3-rule-compliant mapping; PSBMA returns *something* within a 5-min budget.
-
-### Phase 5a — MCP server + skill packaging (week 6)
-- Wrap Phases 2–4 internals as an MCP server (stdio transport, Python MCP SDK), runs inside `autom3` conda env.
-- Author `SKILL.md` (Claude Code format) + `AGENTS.md` (mirror) with the trigger surface, tool listing, and decision-rule prose.
-- Scripts under `skill/scripts/` for deterministic steps.
-- Calibrate `program.md` thresholds + decision rules from Phase 0–4 fixture data.
-- **Deliverable**: `mcp_server/` installable + `skill/` directory + `program.md` running end-to-end on the octanol fixture inside Claude Code.
-
-### Phase 5b — Portability verification (week 6)
-- Mount the same MCP server in a second agent runtime (Codex CLI is the cheapest target; OpenCode / Cursor as stretch).
-- Run `program.md` on the octanol fixture in that runtime; assert byte-identical mapping output and equivalent score report.
-- Document any per-runtime mounting steps in `skill/AGENTS.md`.
-- **Deliverable**: portability test report in `tests/portability/` showing identical output across two agents.
-
-### Phase 6 — Demonstration (week 7)
-- Run the full protocol on Chris's PMETAC and PSBMA AA trajectories with no human intervention.
-- Generate a write-up showing: mapping diff vs. AutoMARTINI3 baseline, bond/angle distributions before/after repair, provenance log of repair decisions.
-- **Deliverable**: `demos/{pmetac,psbma}/` with the agent's full session log + final mapping + score report. Headline figure for any paper / write-up.
-
-### Open research questions (track, not blockers)
-- How formally to encode Martini 3 bead-selection rules so an LLM can reason over them?
-- Charged groups (Qd/Qa, ammonium/sulfonate) — single bead vs split? PSBMA is the canonical case.
-- Polymers: monomer-only mapping vs requiring a dimer/trimer reference?
-- Confidence scoring: how does the agent communicate "sketchy" vs "solid"?
-
-### Risks / known traps
-- **AutoMARTINI3 stalls** — hard timeout + fallback non-negotiable.
-- **`--fpred` always-on** — ALOGPS lookups fail on charged/exotic; default it in our wrapper.
-- **AA sampling adequacy** — under-converged AA trajectories look spuriously non-Gaussian. Need a sampling-sufficiency check before scoring.
-- **Polyply input contract** — monomer `.itp` shape differs from free-molecule `.itp`; verify before pass-through.
+**Critical clarification (2026-05-10)**: Seonghan's reproduction script (`run.sh` for octanol) is a **Stage 1 + CG simulation** pipeline — its `.mdp` and force-field includes are Martini, and the trajectory it produces is CG, not AA. We **cannot** use it to generate the AA reference trajectories Stage 2 requires. AA data must come from a separate atomistic pipeline (LigParGen / OPLS-AA + TIP3P + GROMACS production), either provided by collaborators or built under `scripts/aa_prep/`.
 
 ---
 
-## 5. Status log
+## Status log
 
-Section numbers below refer to §3 architecture; phases to §4.
+Section labels below map to the four ingredients above.
 
 | date       | milestone                                                  | status |
 |------------|------------------------------------------------------------|--------|
 | 2026-04-30 | repo created, plan synthesized from email chain            | done   |
-| 2026-04-30 | Obsidian project note created                              | done   |
 | 2026-04-30 | scope revised (drop CG sim; AA-projection scoring instead) | done   |
-| 2026-04-30 | first-cut `program.md` drafted                            | done   |
-| 2026-05-01 | architecture committed: MCP server + portable skill + program.md | done   |
-| 2026-05-01 | Phase 0: `autom3` env + AutoMARTINI3 M3 (commit 1fff05a) installed | done |
-| 2026-05-01 | Phase 0: octanol golden fixture captured                   | done   |
-| 2026-05-01 | Phase 0: PMETAC + PSBMA fixtures captured (M3 fork; behavior diverges from email predictions — see `tests/fixtures/README.md`) | done |
-| —          | Phase 0: ingest first AA trajectory from collaborators     | blocked on data |
-| —          | Phase 0: confirm PSBMA M3 mapping with Chris/Seonghan      | needs review |
-| —          | Phase 1: backends.md                                       |        |
-| —          | Phase 2: classifier + dispatcher                           |        |
-| —          | Phase 3: AA→CG projection + scoring                        |        |
-| —          | Phase 4: QA + repair loop                                  |        |
-| —          | Phase 5a: MCP server + skill packaging                     |        |
-| —          | Phase 5b: portability verification on second runtime       |        |
-| —          | Phase 6: demonstration on PMETAC + PSBMA                   |        |
+| 2026-04-30 | first-cut `program.md` drafted                             | done   |
+| 2026-05-01 | `autom3` env + AutoMARTINI3 M3 fork installed              | done   |
+| 2026-05-01 | octanol golden fixture captured                            | done   |
+| 2026-05-01 | PMETAC + PSBMA fixtures captured (behavior diverges from email) | done |
+| 2026-05-10 | outline restructured around the four ingredients           | done   |
+| 2026-05-10 | scope tightened (neutral-only) per Seonghan's testing update | done |
+| 2026-05-10 | acceptance criterion + modes (tight/loose) + action vocabulary locked | done |
+| 2026-05-10 | confirmed Seonghan's pipeline is CG-only; AA data must come separately | done |
+| 2026-05-10 | AA trajectories requested from Chris + Seonghan (octanol, PDMAEMA, PEO-20) | sent |
+| 2026-05-10 | Seonghan offered AA PEO-20 (single chain, water, no ions); ETA ~2026-05-15 | replied |
+| 2026-05-10 | Master TODO checklist added to Obsidian note               | done   |
+| 2026-05-15 | **AA PEO-20 delivered** to `reference/gromacs/` (CHARMM36, TIP3P, 200 ns) | done |
+| 2026-05-19 | AA PEO-20 inspected; end-group asymmetry (HO / CH₃) noted   | done |
+| 2026-05-19 | Chris back from vacation — archive lists charged 20-mers (PMETAC, PMPC, PSBMA, PNOMA, P2VPPS); no PDMAEMA monomer | known |
+| 2026-06-09 | **PEO-20 AA→CG mapping derived** — 20 ETHOX residues → 20 SN3r beads (1:1, mass-weighted, end-groups fold into bead 1 / bead 20). Artifacts: `reference/polyply_PEO20/PEO20_mapping.json` (canonical, atom-index keyed) + `PEO20.map` (Martini-style mirror). Hand-derived from CHARMM36 ETHOX + Polyply's `PEO20.itp` — *not* extracted from Polyply's built-in `.mapping` library (which targets OPLS atom names, not CHARMM). | done |
+| 2026-06-09 | Helper scripts added: `scripts/build_peo20_mapping.py` (regenerate mapping deterministically from the two `.itp` files) + `scripts/check_peo20_mapping.py` (project `equil.gro` through mapping; assert per-bead mass sums; print 1-2 bond + 1-2-3 angle stats) | done |
+| 2026-06-09 | Single-frame sanity check on `equil.gro`: mean 1-2 bond 0.310 nm (Polyply r₀ = 0.36), mean 1-2-3 angle 118° (Polyply θ₀ = 123°). All 20 bead-mass sums match expected AA sums to 0.01 g/mol → atom-index grouping verified. Whether the 0.05 nm bond offset is mapping-driven or parameter-driven is the scorer's call once the full xtc is projected. | done |
+| 2026-06-09 | PROGRESS.md end-group description corrected — terminus is `-O-CH₂-CH₃` (ethyl-ether), not `-O-CH₂-CH₂-CH₃`. Off-by-one CH₂ in original note. | done |
+| —          | **Scope decision**: drop PDMAEMA / self-generate / broaden to Chris's charged 20-mers | open |
+| —          | **#1 Stage**: sampling-sufficiency check                   | not started |
+| —          | **#1 Stage**: build `scripts/aa_prep/` if no traj provided | contingency |
+| —          | **#2 Process**: classifier + dispatcher (`classify.py`, `dispatch.py`) | not started |
+| —          | **#2 Process**: Martini Mapper interactive-CLI wrapper     | not started |
+| —          | **#2 Process**: cold-start fallback chain (BRICS + naive)  | not started |
+| —          | **#2 Process**: Martini 3 rules table + lookup             | not started |
+| —          | **#3 Evaluation**: AA→CG projector (`project.py`)          | not started |
+| —          | **#3 Evaluation**: scorer (`score.py`) — bootstrap on synthetic data first | not started |
+| —          | **#4 Loop**: QA + repair (`qa.py`, `repair.py`)            | not started |
+| —          | **#4 Loop**: MCP server + skill packaging                  | not started |
+| —          | **#4 Loop**: portability check on second runtime           | not started |
+| —          | Demonstration on PDMAEMA + PEO-20 (depends on #1)          | not started |
+| —          | Move PMETAC + PSBMA fixtures under `tests/fixtures/known_failures/` | not started |
+
+---
+
+## What we can do without AA data
+
+#1 is gating, but #2 and #3 can advance in parallel without it:
+
+- **#2** is structure-only — classifier, dispatcher, two-backend wrapper for AutoMARTINI3 + Martini Mapper, BRICS fallback. PDMAEMA cold-start divergence (the two backends disagree on bead types) can be captured as a fixture without any AA trajectory.
+- **#3 scorer** can be built against synthetic harmonic CG systems (project a known-good model, assert Gaussian-fit RMSE ≈ 0, rules clean). The projector half *does* need AA data for any non-trivial test.
+- **#4** glues #2 and #3 together; once both have minimal versions running, the QA-repair loop can be wired and exercised on synthetic-AA + the PDMAEMA disagreement fixture.
+
+Net: AA data unblocks the projector and the demonstration, but does not block the rest of the architecture.
+
+---
+
+## Background — email chain and key findings
+
+The April 2026 email chain (Walker / Kim / Ding / Carrillo) seeded the plan. Two findings from Phase 0 reproduction altered the original premise:
+
+1. **Chris's failure cases were on `auto_martini` (M2), not `auto_martiniM3`.** His PSBMA stall and PMETAC mis-sizing came from the older Bereau & Kremer tool. On the M3 fork: PSBMA converges in ~5 s with a rule-compliant mapping; PMETAC fails differently (disconnected-fragment intermediates). Implication: the PSBMA-stall fallback is deprioritized; the PMETAC disconnected-fragment crash is the new headline repair target.
+2. **`--fpred` is mandatory** in our wrapper. ALOGPS fragment lookup fails on charged / exotic fragments otherwise.
+
+Reference paper from Carrillo (not yet read): https://doi.org/10.1021/acs.jcim.5c02903 (J. Chem. Inf. Model., 2026).
+
+Reproduction notes: `tests/fixtures/README.md`. Email source: `reference/email_chain.md`. Polyply worked example: `reference/polyply_PEO20/`.
+
+---
+
+## Open questions
+
+- How to encode Martini 3 bead-selection rules so an LLM can reason over them — lookup table, rule prose, or example library?
+- Charged groups (Qd / Qa, ammonium / sulfonate): single bead vs split? PSBMA is the canonical case; chemistry sign-off from Chris / Seonghan still pending.
+- Polymers: monomer-only mapping sufficient, or is a dimer / trimer reference required for the dispatcher to do its job?
+- Confidence scoring: how does the agent communicate "sketchy" vs "solid" mappings to a downstream user?
+
+## Risks
+
+- **AA sampling adequacy** — under-converged trajectories look spuriously non-Gaussian. The sampling-sufficiency check in #1 is non-negotiable before #3 trusts its own output.
+- **`--fpred` always-on** — default it in our wrapper; never expose as optional.
+- **Polyply input contract drift** — monomer `.itp` shape differs from free-molecule `.itp`; verify on the PEO20 fixture before relying on pass-through.
+- **Backend stalls / crashes** — hard subprocess timeout + fragment-and-assemble fallback non-negotiable in the dispatcher.

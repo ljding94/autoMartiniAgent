@@ -1,0 +1,8 @@
+#include "../ff/martini_v3.0.0.itp"
+#include "PEO20.itp"
+
+[ system ]
+PEO20
+
+[ molecules ]
+PEO20 1

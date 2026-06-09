@@ -1,0 +1,94 @@
+; /Users/in3/miniconda3/envs/autom3/bin/polyply gen_params -lib martini3 -seq PEO:20 -o PEO20.itp -name PEO20
+
+; Please cite the following papers:
+; Souza, P C T; Alessandri, R; Barnoud, J; Thallmair, S; Faustino, I; Grünewald, F; Patmanidis, I; Abdizadeh, H; Bruininks, B M H; Wassenaar, T A; Kroon, P C; Melcr, J; Nieto, V; Corradi, V; Khan, H M; Domański, J; Javanainen, M; Martinez-Seara, H; Reuter, N; Best, R B; Vattulainen, I; Monticelli, L; Periole, X; Tieleman, D P; de Vries, A H; Marrink, S J;  Nature Methods 2021; 10.1038/s41592-021-01098-3
+; Kroon, P C; Grunewald, F; Barnoud, J; van Tilburg, M; Souza, P C; Wassenaar, T A; Marrink, S J;  elife 2024; 10.7554/elife.90627.2
+; Grunewald, F; Alessandri, R; Kroon, P C; Monticelli, L; Souza, P C; Marrink, S J;  Nature Communications 2022; 10.1038/s41467-021-27627-4
+
+[ moleculetype ]
+PEO20 1
+
+[ atoms ]
+ 1 SN3r  1 PEO EC  1 0.0 45.0
+ 2 SN3r  2 PEO EC  2 0.0 45.0
+ 3 SN3r  3 PEO EC  3 0.0 45.0
+ 4 SN3r  4 PEO EC  4 0.0 45.0
+ 5 SN3r  5 PEO EC  5 0.0 45.0
+ 6 SN3r  6 PEO EC  6 0.0 45.0
+ 7 SN3r  7 PEO EC  7 0.0 45.0
+ 8 SN3r  8 PEO EC  8 0.0 45.0
+ 9 SN3r  9 PEO EC  9 0.0 45.0
+10 SN3r 10 PEO EC 10 0.0 45.0
+11 SN3r 11 PEO EC 11 0.0 45.0
+12 SN3r 12 PEO EC 12 0.0 45.0
+13 SN3r 13 PEO EC 13 0.0 45.0
+14 SN3r 14 PEO EC 14 0.0 45.0
+15 SN3r 15 PEO EC 15 0.0 45.0
+16 SN3r 16 PEO EC 16 0.0 45.0
+17 SN3r 17 PEO EC 17 0.0 45.0
+18 SN3r 18 PEO EC 18 0.0 45.0
+19 SN3r 19 PEO EC 19 0.0 45.0
+20 SN3r 20 PEO EC 20 0.0 45.0
+
+[ bonds ]
+ 1  2 1 0.36 7000 ; central-bond
+ 2  3 1 0.36 7000 ; central-bond
+ 3  4 1 0.36 7000 ; central-bond
+ 4  5 1 0.36 7000 ; central-bond
+ 5  6 1 0.36 7000 ; central-bond
+ 6  7 1 0.36 7000 ; central-bond
+ 7  8 1 0.36 7000 ; central-bond
+ 8  9 1 0.36 7000 ; central-bond
+ 9 10 1 0.36 7000 ; central-bond
+10 11 1 0.36 7000 ; central-bond
+11 12 1 0.36 7000 ; central-bond
+12 13 1 0.36 7000 ; central-bond
+13 14 1 0.36 7000 ; central-bond
+14 15 1 0.36 7000 ; central-bond
+15 16 1 0.36 7000 ; central-bond
+16 17 1 0.36 7000 ; central-bond
+17 18 1 0.36 7000 ; central-bond
+18 19 1 0.36 7000 ; central-bond
+19 20 1 0.36 7000 ; central-bond
+
+[ angles ]
+ 1  2  3 2 123.00 80 ; central-angle
+ 2  3  4 2 123.00 80 ; central-angle
+ 3  4  5 2 123.00 80 ; central-angle
+ 4  5  6 2 123.00 80 ; central-angle
+ 5  6  7 2 123.00 80 ; central-angle
+ 6  7  8 2 123.00 80 ; central-angle
+ 7  8  9 2 123.00 80 ; central-angle
+ 8  9 10 2 123.00 80 ; central-angle
+ 9 10 11 2 123.00 80 ; central-angle
+10 11 12 2 123.00 80 ; central-angle
+11 12 13 2 123.00 80 ; central-angle
+12 13 14 2 123.00 80 ; central-angle
+13 14 15 2 123.00 80 ; central-angle
+14 15 16 2 123.00 80 ; central-angle
+15 16 17 2 123.00 80 ; central-angle
+16 17 18 2 123.00 80 ; central-angle
+17 18 19 2 123.00 80 ; central-angle
+18 19 20 2 123.00 80 ; central-angle
+
+[ dihedrals ]
+#ifndef TI
+ 1  2  3  4 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+ 2  3  4  5 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+ 3  4  5  6 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+ 4  5  6  7 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+ 5  6  7  8 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+ 6  7  8  9 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+ 7  8  9 10 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+ 8  9 10 11 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+ 9 10 11 12 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+10 11 12 13 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+11 12 13 14 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+12 13 14 15 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+13 14 15 16 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+14 15 16 17 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+15 16 17 18 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+16 17 18 19 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+17 18 19 20 11 8 0.6570 -1.3278 -0.43661278 1.0808704 0.680055
+#endif
+
