@@ -9,3 +9,6 @@ __pycache__/
 build/
 dist/
 vendor/
+derived/
+.pytest_cache/
+.*_offsets.npz
