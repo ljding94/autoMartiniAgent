@@ -143,7 +143,7 @@ autoMartiniAgent/
 ├── tests/                      # pytest suite
 ├── vendor/                     # third-party backends (gitignored)
 │   └── Automartini_M3/         # logP-based small-molecule mapper
-├── derived/                    # runtime outputs (gitignored)
+├── derived/                    # runtime outputs (committed as reference snapshots; regeneratable from inputs)
 ├── PROGRESS.md                 # full plan, scope, status log
 ├── program.md                  # agent-runnable protocol (draft)
 └── README.md                   # this file
