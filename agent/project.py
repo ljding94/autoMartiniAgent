@@ -26,12 +26,20 @@ inside ``--out-dir`` (the dir is created if absent).
 from __future__ import annotations
 
 import argparse
+import glob as _glob
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Sequence
 
 import MDAnalysis as mda
 import numpy as np
+
+
+def _natural_key(s: str) -> list:
+    """Sort key that treats embedded integers numerically (foo_2 < foo_10)."""
+    return [int(tok) if tok.isdigit() else tok for tok in re.split(r"(\d+)", str(s))]
 
 
 @dataclass(frozen=True)
@@ -117,7 +125,7 @@ def _build_cg_universe(mapping: dict) -> mda.Universe:
 
 def project_trajectory(
     aa_top: str | Path,
-    aa_traj: str | Path,
+    aa_traj: str | Path | Sequence[str | Path],
     mapping: dict | str | Path,
     out_traj: str | Path,
     out_struct: str | Path,
@@ -127,10 +135,11 @@ def project_trajectory(
     Parameters
     ----------
     aa_top : path
-        AA topology (``.tpr``, ``.gro``, ``.pdb``, ...). Must include masses
-        for correct mass-weighted COM.
-    aa_traj : path
-        AA trajectory (``.xtc``, ``.trr``, ``.dcd``, ...).
+        AA topology (``.tpr``, ``.psf``, ``.gro``, ``.pdb``, ...). Must include
+        masses for correct mass-weighted COM.
+    aa_traj : path | list of paths
+        AA trajectory (``.xtc``, ``.trr``, ``.dcd``, ...). A list is chained in
+        the given order, so the caller is responsible for time ordering.
     mapping : dict | path
         Mapping in the autoMartiniAgent schema. If a path, it is read first.
     out_traj : path
@@ -146,7 +155,12 @@ def project_trajectory(
     out_traj.parent.mkdir(parents=True, exist_ok=True)
     out_struct.parent.mkdir(parents=True, exist_ok=True)
 
-    u = mda.Universe(str(aa_top), str(aa_traj))
+    if isinstance(aa_traj, (str, Path)):
+        traj_arg: str | list[str] = str(aa_traj)
+    else:
+        traj_arg = [str(p) for p in aa_traj]
+
+    u = mda.Universe(str(aa_top), traj_arg)
     bead_groups = _build_bead_groups(u, mapping_dict)
     _validate_mass_sums(bead_groups, mapping_dict)
 
@@ -179,8 +193,17 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p = argparse.ArgumentParser(
         description="Project an AA trajectory through a Martini mapping JSON"
     )
-    p.add_argument("--aa-top", required=True, help="AA topology (.tpr/.gro/.pdb)")
-    p.add_argument("--aa-traj", required=True, help="AA trajectory (.xtc/.trr/...)")
+    p.add_argument("--aa-top", required=True, help="AA topology (.tpr/.psf/.gro/.pdb)")
+    p.add_argument(
+        "--aa-traj",
+        required=True,
+        nargs="+",
+        help=(
+            "AA trajectory file(s). Pass multiple files to chain them in time order, "
+            "or a single quoted glob like 'dir/step5_*.dcd' (natural-sorted so "
+            "step5_2 < step5_10)."
+        ),
+    )
     p.add_argument("--mapping", required=True, help="mapping JSON path")
     p.add_argument(
         "--out-dir",
@@ -200,6 +223,16 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return p.parse_args(argv)
 
 
+def _resolve_traj_args(traj_args: list[str]) -> list[str]:
+    """Expand a glob-only single arg; otherwise return args in user-given order."""
+    if len(traj_args) == 1 and any(c in traj_args[0] for c in "*?["):
+        expanded = sorted(_glob.glob(traj_args[0]), key=_natural_key)
+        if not expanded:
+            raise SystemExit(f"glob matched no files: {traj_args[0]}")
+        return expanded
+    return traj_args
+
+
 def main(argv: list[str] | None = None) -> None:
     args = _parse_args(argv)
     mapping = load_mapping(args.mapping)
@@ -210,15 +243,22 @@ def main(argv: list[str] | None = None) -> None:
         Path(args.out_struct) if args.out_struct else out_dir / f"{molecule}_cg.gro"
     )
 
+    traj_paths = _resolve_traj_args(args.aa_traj)
+    traj_label = (
+        Path(traj_paths[0]).name
+        if len(traj_paths) == 1
+        else f"{len(traj_paths)} files ({Path(traj_paths[0]).name} … {Path(traj_paths[-1]).name})"
+    )
+
     result = project_trajectory(
         aa_top=args.aa_top,
-        aa_traj=args.aa_traj,
+        aa_traj=traj_paths if len(traj_paths) > 1 else traj_paths[0],
         mapping=mapping,
         out_traj=out_traj,
         out_struct=out_struct,
     )
     print(
-        f"projected {result.n_frames} frame(s) of {Path(args.aa_traj).name} "
+        f"projected {result.n_frames} frame(s) of {traj_label} "
         f"through {len(mapping['beads'])}-bead mapping "
         f"({mapping.get('molecule', 'MOL')})"
     )

@@ -84,8 +84,8 @@ torsion_list, torsion_type_list, torsion_type_map, torsion_type_reverse_map = ge
 # Load in mapped trajectory #
 #---------------------------#
 
-xtc_in = '../../derived/PEO20/PEO20_cg.xtc'
-gro_in = '../../derived/PEO20/PEO20_cg.gro'
+xtc_in = '../../derived/PEO20_solu/PEO20_cg.xtc'
+gro_in = '../../derived/PEO20_solu/PEO20_cg.gro'
 
 # Load in a list of single frame dcd from NAMD
 traj = md.load(
@@ -104,6 +104,9 @@ print(f'Analyzing {n_frames_traj} frames')
 binwidth_nm = 0.001
 
 hist_data_bonds = compute_bond_distributions(traj,bond_type_map,binwidth_nm)
+fit_bonds, rmse_bonds, params_bonds = fit_gaussians(hist_data_bonds)
+for t,p in params_bonds.items():
+    print(f'  bond type {t}:  μ={p[0]:.4f} nm  σ={p[1]:.4f} nm  RMSE={rmse_bonds[t]:.4f}')
 
 # Set plotting parameters:
 plotfile_out_bonds = 'bond_hists.pdf'
@@ -111,12 +114,15 @@ bonded_type = 'bond'
 xlims = {
     1: (0.25,0.40),
     }
-    
+
 plot_bonded_distributions(
     hist_data_bonds,
     plotfile_out_bonds,
     bonded_type=bonded_type,
     xlims=xlims,
+    fit_data=fit_bonds,
+    rmse_data=rmse_bonds,
+    params=params_bonds,
     )
     
 #-----------------------------#
@@ -127,6 +133,9 @@ plot_bonded_distributions(
 binwidth_deg = 1
 
 hist_data_angles = compute_angle_distributions(traj,angle_type_map,binwidth_deg)
+fit_angles, rmse_angles, params_angles = fit_gaussians(hist_data_angles)
+for t,p in params_angles.items():
+    print(f'  angle type {t}: μ={p[0]:.2f}°  σ={p[1]:.2f}°  RMSE={rmse_angles[t]:.4f}')
 
 # Set plotting parameters:
 plotfile_out_angles = 'angle_hists.pdf'
@@ -134,12 +143,15 @@ bonded_type = 'angle'
 xlims = {
     1: (0,180),
     }
-    
+
 plot_bonded_distributions(
     hist_data_angles,
     plotfile_out_angles,
     bonded_type=bonded_type,
     xlims=xlims,
+    fit_data=fit_angles,
+    rmse_data=rmse_angles,
+    params=params_angles,
     )
 
 #-------------------------------#
@@ -150,6 +162,9 @@ plot_bonded_distributions(
 binwidth_deg = 1
 
 hist_data_torsions = compute_torsion_distributions(traj,torsion_type_map,binwidth_deg)
+fit_torsions, rmse_torsions, params_torsions = fit_gaussians(hist_data_torsions)
+for t,p in params_torsions.items():
+    print(f'  torsion type {t}: μ={p[0]:.2f}°  σ={p[1]:.2f}°  RMSE={rmse_torsions[t]:.4f}')
 
 # Set plotting parameters:
 plotfile_out_torsions = 'torsion_hists.pdf'
@@ -157,11 +172,14 @@ bonded_type = 'torsion'
 xlims = {
     1: (180,-180),
     }
-    
+
 plot_bonded_distributions(
     hist_data_torsions,
     plotfile_out_torsions,
     bonded_type=bonded_type,
     xlims=xlims,
+    fit_data=fit_torsions,
+    rmse_data=rmse_torsions,
+    params=params_torsions,
     )
     

@@ -188,8 +188,13 @@ Section labels below map to the four ingredients above.
 | 2026-06-09 | PROGRESS.md end-group description corrected — terminus is `-O-CH₂-CH₃` (ethyl-ether), not `-O-CH₂-CH₂-CH₃`. Off-by-one CH₂ in original note. | done |
 | 2026-06-09 | **#3 Evaluation — AA→CG projector landed** at `agent/project.py`. Generic across any mapping JSON in our schema; CLI + library API. Reads AA top (`.tpr`/`.gro`) + AA traj (`.xtc`/...), writes CG `.xtc` + single-frame CG `.gro`. Mass-weighted COM via MDAnalysis AtomGroup; mass-sum validation guards against atom-index off-by-ones. Smoke tests at `tests/test_project.py` (5 pass) check shape + bit-exact agreement with from-scratch Python COM. | done |
 | 2026-06-09 | Projector exercised on `step5_200_center.xtc` → `derived/PEO20/PEO20_cg.{xtc,gro}`. 1-2 bond mean **0.326 nm** (Polyply r₀=0.36, Δ=-0.034) ; 1-2-3 angle mean **131.3°** (Polyply θ₀=123°, Δ=+8°). These are real signals the scorer will need to act on — *not* projector bugs (positions verified bit-exact vs Python COM). | done |
-| 2026-06-09 | **Sampling gap**: `step5_200_center.xtc` contains only **10 frames** (20 ns spacing for a 200 ns run). 190 bond + 180 angle observations is far below convergence for Gaussian-fit RMSE. Need a denser xtc — either re-`trjconv -dt` from Seonghan's original or ask him for a higher-frequency dump. Pre-requisite to the scorer (#3 evaluation half). | open |
+| 2026-06-09 | **Sampling gap**: `step5_200_center.xtc` contains only **10 frames** (20 ns spacing for a 200 ns run). 190 bond + 180 angle observations is far below convergence for Gaussian-fit RMSE. Need a denser xtc — either re-`trjconv -dt` from Seonghan's original or ask him for a higher-frequency dump. Pre-requisite to the scorer (#3 evaluation half). | ~~open~~ → resolved 2026-06-30 via NAMD production data |
 | 2026-06-09 | autom3 env additions: `MDAnalysis 2.9.0`, `pytest 9.0.3` (+ transitive scipy/matplotlib). | done |
+| 2026-06-30 | **AA PEO-20 production data delivered** — `reference/peo20_solu/namd/`: CHARMM-GUI Polymer Builder solvated box (12 208 atoms; same 142-atom S1P1/ETHOX polymer at indices 1-142 → `PEO20_mapping.json` works as-is), 200 NAMD production segments (`step5_{1..200}.dcd`, 10 frames @ 100 ps each), **2000 frames over 200 ns = 200× the previous GROMACS dump**. Closes the sampling gap from 2026-06-09. | done |
+| 2026-06-30 | Projector CLI extended: `--aa-traj` is now `nargs='+'` and natural-sorts a single quoted glob (`step5_2.dcd` before `step5_10.dcd`). Library signature widened to `Sequence[str|Path]`. Projected the full 200-segment NAMD trajectory → `derived/PEO20_solu/PEO20_cg.{xtc,gro}` (2000 frames × 20 beads). | done |
+| 2026-06-30 | Chris's `peo_validation` branch (PR #1, `8f21c0a`) lifted into production at **`agent/score.py`** — Polyply `.itp` parser (bonds + angles + targets), Gaussian fitter, JSON report, PDFs. Reads canonical Martini target μ from `.itp`, emits Δ vs target per term. Bonds + angles only (per scope decision — torsions deferred as non-Gaussian). 6 new tests at `tests/test_score.py` (all green); 11/11 total. | done |
+| 2026-06-30 | **PEO-20 numbers on the full trajectory** (`agent.score` against Polyply `.itp`, end-exclude 2): bond μ_fit = **0.3301 nm** (target 0.36, **Δ = −0.033**), σ_fit = 0.0114, RMSE = 0.79; angle μ_fit = **129.86°** (target 123, **Δ = +7.8°**), σ_fit = 13.07, RMSE = 0.0012. 30 000 bond obs, 28 000 angle obs. The 10-frame baseline (μ_bond=0.326, μ_angle=131.3) and 2000-frame production agree on the means within ~0.4%, so the original Δ signals are reproducible and the underlying chemistry — not the projector or the sampling — drives them. | done |
+| 2026-06-30 | autom3 env additions: `mdtraj 1.10.3` (+ netCDF4 / cftime). | done |
 | —          | **Scope decision**: drop PDMAEMA / self-generate / broaden to Chris's charged 20-mers | open |
 | —          | **#1 Stage**: sampling-sufficiency check                   | not started |
 | —          | **#1 Stage**: build `scripts/aa_prep/` if no traj provided | contingency |
@@ -197,8 +202,9 @@ Section labels below map to the four ingredients above.
 | —          | **#2 Process**: Martini Mapper interactive-CLI wrapper     | not started |
 | —          | **#2 Process**: cold-start fallback chain (BRICS + naive)  | not started |
 | —          | **#2 Process**: Martini 3 rules table + lookup             | not started |
-| —          | **#3 Evaluation**: AA→CG projector (`project.py`)          | not started |
-| —          | **#3 Evaluation**: scorer (`score.py`) — bootstrap on synthetic data first | not started |
+| —          | **#3 Evaluation**: AA→CG projector (`project.py`)          | done (2026-06-09, extended 2026-06-30) |
+| —          | **#3 Evaluation**: scorer (`score.py`) — bonds + angles via Polyply `.itp` target | done (2026-06-30) |
+| —          | **#3 Evaluation**: Martini-rule checks (R/S/T sizing, Q-bead defaults) | not started |
 | —          | **#4 Loop**: QA + repair (`qa.py`, `repair.py`)            | not started |
 | —          | **#4 Loop**: MCP server + skill packaging                  | not started |
 | —          | **#4 Loop**: portability check on second runtime           | not started |

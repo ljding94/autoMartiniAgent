@@ -11,3 +11,23 @@ dist/
 vendor/
 .pytest_cache/
 .*_offsets.npz
+
+# Bulk MD trajectories — kept locally, not in git
+*.dcd
+
+# AA reference data (reference/peo20_solu/) — commit only what the pipeline
+# needs + production scripts; CHARMM-GUI setup + force-field libs stay local
+reference/peo20_solu/*
+!reference/peo20_solu/namd/
+reference/peo20_solu/namd/*
+!reference/peo20_solu/namd/README
+!reference/peo20_solu/namd/run_md.sh
+!reference/peo20_solu/namd/sysinfo.dat
+!reference/peo20_solu/namd/step3_input.psf
+!reference/peo20_solu/namd/step3_input.pdb
+!reference/peo20_solu/namd/step3_input.crd
+!reference/peo20_solu/namd/step3_input.str
+!reference/peo20_solu/namd/step4_equilibration.inp
+!reference/peo20_solu/namd/step5_production.inp
+!reference/peo20_solu/namd/step5_run.inp
+!reference/peo20_solu/namd/restraints/

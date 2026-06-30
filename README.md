@@ -31,15 +31,17 @@ See [`PROGRESS.md`](PROGRESS.md) for the full plan and status log.
 
 | ingredient | what's built | path |
 |---|---|---|
-| #1 Stage | AA PEO-20 reference data delivered (CHARMM36, TIP3P, 200 ns) | `reference/gromacs/` |
+| #1 Stage | AA PEO-20 reference data (CHARMM36, TIP3P, **NAMD 200 ns @ 100 ps spacing → 2000 frames**) | `reference/peo20_solu/namd/` |
 | #2 Process | Polyply CG topology for PEO-20 (20 × SN3r) + canonical AA→CG mapping | `reference/polyply_PEO20/` |
 | #2 Process | mapping regenerator + sanity-check scripts | `scripts/build_peo20_mapping.py`, `scripts/check_peo20_mapping.py` |
-| **#3 Evaluation** | **AA→CG trajectory projector** (library API + CLI) | `agent/project.py` |
-| tests | bit-exact projector verification vs hand-coded COM | `tests/test_project.py` |
+| **#3 Evaluation** | **AA→CG trajectory projector** (library API + CLI; accepts a list/glob of trajectory files) | `agent/project.py` |
+| **#3 Evaluation** | **CG mapping scorer** — Gaussian-fit bond + angle distributions, target μ pulled from Polyply ``.itp``, JSON report + PDFs | `agent/score.py` |
+| tests | projector COM verification + scorer end-to-end | `tests/test_project.py`, `tests/test_score.py` |
 
 What's **not** built yet: the molecule classifier and backend dispatcher
-(#2), the scorer with Martini-rule checks (#3), the agent's repair loop
-(#4), the MCP server, and the skill packaging.
+(#2), the Martini-rule checks (R/S/T sizing, Q-bead defaults) that the
+scorer will eventually enforce (#3), the agent's repair loop (#4), the
+MCP server, and the skill packaging.
 
 ## Try it (PEO-20, end-to-end)
 
@@ -64,16 +66,29 @@ python scripts/check_peo20_mapping.py
 # prints per-bead masses + 1-2 bond and 1-2-3 angle stats
 ```
 
-Project the full AA trajectory through the mapping into a CG trajectory:
+Project the full AA trajectory (200 NAMD segments → 2000 CG frames) through the mapping:
 
 ```sh
 python -m agent.project \
-  --aa-top   reference/gromacs/equil.tpr \
-  --aa-traj  reference/gromacs/step5_200_center.xtc \
+  --aa-top   reference/peo20_solu/namd/step3_input.psf \
+  --aa-traj  'reference/peo20_solu/namd/step5_*.dcd' \
   --mapping  reference/polyply_PEO20/PEO20_mapping.json \
-  --out-dir  derived/PEO20
-# → derived/PEO20/PEO20_cg.xtc   (CG trajectory)
-# → derived/PEO20/PEO20_cg.gro   (single-frame CG reference structure)
+  --out-dir  derived/PEO20_solu
+# → derived/PEO20_solu/PEO20_cg.xtc   (2000-frame CG trajectory)
+# → derived/PEO20_solu/PEO20_cg.gro   (single-frame CG reference structure)
+```
+
+Score the mapping (Gaussian fit + Δ vs Polyply target):
+
+```sh
+python -m agent.score \
+  --itp        reference/polyply_PEO20/PEO20.itp \
+  --cg-struct  derived/PEO20_solu/PEO20_cg.gro \
+  --cg-traj    derived/PEO20_solu/PEO20_cg.xtc \
+  --out-dir    derived/PEO20_solu
+# → derived/PEO20_solu/score_report.json
+# → derived/PEO20_solu/bond_hists.pdf
+# → derived/PEO20_solu/angle_hists.pdf
 ```
 
 Run the tests:
@@ -113,33 +128,37 @@ residue) for human inspection.
 
 ## PEO-20 first numbers
 
-Projecting `step5_200_center.xtc` through the canonical PEO mapping:
+Projecting the 200 NAMD production segments (2000 frames @ 100 ps) through
+the canonical PEO mapping and scoring against the Polyply ``.itp`` target:
 
-| metric | projected | Polyply M3 default | Δ |
-|---|---|---|---|
-| 1-2 bond mean (nm) | 0.326 | 0.360 | -0.034 |
-| 1-2-3 angle mean (°) | 131.3 | 123 | +8 |
+| metric | Gaussian fit μ | fit σ | fit RMSE | Polyply M3 target | Δ vs target |
+|---|---:|---:|---:|---:|---:|
+| 1-2 bond (nm) | **0.3301** | 0.0114 | 0.79 | 0.360 | **−0.033** |
+| 1-2-3 angle (°) | **129.86** | 13.07 | 0.0012 | 123 | **+7.8** |
 
-These offsets are real signals (the projection itself is verified
-bit-exact against a hand-coded COM in `tests/test_project.py`) — they're
-what the scorer will need to interpret once it lands. Caveat: the
-trajectory we have only contains 10 saved frames over 200 ns, so the
-sample is far below convergence for distribution fitting; we need a
-denser xtc from the production run.
+(Both ends dropped by `--end-exclude 2` per Chris's convention; 30 000 bond
+observations, 28 000 angle observations after exclusion.) The projection
+itself is verified bit-exact against a hand-coded COM in
+`tests/test_project.py`, so the Δ values are real chemistry signals — the
+agent loop will use them to decide whether the mapping is acceptable.
 
 ## Repo layout
 
 ```
 autoMartiniAgent/
 ├── agent/                      # core agent code
-│   └── project.py              # #3 — AA→CG trajectory projector
+│   ├── project.py              # #3 — AA→CG trajectory projector
+│   └── score.py                # #3 — Gaussian-fit bond/angle scorer vs .itp target
 ├── scripts/                    # standalone helpers
 │   ├── build_peo20_mapping.py  # build PEO20_mapping.json + PEO20.map
 │   └── check_peo20_mapping.py  # single-frame mapping sanity check
 ├── reference/                  # inputs (committed)
-│   ├── gromacs/                # AA PEO-20: CHARMM36, TIP3P, 200 ns
+│   ├── gromacs/                # AA PEO-20 (legacy 10-frame GROMACS dump)
+│   ├── peo20_solu/             # AA PEO-20 production: NAMD, 2000 frames, solvated
 │   ├── polyply_PEO20/          # CG topology + AA→CG mapping artifact
 │   └── email_chain.md          # April 2026 ORNL conversation seed
+├── validation/                 # ad-hoc analysis notebooks/scripts (e.g. Chris's PR)
+│   └── PEO20/                  # superseded by agent/score.py — kept as worked example
 ├── tests/                      # pytest suite
 ├── vendor/                     # third-party backends (gitignored)
 │   └── Automartini_M3/         # logP-based small-molecule mapper

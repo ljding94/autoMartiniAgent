@@ -2,6 +2,7 @@ import os
 import numpy as np
 import mdtraj as md
 from matplotlib import pyplot as plt
+from scipy.optimize import curve_fit
 
 # Tools for getting bond, angle, and torsion lists from a CG model,
 # and computing, plotting bonded histograms.
@@ -451,7 +452,63 @@ def compute_torsion_distributions(traj,torsion_type_map,binwidth_deg):
     return hist_data_torsions     
     
 
-def plot_bonded_distributions(hist_data,plotfile_out,bonded_type='bond',xlims={},ylims={},ncol=1):
+def _gaussian(x, mu, sigma, amp):
+    return amp * np.exp(-0.5 * ((x - mu) / sigma) ** 2)
+
+
+def fit_gaussian(hist_array):
+    """Fit a Gaussian to a 2xN histogram (bin_centers, probabilities).
+
+    Initial guesses come from the weighted moments of the histogram, so the
+    fit is robust to flat (no real peak) inputs — the resulting RMSE then
+    honestly flags 'this term is not Gaussian'.
+
+    Returns (popt=[mu, sigma, amp], fitted_y, rmse).
+    """
+    x = hist_array[0]
+    y = hist_array[1]
+    ysum = float(y.sum())
+    if ysum > 0:
+        mu0 = float(np.average(x, weights=y))
+        var0 = float(np.average((x - mu0) ** 2, weights=y))
+        sigma0 = max(np.sqrt(max(var0, 0.0)), float(x[1] - x[0]))
+    else:
+        mu0 = float(x.mean())
+        sigma0 = float(x.std()) or 1.0
+    amp0 = float(max(y.max(), 1e-12))
+    try:
+        popt, _ = curve_fit(_gaussian, x, y, p0=[mu0, sigma0, amp0], maxfev=10000)
+    except Exception:
+        popt = np.array([mu0, sigma0, amp0])
+    fitted = _gaussian(x, *popt)
+    rmse = float(np.sqrt(np.mean((y - fitted) ** 2)))
+    return popt, fitted, rmse
+
+
+def fit_gaussians(hist_data):
+    """Apply ``fit_gaussian`` to each entry in a hist_data dict.
+
+    Returns (fit_data, rmse_data, params) dicts keyed identically to hist_data:
+      - fit_data[t]  : 2xN array (bin_centers, fitted_y)
+      - rmse_data[t] : float
+      - params[t]    : np.array([mu, sigma, amp])
+    """
+    fit_data = {}
+    rmse_data = {}
+    params = {}
+    for t, hist in hist_data.items():
+        popt, fitted, rmse = fit_gaussian(hist)
+        fit_arr = np.zeros_like(hist)
+        fit_arr[0, :] = hist[0]
+        fit_arr[1, :] = fitted
+        fit_data[t] = fit_arr
+        rmse_data[t] = rmse
+        params[t] = popt
+    return fit_data, rmse_data, params
+
+
+def plot_bonded_distributions(hist_data,plotfile_out,bonded_type='bond',xlims={},ylims={},ncol=1,
+                              fit_data=None,rmse_data=None,params=None):
     """
     Plot bonded distributions with each type on a separate subplot
     
@@ -500,18 +557,50 @@ def plot_bonded_distributions(hist_data,plotfile_out,bonded_type='bond',xlims={}
     
     subplot_id = 0
         
-    for i,bond in enumerate(bond_type_list): 
+    for i,bond in enumerate(bond_type_list):
         # Determine subplot index:
         row = int(np.floor(subplot_id/(ncol)))
-        col = int(subplot_id%ncol)    
-            
+        col = int(subplot_id%ncol)
+
         eval(ax_call).plot(
             hist_data[bond][0,:],
             hist_data[bond][1,:],
+            label='measured',
             )
-            
+
+        if fit_data is not None and bond in fit_data:
+            eval(ax_call).plot(
+                fit_data[bond][0,:],
+                fit_data[bond][1,:],
+                'r--',
+                lw=1.5,
+                label='Gaussian fit',
+                )
+            eval(ax_call).legend(loc='upper left', fontsize=9, frameon=False)
+
+        annot_lines = []
+        if params is not None and bond in params:
+            mu, sigma, _ = params[bond]
+            if bonded_type == 'bond':
+                annot_lines.append(f'μ = {mu:.4f} nm')
+                annot_lines.append(f'σ = {sigma:.4f} nm')
+            else:
+                annot_lines.append(f'μ = {mu:.2f}°')
+                annot_lines.append(f'σ = {sigma:.2f}°')
+        if rmse_data is not None and bond in rmse_data:
+            annot_lines.append(f'RMSE = {rmse_data[bond]:.4f}')
+        if annot_lines:
+            eval(ax_call).text(
+                0.97, 0.95,
+                '\n'.join(annot_lines),
+                transform=eval(ax_call).transAxes,
+                ha='right', va='top',
+                fontsize=10,
+                bbox=dict(facecolor='white', alpha=0.8, edgecolor='0.7'),
+                )
+
         eval(ax_call).set_title(f'{bonded_type} type {bond}')
-    
+
         subplot_id += 1
         
     # Format the subplots:
