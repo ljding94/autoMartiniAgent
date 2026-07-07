@@ -1,0 +1,363 @@
+; PSBMA-20 AA→CG mapping (Martini-style mirror of PSBMA20_mapping.json)
+; molecule = PSBMA20, weighting = mass
+; SMILES   = CC(C)C(=O)OCC[N+](C)(C)CCCS(=O)(=O)[O-]
+
+[ C01#001  SC1   res  1 ]
+  C1 C2 C3 H5 H6 H7 H1 H3 H2
+
+[ N01#002  TN5a  res  1 ]
+  C4 O1
+
+[ P01#003  TP2a  res  1 ]
+  O2 C5 H8 H9
+
+[ 101#004  Q1    res  1 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#005  SC1   res  1 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#006  Q1    res  1 ]
+  S O3 O4 O5
+
+[ C01#007  SC1   res  2 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#008  TN5a  res  2 ]
+  C4 O1
+
+[ P01#009  TP2a  res  2 ]
+  O2 C5 H8 H9
+
+[ 101#010  Q1    res  2 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#011  SC1   res  2 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#012  Q1    res  2 ]
+  S O3 O4 O5
+
+[ C01#013  SC1   res  3 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#014  TN5a  res  3 ]
+  C4 O1
+
+[ P01#015  TP2a  res  3 ]
+  O2 C5 H8 H9
+
+[ 101#016  Q1    res  3 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#017  SC1   res  3 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#018  Q1    res  3 ]
+  S O3 O4 O5
+
+[ C01#019  SC1   res  4 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#020  TN5a  res  4 ]
+  C4 O1
+
+[ P01#021  TP2a  res  4 ]
+  O2 C5 H8 H9
+
+[ 101#022  Q1    res  4 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#023  SC1   res  4 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#024  Q1    res  4 ]
+  S O3 O4 O5
+
+[ C01#025  SC1   res  5 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#026  TN5a  res  5 ]
+  C4 O1
+
+[ P01#027  TP2a  res  5 ]
+  O2 C5 H8 H9
+
+[ 101#028  Q1    res  5 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#029  SC1   res  5 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#030  Q1    res  5 ]
+  S O3 O4 O5
+
+[ C01#031  SC1   res  6 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#032  TN5a  res  6 ]
+  C4 O1
+
+[ P01#033  TP2a  res  6 ]
+  O2 C5 H8 H9
+
+[ 101#034  Q1    res  6 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#035  SC1   res  6 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#036  Q1    res  6 ]
+  S O3 O4 O5
+
+[ C01#037  SC1   res  7 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#038  TN5a  res  7 ]
+  C4 O1
+
+[ P01#039  TP2a  res  7 ]
+  O2 C5 H8 H9
+
+[ 101#040  Q1    res  7 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#041  SC1   res  7 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#042  Q1    res  7 ]
+  S O3 O4 O5
+
+[ C01#043  SC1   res  8 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#044  TN5a  res  8 ]
+  C4 O1
+
+[ P01#045  TP2a  res  8 ]
+  O2 C5 H8 H9
+
+[ 101#046  Q1    res  8 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#047  SC1   res  8 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#048  Q1    res  8 ]
+  S O3 O4 O5
+
+[ C01#049  SC1   res  9 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#050  TN5a  res  9 ]
+  C4 O1
+
+[ P01#051  TP2a  res  9 ]
+  O2 C5 H8 H9
+
+[ 101#052  Q1    res  9 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#053  SC1   res  9 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#054  Q1    res  9 ]
+  S O3 O4 O5
+
+[ C01#055  SC1   res 10 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#056  TN5a  res 10 ]
+  C4 O1
+
+[ P01#057  TP2a  res 10 ]
+  O2 C5 H8 H9
+
+[ 101#058  Q1    res 10 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#059  SC1   res 10 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#060  Q1    res 10 ]
+  S O3 O4 O5
+
+[ C01#061  SC1   res 11 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#062  TN5a  res 11 ]
+  C4 O1
+
+[ P01#063  TP2a  res 11 ]
+  O2 C5 H8 H9
+
+[ 101#064  Q1    res 11 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#065  SC1   res 11 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#066  Q1    res 11 ]
+  S O3 O4 O5
+
+[ C01#067  SC1   res 12 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#068  TN5a  res 12 ]
+  C4 O1
+
+[ P01#069  TP2a  res 12 ]
+  O2 C5 H8 H9
+
+[ 101#070  Q1    res 12 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#071  SC1   res 12 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#072  Q1    res 12 ]
+  S O3 O4 O5
+
+[ C01#073  SC1   res 13 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#074  TN5a  res 13 ]
+  C4 O1
+
+[ P01#075  TP2a  res 13 ]
+  O2 C5 H8 H9
+
+[ 101#076  Q1    res 13 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#077  SC1   res 13 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#078  Q1    res 13 ]
+  S O3 O4 O5
+
+[ C01#079  SC1   res 14 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#080  TN5a  res 14 ]
+  C4 O1
+
+[ P01#081  TP2a  res 14 ]
+  O2 C5 H8 H9
+
+[ 101#082  Q1    res 14 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#083  SC1   res 14 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#084  Q1    res 14 ]
+  S O3 O4 O5
+
+[ C01#085  SC1   res 15 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#086  TN5a  res 15 ]
+  C4 O1
+
+[ P01#087  TP2a  res 15 ]
+  O2 C5 H8 H9
+
+[ 101#088  Q1    res 15 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#089  SC1   res 15 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#090  Q1    res 15 ]
+  S O3 O4 O5
+
+[ C01#091  SC1   res 16 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#092  TN5a  res 16 ]
+  C4 O1
+
+[ P01#093  TP2a  res 16 ]
+  O2 C5 H8 H9
+
+[ 101#094  Q1    res 16 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#095  SC1   res 16 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#096  Q1    res 16 ]
+  S O3 O4 O5
+
+[ C01#097  SC1   res 17 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#098  TN5a  res 17 ]
+  C4 O1
+
+[ P01#099  TP2a  res 17 ]
+  O2 C5 H8 H9
+
+[ 101#100  Q1    res 17 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#101  SC1   res 17 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#102  Q1    res 17 ]
+  S O3 O4 O5
+
+[ C01#103  SC1   res 18 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#104  TN5a  res 18 ]
+  C4 O1
+
+[ P01#105  TP2a  res 18 ]
+  O2 C5 H8 H9
+
+[ 101#106  Q1    res 18 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#107  SC1   res 18 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#108  Q1    res 18 ]
+  S O3 O4 O5
+
+[ C01#109  SC1   res 19 ]
+  C1 C2 C3 H5 H7 H1 H3 H2
+
+[ N01#110  TN5a  res 19 ]
+  C4 O1
+
+[ P01#111  TP2a  res 19 ]
+  O2 C5 H8 H9
+
+[ 101#112  Q1    res 19 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#113  SC1   res 19 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#114  Q1    res 19 ]
+  S O3 O4 O5
+
+[ C01#115  SC1   res 20 ]
+  C1 C2 C3 H5 H7 H1 H3 H2 BR1
+
+[ N01#116  TN5a  res 20 ]
+  C4 O1
+
+[ P01#117  TP2a  res 20 ]
+  O2 C5 H8 H9
+
+[ 101#118  Q1    res 20 ]
+  C6 N C7 C8 H10 H11 H12 H13 H14 H15 H16 H17
+
+[ C02#119  SC1   res 20 ]
+  C9 C10 C11 H18 H19 H20 H21 H22 H23
+
+[ 102#120  Q1    res 20 ]
+  S O3 O4 O5

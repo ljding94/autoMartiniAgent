@@ -31,12 +31,14 @@ See [`PROGRESS.md`](PROGRESS.md) for the full plan and status log.
 
 | ingredient | what's built | path |
 |---|---|---|
-| #1 Stage | AA PEO-20 reference data (CHARMM36, TIP3P, **NAMD 200 ns @ 100 ps spacing → 2000 frames**) | `reference/peo20_solu/namd/` |
+| #1 Stage | AA PEO-20 reference data (CHARMM36, TIP3P, **NAMD 200 ns @ 100 ps → 2000 frames**) | `reference/peo20_solu/namd/` |
+| #1 Stage | AA PSBMA-20mer reference data (**500 ns @ 20 ps → 25 001 frames**, zwitterionic methacrylate) | `reference/PSBMA_20mer/` |
 | #2 Process | Polyply CG topology for PEO-20 (20 × SN3r) + canonical AA→CG mapping | `reference/polyply_PEO20/` |
-| #2 Process | mapping regenerator + sanity-check scripts | `scripts/build_peo20_mapping.py`, `scripts/check_peo20_mapping.py` |
+| #2 Process | Auto-martiniM3 CG topology + AA→CG mapping tiled to PSBMA-20mer (120 beads: SC1 / TN5a / TP2a / Q1± / SC1 / Q1± per monomer + inter-monomer backbone bonds) | `reference/PSBMA_20mer/PSBMA20.itp`, `PSBMA20_mapping.json` |
+| #2 Process | mapping + topology regenerators | `scripts/build_peo20_mapping.py`, `scripts/build_psbma20_mapping.py`, `scripts/build_psbma20_itp.py` |
 | **#3 Evaluation** | **AA→CG trajectory projector** (library API + CLI; accepts a list/glob of trajectory files) | `agent/project.py` |
-| **#3 Evaluation** | **CG mapping scorer** — Gaussian-fit bond + angle distributions, target μ pulled from Polyply ``.itp``, JSON report + PDFs | `agent/score.py` |
-| tests | projector COM verification + scorer end-to-end | `tests/test_project.py`, `tests/test_score.py` |
+| **#3 Evaluation** | **CG mapping scorer** — bonds grouped by `(b0, kb)`, angles by `(θ0, kₐ)`, per-group Gaussian fit + Δ vs target, multi-panel PDFs + JSON | `agent/score.py` |
+| tests | projector COM verification + scorer end-to-end (12 tests) | `tests/test_project.py`, `tests/test_score.py` |
 
 What's **not** built yet: the molecule classifier and backend dispatcher
 (#2), the Martini-rule checks (R/S/T sizing, Q-bead defaults) that the
@@ -126,21 +128,39 @@ the projector to consume:
 `PEO20.map` is the same mapping in Martini-style format (atom-name per
 residue) for human inspection.
 
-## PEO-20 first numbers
+## First numbers
 
-Projecting the 200 NAMD production segments (2000 frames @ 100 ps) through
-the canonical PEO mapping and scoring against the Polyply ``.itp`` target:
+**PEO-20** (single bead type: SN3r; 2000 frames @ 100 ps; end_exclude=2):
 
-| metric | Gaussian fit μ | fit σ | fit RMSE | Polyply M3 target | Δ vs target |
+| term | Gaussian fit μ | fit σ | Polyply M3 target | **Δ vs target** |
+|---|---:|---:|---:|---:|
+| bond `SN3r-SN3r` (nm) | 0.3301 | 0.0114 | 0.360 | **−0.033** |
+| angle `SN3r-SN3r-SN3r` (°) | 129.86 | 13.07 | 123 | **+7.8** |
+
+**PSBMA-20mer** (6 beads / monomer; 25 001 frames @ 20 ps; end_exclude=1):
+
+Bond groups (auto-martiniM3 targets from `PSBA.itp`, inter-monomer backbone
+tiled with Martini-3 methacrylate defaults b0=0.27 / kb=7500):
+
+| bond group | μ_fit (nm) | σ | target | Δ | n_obs |
 |---|---:|---:|---:|---:|---:|
-| 1-2 bond (nm) | **0.3301** | 0.0114 | 0.79 | 0.360 | **−0.033** |
-| 1-2-3 angle (°) | **129.86** | 13.07 | 0.0012 | 123 | **+7.8** |
+| `SC1-TN5a` (backbone→carbonyl) | 0.253 | 0.008 | 0.24 | **+0.019** | 475 019 |
+| `TN5a-TP2a` (carbonyl→ester O) | 0.198 | 0.005 | 0.24 | **−0.036** | 500 020 |
+| `Q1-SC1 #1` (propyl-sulfonate) | 0.270 | 0.007 | 0.26 | +0.016 | 475 019 |
+| `SC1-SC1` (inter-monomer backbone) | 0.255 | 0.011 | 0.27 | **−0.001** | 450 018 |
+| `Q1-TP2a` (ester→ammonium) | 0.294 | 0.010 | 0.31 | −0.019 | 500 020 |
+| `Q1-SC1 #2` (ammonium→propyl) | 0.305 | 0.005 | 0.33 | −0.024 | 500 020 |
 
-(Both ends dropped by `--end-exclude 2` per Chris's convention; 30 000 bond
-observations, 28 000 angle observations after exclusion.) The projection
-itself is verified bit-exact against a hand-coded COM in
-`tests/test_project.py`, so the Δ values are real chemistry signals — the
-agent loop will use them to decide whether the mapping is acceptable.
+Angle groups tell a much sharper story — many groups have Δ > 25° and σ > 25°
+(bimodal or nearly-flat), so the single-Gaussian fit is really a
+goodness-of-fit metric that flags "auto-martiniM3's angle parameterization
+for this zwitterion doesn't survive AA validation". This is exactly the
+signal `tests/fixtures/psbma/README.md` foreshadowed as "surprise success
+(needs chemistry review)". See `derived/PSBMA20/{bond,angle}_hists.pdf`.
+
+The projection itself is verified bit-exact against a hand-coded COM in
+`tests/test_project.py`, so the Δ's above are real chemistry signals — not
+projector or sampling artifacts.
 
 ## Repo layout
 
@@ -155,7 +175,8 @@ autoMartiniAgent/
 ├── reference/                  # inputs (committed)
 │   ├── gromacs/                # AA PEO-20 (legacy 10-frame GROMACS dump)
 │   ├── peo20_solu/             # AA PEO-20 production: NAMD, 2000 frames, solvated
-│   ├── polyply_PEO20/          # CG topology + AA→CG mapping artifact
+│   ├── polyply_PEO20/          # PEO-20 CG topology + AA→CG mapping
+│   ├── PSBMA_20mer/            # AA PSBMA-20mer 25k-frame trajectory (.xtc gitignored) + CG topology + mapping
 │   └── email_chain.md          # April 2026 ORNL conversation seed
 ├── validation/                 # ad-hoc analysis notebooks/scripts (e.g. Chris's PR)
 │   └── PEO20/                  # superseded by agent/score.py — kept as worked example
