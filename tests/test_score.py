@@ -103,6 +103,32 @@ def test_fit_means_in_expected_band(report):
     assert 5 < angle.delta_vs_target < 11
 
 
+def test_fit_r2_is_reasonable(report):
+    """PEO bond and angle distributions are near-Gaussian, so the fitted-Gaussian
+    R² (in density space) should be high — 1.0 is a perfect trace and clean
+    single-Gaussian fits sit well above 0.9, versus the much lower R² of the
+    badly non-Gaussian (bimodal / skewed) PSBMA terms. If a scoring change
+    degrades this we want to notice."""
+    import math
+    for t in [report.bond_terms[0], report.angle_terms[0]]:
+        assert math.isfinite(t.fit_r2)
+        assert t.fit_r2 <= 1.0  # R² is bounded above by 1 (perfect fit)
+        # PEO fits are clean, so R² should be close to 1.
+        assert t.fit_r2 > 0.9
+
+
+def test_angle_coverage_always_populated(report):
+    """Every score run audits which consecutive-bond angles the itp defines. PEO
+    is a linear chain whose one angle type (SN3r-SN3r-SN3r) IS defined, so its
+    coverage is a single in-itp entry with nothing missing. The always-on audit
+    is how the workflow flags bonded angles a force field omits."""
+    cov = report.angle_coverage
+    assert len(cov) == 1
+    assert cov[0].bead_pattern == "SN3r-SN3r-SN3r"
+    assert cov[0].in_itp is True
+    assert [c for c in cov if not c.in_itp] == []  # nothing missing for PEO
+
+
 def test_json_round_trip(report, tmp_path):
     import json
     out = tmp_path / "score_report.json"

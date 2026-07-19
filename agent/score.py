@@ -51,7 +51,24 @@ def _gaussian(x, mu, sigma, amp):
 
 
 def _fit_gaussian(centers: np.ndarray, density: np.ndarray):
-    """Fit a single Gaussian to (centers, density). Returns (popt, fitted_y, rmse)."""
+    """Fit a single Gaussian to (centers, density). Returns (popt, fitted_y, r2).
+
+    Fit parameters come from least-squares (``curve_fit``). Goodness-of-fit is
+    reported as the **coefficient of determination** R² = 1 − SS_res / SS_tot
+    in density space, i.e. how well the fitted Gaussian traces the measured
+    histogram curve. R² = 1 is a perfect fit; lower is worse and it can go
+    negative for a fit worse than a flat mean line (e.g. a single Gaussian over
+    a clearly bimodal distribution).
+
+    R² is used in preference to information-theoretic scores (cross-entropy,
+    KL, JS) because those are mass/overlap-based and are dominated by tail
+    behaviour: a sharp, well-fit peak with rare non-Gaussian tails gets a large
+    KL even though the harmonic model captures it well, while a broad bimodal
+    blob that the Gaussian traces poorly gets a small KL because the fitted
+    curve still covers the occupied range. R² weights every bin's density
+    residual equally, so it tracks visual / physical fit quality (does the peak
+    match) instead of exploding on low-density tail bins.
+    """
     x = np.asarray(centers, dtype=float)
     y = np.asarray(density, dtype=float)
     s = float(y.sum())
@@ -68,8 +85,28 @@ def _fit_gaussian(centers: np.ndarray, density: np.ndarray):
     except Exception:
         popt = np.array([mu0, sigma0, amp0])
     fitted = _gaussian(x, *popt)
-    rmse = float(np.sqrt(np.mean((y - fitted) ** 2)))
-    return popt, fitted, rmse
+    r2 = _r_squared(y, fitted)
+    return popt, fitted, r2
+
+
+def _r_squared(measured: np.ndarray, fitted: np.ndarray) -> float:
+    """Coefficient of determination R² = 1 − SS_res / SS_tot in density space.
+
+    ``measured`` and ``fitted`` are the histogram density and the fitted
+    Gaussian evaluated at the same bin centers (both in the same density
+    units, so no normalization is needed). R² = 1 is a perfect trace; it falls
+    toward 0 as the fit worsens and can go negative when the Gaussian is worse
+    than a flat mean line (a strongly bimodal / skewed distribution). Unlike
+    KL / cross-entropy this weights each bin's residual equally, so it is not
+    dominated by rare non-Gaussian tails.
+    """
+    measured = np.asarray(measured, dtype=float)
+    fitted = np.asarray(fitted, dtype=float)
+    ss_tot = float(np.sum((measured - measured.mean()) ** 2))
+    if ss_tot <= 0.0:
+        return float("nan")
+    ss_res = float(np.sum((measured - fitted) ** 2))
+    return 1.0 - ss_res / ss_tot
 
 
 def _moments(centers: np.ndarray, density: np.ndarray) -> tuple[float, float]:
@@ -217,10 +254,24 @@ class TermStats:
     fit_mu: float
     fit_sigma: float
     fit_amp: float
-    fit_rmse: float
+    fit_r2: float              # R² of fitted Gaussian vs measured density (1 = perfect)
     target_mu: float | None
     target_k: float | None
     delta_vs_target: float | None
+
+
+@dataclass(frozen=True)
+class AngleCoverage:
+    """One consecutive-bond angle bead-type triple present in the topology, and
+    whether the itp defines a harmonic bonded angle term for it.
+
+    Populated on every score run (topology-only, no trajectory) so the workflow
+    always surfaces bonded angles the force field omits. ``in_itp=False`` means a
+    real bond-bond angle exists geometrically but has no [angles] entry.
+    """
+    bead_pattern: str                      # canonical bead-type triple, e.g. "Q1-SC1-Q1"
+    example_triple: tuple[int, int, int]   # a representative 1-based (i, j, k)
+    in_itp: bool
 
 
 @dataclass(frozen=True)
@@ -231,6 +282,7 @@ class ScoreReport:
     end_exclude: int
     bond_terms: list[TermStats] = field(default_factory=list)
     angle_terms: list[TermStats] = field(default_factory=list)
+    angle_coverage: list[AngleCoverage] = field(default_factory=list)
 
 
 def _drop_end_excluded(tuples, n_beads: int, end_exclude: int):
@@ -262,7 +314,7 @@ def _stats_from_values(
 ) -> TermStats:
     centers, density = _hist(values, binwidth, lo, hi)
     measured_mu, measured_sigma = _moments(centers, density)
-    popt, _fitted, rmse = _fit_gaussian(centers, density)
+    popt, _fitted, r2 = _fit_gaussian(centers, density)
     delta = float(measured_mu - target_mu) if target_mu is not None else None
     return TermStats(
         group_id=group_id,
@@ -275,7 +327,7 @@ def _stats_from_values(
         fit_mu=float(popt[0]),
         fit_sigma=float(abs(popt[1])),
         fit_amp=float(popt[2]),
-        fit_rmse=float(rmse),
+        fit_r2=float(r2),
         target_mu=float(target_mu) if target_mu is not None else None,
         target_k=float(target_k) if target_k is not None else None,
         delta_vs_target=delta,
@@ -312,9 +364,33 @@ def _group_bonds(topology: Topology):
     return out
 
 
+def _bond_pairs(topology: Topology) -> set[tuple[int, int]]:
+    """Undirected set of bonded index pairs (both orderings) for O(1) lookup."""
+    pairs: set[tuple[int, int]] = set()
+    for b in topology.bonds:
+        pairs.add((b.i, b.j))
+        pairs.add((b.j, b.i))
+    return pairs
+
+
+def _angle_is_bonded(a: AngleTerm, bonded: set[tuple[int, int]]) -> bool:
+    """True iff the angle's vertex (middle atom j) is bonded to both arms i, k.
+
+    GROMACS ``[angles]`` entries are 3-body potentials that do NOT require the
+    arms to be bonded to the vertex; some CG force fields add non-adjacent
+    "structural" angle restraints (spanning several bonds) to lock a group's
+    geometry. Those are not classical harmonic bond-bond angles and a single
+    Gaussian is a poor model for them, so they are excluded from scoring.
+    """
+    return (a.j, a.i) in bonded and (a.j, a.k) in bonded
+
+
 def _group_angles(topology: Topology):
+    bonded = _bond_pairs(topology)
     buckets: dict[tuple, dict] = {}
     for a in topology.angles:
+        if not _angle_is_bonded(a, bonded):
+            continue
         key = _angle_group_key(a)
         triple = _triple_label(
             topology.bead_type(a.i),
@@ -340,18 +416,92 @@ def _group_angles(topology: Topology):
     return out
 
 
+def _all_bonded_angle_groups(topology: Topology):
+    """Enumerate EVERY consecutive-bond angle (vertex bonded to both arms) from
+    the bonds, grouped by canonical bead-type triple — regardless of whether the
+    itp defines an [angles] term for it.
+
+    This is the "measure-only" angle set: it surfaces bonded angles the force
+    field omits (e.g. sidechain 2-3-4 / 3-4-5 / 4-5-6 or backbone-bend angles)
+    so their measured distributions can be inspected. Where the itp *does* define
+    the angle, its (theta0, ka) target is attached so a Δ-vs-target is still
+    reported; otherwise the target is None (measured-only, no Δ). Groups are keyed
+    purely by bead-type pattern, so distinct angles sharing a pattern would merge.
+    """
+    adj: dict[int, set[int]] = {}
+    for b in topology.bonds:
+        adj.setdefault(b.i, set()).add(b.j)
+        adj.setdefault(b.j, set()).add(b.i)
+
+    # itp targets keyed by canonical triple (min arm, vertex, max arm)
+    itp_target: dict[tuple[int, int, int], tuple[float | None, float | None]] = {}
+    for a in topology.angles:
+        itp_target[(min(a.i, a.k), a.j, max(a.i, a.k))] = (a.theta0, a.ka)
+
+    # every vertex-bonded triple, canonicalized
+    triples: set[tuple[int, int, int]] = set()
+    for j, nbrs in adj.items():
+        nl = sorted(nbrs)
+        for x in range(len(nl)):
+            for y in range(x + 1, len(nl)):
+                triples.add((min(nl[x], nl[y]), j, max(nl[x], nl[y])))
+
+    buckets: dict[str, dict] = {}
+    for (i, j, k) in sorted(triples):
+        lbl = _triple_label(
+            topology.bead_type(i), topology.bead_type(j), topology.bead_type(k)
+        )
+        tmu, tk = itp_target.get((i, j, k), (None, None))
+        v = buckets.setdefault(
+            lbl, {"triples": [], "pattern": lbl, "target_mu": None, "target_k": None}
+        )
+        v["triples"].append((i, j, k))
+        if v["target_mu"] is None and tmu is not None:  # adopt a target if any member has one
+            v["target_mu"], v["target_k"] = tmu, tk
+
+    # itp-defined groups first, then by measured-agnostic target/label
+    ordered = sorted(
+        buckets.items(),
+        key=lambda kv: (kv[1]["target_mu"] is None, kv[1]["target_mu"] or 0.0, kv[0]),
+    )
+    return [
+        ((v["target_mu"], v["target_k"]), v["triples"], lbl, v["pattern"], v["target_mu"], v["target_k"])
+        for lbl, v in ordered
+    ]
+
+
+def _angle_coverage(topology: Topology) -> list[AngleCoverage]:
+    """Topology-only audit: every consecutive-bond angle bead-type triple and
+    whether the itp defines a harmonic bonded angle for it. No trajectory needed."""
+    return [
+        AngleCoverage(
+            bead_pattern=pattern,
+            example_triple=tuple(triples[0]),
+            in_itp=target_mu is not None,
+        )
+        for (_key, triples, _label, pattern, target_mu, _tk) in _all_bonded_angle_groups(topology)
+    ]
+
+
 def score_mapping(
     *,
     itp: str | Path,
     cg_struct: str | Path,
     cg_traj: str | Path | Sequence[str | Path],
     molecule: str | None = None,
-    end_exclude: int = 2,
+    end_exclude: int = 0,
     bond_binwidth_nm: float = 0.001,
     angle_binwidth_deg: float = 1.0,
+    all_bonded_angles: bool = False,
 ) -> ScoreReport:
     """Score a CG mapping by grouping bonded terms per (target μ, target k) and
     reporting per-group Gaussian-fit statistics vs the ``.itp`` target.
+
+    By default only angles the itp defines (and whose vertex is bonded to both
+    arms) are scored. With ``all_bonded_angles=True`` the scorer instead measures
+    EVERY consecutive-bond angle in the topology — including bonded angles the itp
+    omits — reporting their fitted μ/σ/R² and a Δ-vs-target only where the itp
+    supplies one. Useful for spotting bonded angles missing from the force field.
     """
     topology = load_topology(itp)
 
@@ -383,8 +533,9 @@ def score_mapping(
             n_members=len(kept),
         ))
 
+    angle_groups = _all_bonded_angle_groups(topology) if all_bonded_angles else _group_angles(topology)
     angle_terms: list[TermStats] = []
-    for group_id, (_key, trips_1, label, pattern, target_mu, target_k) in enumerate(_group_angles(topology)):
+    for group_id, (_key, trips_1, label, pattern, target_mu, target_k) in enumerate(angle_groups):
         trips_0 = [(i - 1, j - 1, k - 1) for (i, j, k) in trips_1]
         kept = _drop_end_excluded(trips_0, n_beads, end_exclude)
         if not kept:
@@ -410,6 +561,7 @@ def score_mapping(
         end_exclude=end_exclude,
         bond_terms=bond_terms,
         angle_terms=angle_terms,
+        angle_coverage=_angle_coverage(topology),
     )
 
 
@@ -433,8 +585,13 @@ def _plot_groups(
     binwidth: float,
     lo: float,
     hi: float,
+    all_bonded_angles: bool = False,
 ) -> None:
-    """One PDF, one subplot per group, with measured + Gaussian fit + target."""
+    """One PDF, one subplot per group, with measured + Gaussian fit + target.
+
+    ``all_bonded_angles`` must match how the report's angle terms were grouped so
+    that group ids and triples line up (else panels go missing / mislabelled).
+    """
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -459,7 +616,7 @@ def _plot_groups(
         unit = "nm"
         val_fmt = ".4f"
     elif kind == "angle":
-        groups = _group_angles(topology)
+        groups = _all_bonded_angle_groups(topology) if all_bonded_angles else _group_angles(topology)
         get_indices = lambda ijk: [(i - 1, j - 1, k - 1) for (i, j, k) in ijk]
         measure = lambda kept: (180.0 / np.pi) * md.compute_angles(traj, kept, opt=True).ravel()
         xlabel = "bond angle (deg)"
@@ -493,7 +650,7 @@ def _plot_groups(
         annot = [
             f"μ = {format(stats.fit_mu, val_fmt)} {unit}",
             f"σ = {format(stats.fit_sigma, val_fmt)} {unit}",
-            f"RMSE = {stats.fit_rmse:.4f}",
+            f"R² = {stats.fit_r2:.3f}",
         ]
         if stats.delta_vs_target is not None:
             delta_fmt = "+" + val_fmt
@@ -526,12 +683,14 @@ def write_plots(
     out_dir: str | Path,
     bond_binwidth_nm: float = 0.001,
     angle_binwidth_deg: float = 1.0,
+    name_suffix: str = "",
+    all_bonded_angles: bool = False,
 ) -> dict[str, Path]:
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     written: dict[str, Path] = {}
     if report.bond_terms:
-        path = out_dir / "bond_hists.pdf"
+        path = out_dir / f"bond_hists{name_suffix}.pdf"
         _plot_groups(
             itp=itp, cg_struct=cg_struct, cg_traj=cg_traj,
             terms=report.bond_terms, kind="bond", out_path=path,
@@ -540,12 +699,13 @@ def write_plots(
         )
         written["bond"] = path
     if report.angle_terms:
-        path = out_dir / "angle_hists.pdf"
+        path = out_dir / f"angle_hists{name_suffix}.pdf"
         _plot_groups(
             itp=itp, cg_struct=cg_struct, cg_traj=cg_traj,
             terms=report.angle_terms, kind="angle", out_path=path,
             end_exclude=report.end_exclude,
             binwidth=angle_binwidth_deg, lo=0.0, hi=180.0,
+            all_bonded_angles=all_bonded_angles,
         )
         written["angle"] = path
     return written
@@ -581,8 +741,10 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="output directory (default: same dir as --cg-struct)",
     )
     p.add_argument(
-        "--end-exclude", type=int, default=2,
-        help="drop terms touching the first/last N beads (default: 2)",
+        "--end-exclude", type=int, default=0,
+        help="drop terms touching the first/last N *beads* (default: 0 = keep all "
+             "monomers). Note this counts beads, not monomers: for a molecule with "
+             "K beads per monomer, use a multiple of K to trim whole end monomers.",
     )
     p.add_argument(
         "--molecule", default=None,
@@ -591,6 +753,11 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument(
         "--no-plots", action="store_true",
         help="skip PDF plot generation",
+    )
+    p.add_argument(
+        "--all-bonded-angles", action="store_true",
+        help="measure EVERY consecutive-bond angle, including those the itp omits "
+             "(Δ-vs-target only where the itp defines one)",
     )
     return p.parse_args(argv)
 
@@ -607,19 +774,23 @@ def main(argv: list[str] | None = None) -> None:
         cg_traj=traj_paths if len(traj_paths) > 1 else traj_paths[0],
         molecule=molecule,
         end_exclude=args.end_exclude,
+        all_bonded_angles=args.all_bonded_angles,
     )
 
-    json_path = out_dir / "score_report.json"
+    suffix = "_all_angles" if args.all_bonded_angles else ""
+    json_path = out_dir / f"score_report{suffix}.json"
     write_json_report(report, json_path)
 
     print(f"scored {report.n_frames} frame(s) of {molecule} ({report.n_beads} beads, end_exclude={report.end_exclude})")
+    if args.all_bonded_angles:
+        print("  [all-bonded-angles mode] angles = every consecutive-bond angle; Δ shown only where the itp defines a target")
     print(f"  bond groups  ({len(report.bond_terms)}):")
     for t in report.bond_terms:
         tgt = f"target={t.target_mu:g}" if t.target_mu is not None else "target=—"
         d = f"Δ={t.delta_vs_target:+.4f} nm" if t.delta_vs_target is not None else "Δ=—"
         print(
             f"    {t.label:<22} μ_fit={t.fit_mu:.4f} σ={t.fit_sigma:.4f}  "
-            f"RMSE={t.fit_rmse:.4f}  {tgt}  {d}  (n_obs={t.n_observations})"
+            f"R²={t.fit_r2:.3f}  {tgt}  {d}  (n_obs={t.n_observations})"
         )
     print(f"  angle groups ({len(report.angle_terms)}):")
     for t in report.angle_terms:
@@ -627,8 +798,18 @@ def main(argv: list[str] | None = None) -> None:
         d = f"Δ={t.delta_vs_target:+.2f}°" if t.delta_vs_target is not None else "Δ=—"
         print(
             f"    {t.label:<22} μ_fit={t.fit_mu:.2f}° σ={t.fit_sigma:.2f}°  "
-            f"RMSE={t.fit_rmse:.4f}  {tgt}  {d}  (n_obs={t.n_observations})"
+            f"R²={t.fit_r2:.3f}  {tgt}  {d}  (n_obs={t.n_observations})"
         )
+    cov = report.angle_coverage
+    missing = [c.bead_pattern for c in cov if not c.in_itp]
+    print(
+        f"  angle coverage: {len(cov)} bonded-angle type(s) in topology; "
+        f"itp defines {len(cov) - len(missing)}, missing {len(missing)}"
+    )
+    if missing:
+        print(f"    missing from itp: {', '.join(missing)}")
+        if not args.all_bonded_angles:
+            print("    → re-run with --all-bonded-angles to measure their distributions")
     print(f"  report : {json_path}")
 
     if not args.no_plots:
@@ -638,6 +819,8 @@ def main(argv: list[str] | None = None) -> None:
             cg_struct=args.cg_struct,
             cg_traj=traj_paths if len(traj_paths) > 1 else traj_paths[0],
             out_dir=out_dir,
+            name_suffix=suffix,
+            all_bonded_angles=args.all_bonded_angles,
         )
         for kind, p in plot_paths.items():
             print(f"  {kind:<7}: {p}")
