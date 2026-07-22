@@ -1,10 +1,22 @@
 # autoMartiniAgent — Project Outline
 
+> 📊 **Human-friendly view**: open [`PROGRESS.html`](PROGRESS.html) in a browser. It is generated from this file — after editing here, run `python scripts/build_progress_html.py` to refresh it.
+
 **Goal**: an agent-runnable workflow that takes AA simulation data + chemical structure (SMILES / mol / pdb) and produces a validated Martini 3 mapping — atom-index → bead, bead type, bead size — plus a score report and provenance log. The mapping is the deliverable. We do not run CG simulations. Validation is in-the-loop: project the AA trajectory through the proposed mapping and score bead-bead distance and angle distributions.
 
 Collaborators (ORNL): Lijie Ding (driver, dingl1@ornl.gov), Seonghan Kim (kimsn@ornl.gov), Chris Walker (walkercc@ornl.gov), Jan Michael Carrillo (carrillojy@ornl.gov).
 
 ---
+
+## Scope & framing (locked 2026-07-21)
+
+**One-line pitch**: an automated, **simulation-free** agent that reads *existing* AA polymer trajectories and produces + repairs Martini 3 mappings, using AA-projected bonded-distribution **Gaussianity** (R²) as the objective and Martini rules as constraints.
+
+- **Simulation-free — hard boundary + selling point.** The method consumes AA trajectories that already exist; it never runs AA *or* CG simulations. (This supersedes the earlier `scripts/aa_prep/` self-generation idea — extra AA data comes from collaborators.)
+- **Polymer-focused.** The headline is polymers; more AA polymer data is incoming. The small-molecule route (#2 backends) is deprioritized, not deleted.
+- **Charged polymers are in scope as repair targets.** Cold-start tools mis-handle them (a #2 limitation), but the #3/#4 projection→Gaussianity→repair loop is charge-agnostic (it works on AA-projected distributions), so charged polymers become the tool-failure story the loop fixes.
+- **Objective validation — also sim-free.** Validate "high Gaussianity = good mapping" against Martini-3 **library mappings** as ground truth: (a) **recover** the accepted mapping from a degraded/tool guess, (b) **rank** (accepted scores high R², perturbed groupings lower), (c) **repair** the charged failures. Martini rule constraints close the "Gaussian-but-degenerately-over-coarsened" sufficiency gap.
+- **Benchmark for the paper**: neutral library polymers (PEO/PS/PMMA/PE/PVA/PDMS/PSS — ground truth) + charged 20-mers (PSBMA ✓; PMETAC/PMPC/PNOMA/P2VPPS — repair).
 
 ## The four ingredients
 
@@ -34,13 +46,15 @@ The substrate the agent reasons over.
 
 **Sampling-sufficiency check** is part of this ingredient: trajectory must show converged second moments before the scorer (#3) is allowed to call rule violations. Under-sampled AA looks spuriously non-Gaussian.
 
-**Fallback if no AA trajectories arrive**: build a thin AA-prep pipeline ourselves (SMILES → LigParGen → GROMACS solvate with TIP3P → NPT eq → NVT production) under `scripts/aa_prep/`. Adds scope but makes the project self-contained.
+**AA data comes from collaborators, not from us** (per the sim-free scope locked 2026-07-21): we do *not* run AA (or CG) simulations, so the earlier `scripts/aa_prep/` self-generation idea is **dropped**. Additional polymer AA trajectories (neutral library polymers for ground truth + the charged 20-mers) are requested from collaborators as the benchmark grows.
 
 ### 2. Process — initial AA→CG mapping generation
 
 The cold start: chemical structure → first-cut mapping, before any AA-driven scoring.
 
-**v1 scope** (per Seonghan 2026-05-10): **neutral small molecules + polymers in the Polyply built-in library** only. Charged / zwitterionic molecules drop from v1 — both small-molecule backends fail on them (AutoMARTINI3 rejects via ALOGPS; Martini Mapper silently mis-types because it has no Q-bead dictionary, which is dangerous in an automated pipeline).
+**v1 scope** (per Seonghan 2026-05-10): **neutral small molecules + polymers in the Polyply built-in library** only. Charged / zwitterionic molecules drop from v1 *for the cold-start generator* — both small-molecule backends fail on them (AutoMARTINI3 rejects via ALOGPS; Martini Mapper silently mis-types because it has no Q-bead dictionary, which is dangerous in an automated pipeline).
+
+**Update (2026-07-21, headline scope):** the paper focuses on **polymers**, and charged polymers are back **in scope as #3/#4 repair targets** — the loop is charge-agnostic (it scores AA-projected distributions, not the charge). The cold-start-generator limitation above is a #2 concern only; for the repair story we can start from a hand-built or degraded mapping. The small-molecule route (#2 backends) is deprioritized for the headline.
 
 **Small-molecule backends — two, run in parallel for v1**:
 - **AutoMARTINI3** (M3 fork, `vendor/Automartini_M3` @ `1fff05a`). logP-based strategy. ≤25 heavy atoms. Fully CLI. **Always invoke with `--fpred`**.
@@ -124,6 +138,18 @@ Each verb emits a structured JSON edit logged to a provenance trail.
 
 ---
 
+## Path to publication
+
+Ordered steps, all **sim-free** (existing AA data only):
+
+1. **Engine — done.** Projector (`project.py`) + Gaussianity scorer (`score.py`) + repair verbs & objective (`repair.py`, `evaluate.py`). PSBMA repair demonstrated (0.0400 → 0.0352, −12 %).
+2. **Validation harness — next.** `recover + rank` on existing data: perturb a known-good mapping → confirm R² drops → run the loop → confirm R² climbs back / recovers the accepted grouping. This is the core validation figure. The PSBMA rank demo is buildable now; library-polymer recovery lands when PS/PMMA AA data arrives.
+3. **Loop hardening.** `qa.py` acceptance gate + plateau/budget tracker (clean termination) and the Martini **rule checker** (R/S/T sizing, functional-group integrity, Q-bead defaults) so "rule-valid" is *enforced*, not just observed.
+4. **Benchmark.** Neutral library polymers (ground truth → recover/rank) + charged 20-mers (tool failures → repair). Per-molecule before/after per-term R² + scalar error vs. baselines.
+5. **Write-up.** Method + benchmark; headline = simulation-free agentic QA/repair of Martini 3 polymer mappings.
+
+**Deferred / out of headline scope**: small-molecule route (#2 backends, classifier/dispatcher), MCP + skill packaging (engineering, not results), and any CG-sim forward check (violates the sim-free boundary — collaborators supply extra AA examples for validation instead).
+
 ## Architecture
 
 Three portable layers:
@@ -203,11 +229,12 @@ Section labels below map to the four ingredients above.
 | 2026-07-07 | **Goodness-of-fit metric: cross-entropy → KL → R².** Cross-entropy carries the measured distribution's own entropy H(P), so it's neither comparable across groups nor binwidth-invariant; switched to forward KL (H − H(P)). But KL *inverted* vs visual fit quality on PSBMA: clean narrow peaks scored ~2 nats while broad bimodal blobs scored ~0.1. Root cause (verified): forward KL over the fixed [0,180°]/[0,0.8nm] window is dominated by eps-clipped tail bins — a narrow σ≈6° Gaussian leaves ~160 of 180 bins near-zero where the measured histogram still has trace mass, each contributing `p·log(p/eps)`. Every mass/overlap metric (KL, JS, Hellinger, Bhattacharyya) shares this flaw. **Settled on R² in density space** = "how well the fitted curve traces the histogram" — weights each bin's residual equally, ignores rare tails, matches eye/physics. PSBMA angle ranking under R²: clean SC1-TN5a-TP2a 0.990, bimodal SC1-Q1-TP2a 0.787, worst broad blob 0.464. `TermStats.fit_r2` replaces `fit_cross_entropy`; plots/CLI/JSON all say R². | done |
 | 2026-07-08 | **`end_exclude` default 2 → 0 (was silently dropping one monomer).** Collaborator flagged PSBMA n_obs short by ~25000 (one instance/frame = one monomer). Cause: `_drop_end_excluded` trims by **bead index**, and `end_exclude=2` (calibrated for PEO where 1 bead = 1 monomer) excludes beads {0,1,118,119} — which for PSBMA's 6-bead monomers chops a *different single monomer* off each term (monomer 1 for early-bead bonds, monomer 20 for late-bead bonds, both for backbone), giving inconsistent 18/19/20-per-frame counts. Changed default to 0 (keep all monomers — a validation tool shouldn't silently drop ~5% of data); trimming stays opt-in via `--end-exclude`, with help noting it counts beads not monomers (use a multiple of beads-per-monomer to trim whole ends). Now intra-monomer terms = 20/frame (500020), backbone = 19/frame (475019, correct: 19 links between 20 monomers). PEO essentially unchanged by including its end monomers (bond μ 0.3301→0.3304, angle 129.86→129.72, R² flat), confirming the trim was costing data for no benefit. Test fixture pins `end_exclude=2` so PEO regression assertions are unaffected. 15/15 pass. | done |
 | 2026-07-08 | **Projector PBC bug fixed — spurious ~10° angle peak.** All PSBMA angle distributions carried a small peak near 10° (three bonded beads can't fold that sharply). Root cause: `agent/project.py` computed each bead's `center_of_mass()` on **raw coordinates**, so a bead whose AA atoms straddle a periodic boundary collapsed to a garbage mid-box point — producing impossible ~2.5 nm "bonds" and fake small angles. It bit **52.5%** of frames (this 20-mer chain crosses the boundary constantly); the AA universe carries no bonds, so MDAnalysis `unwrap=True` was unavailable. Fix: `_bead_com()` shifts each atom to its minimum image relative to the bead's first atom (via `minimize_vectors`, triclinic-safe) before the mass-weighted average — no bond info needed, no-op for whole beads. Re-projected PSBMA (47 s): spurious <20° observations 1.9–4.6% → **0.000%**, every angle R² up (backbone 0.871→0.939, `Q1-SC1-Q1` 0.963→0.986), bonds cleaner too; the defined angle's Δ moved −27.3°→−24.6° once the garbage tail was gone. The `SC1-Q1-TP2a` bimodality **survived** → it's a real two-rotamer feature, not an artifact. PEO unaffected (its AA traj was pre-centred/whole). New `test_bead_com_unwraps_across_pbc`; 15/15 tests pass. | done |
+| 2026-07-21 | **Scope & plan locked — sim-free, polymer-focused, validate by library-recovery.** Reflection to sharpen the publication story. **(1) Simulation-free is now a hard boundary + selling point**: the method only consumes *existing* AA trajectories; it never runs AA or CG sims (drops the `scripts/aa_prep/` self-generation idea — extra AA examples come from collaborators). **(2) Headline = polymers**; the small-molecule route (#2 backends) is deprioritized. Charged polymers (PSBMA, PMETAC, …) are back **in scope as repair targets** — cold-start tools mis-handle them (a #2 limit) but the #3/#4 projection→Gaussianity→repair loop is charge-agnostic. **(3) Objective validation, also sim-free**: recover / rank / repair against Martini-3 **library mappings** as ground truth (accepted mappings score high R²; perturbations score lower; the loop climbs back). New **Scope & framing** and **Path to publication** sections added above. Next build: the recover+rank validation harness, then `qa.py` gate + Martini rule checker. | done |
 | 2026-07-14 | **#4 Loop — first cut: agent-driven mapping repair.** Built the mapping-edit verbs (`agent/repair.py`: `reassign_atoms` / `merge_beads` / `split_bead` on a `MappingState`, each re-deriving masses + heavy-atom counts, maintaining the bead-bond graph, and emitting a parameter-free `.itp`) plus the loop evaluator (`agent/evaluate.py`: project → score → scalar **Gaussianity objective** = `mean(1−R²)` over all bonds + all bonded angles; content-hash cached; `frame_stride` for fast interactive eval — stride-25 ≈ 1000 frames in ~2 s vs ~47 s full). Driver = **LLM-in-the-loop** (agent reads the score report, proposes edits, re-evaluates, keeps improvements). Objective is deliberately **target-free** — pure distribution Gaussianity, matching "make the measured CG distributions as Gaussian as possible", not Δ-vs-force-field. **PSBMA-20 result** (full 25 001 frames): baseline **0.0400 → 0.0352 (−12 %)** via a rule-valid edit that shifts each sidechain's bead windows one carbon (ester → `-O-CH₂-CH₂-` = O2,C5,C6; ammonium → `N⁺(CH₃)₂-CH₂` = N,C7,C8,C9; propyl → C10,C11), re-centering the Q1 charge on N⁺: `Q1-TP2a` bond R² **0.892→0.996**, bimodal `SC1-Q1-TP2a` angle **0.840→0.894** (cost: `Q1-SC1 #2` bond 1.000→0.863, all beads stay ≤4 heavy). The *unconstrained* optimum (C9→ammonium only) hits 0.0337 (−19 %) but makes a 5-heavy Q1 bead → cleanly surfaces the **Gaussianity-vs-Martini-sizing tension** the rule checker (not yet built) will arbitrate. Deliverable at `derived/PSBMA20/repair/` (repaired mapping + itp, before/after PDFs, `repair_provenance.json`). New `tests/test_repair.py` (trajectory-free); **26/26 pass**. Still pending: `qa.py` plateau/budget + acceptance gate, force-field param regeneration for merged/split beads (downstream), MCP packaging. | done |
 | 2026-07-07 | **Angle scoring restricted to bonded angles + coverage audit.** The auto-martiniM3 PSBMA `.itp` defines 10 angles/monomer but only `1-2-3` (SC1-TN5a-TP2a) is a classical bond-bond angle; the other 9 are non-adjacent "structural" restraints (vertex not bonded to both arms) that a single harmonic/Gaussian can't model. `_group_angles` now filters to vertex-bonded-both-arms only → PSBMA drops 10→1 scored angle group (PEO unaffected: its consecutive angles all survive). **Always-on `angle_coverage` audit** (topology-only) added to `ScoreReport`: enumerates every consecutive-bond angle bead-type type and flags which the `.itp` defines vs omits — PSBMA reports "6 types, itp defines 1, missing 5". New `--all-bonded-angles` mode measures the omitted ones from the AA-mapped reference (writes `*_all_angles.{json,pdf}`, canonical report untouched). Measured missing angles: most are good harmonic candidates (R² 0.87–0.96) except `SC1-Q1-TP2a`/3-4-5 (bimodal, 0.787); `Q1-TP2a-TN5a`/2-3-4 sits at 160.7° (near-linear, harmonic-risky). Even the one defined angle's θ₀ is 25° off the AA reference (97.5° vs itp 122.2°) → the itp angle block needs review; deferred as parameter-fitting (out of scope). 14/14 tests pass. | done |
-| —          | **Scope decision**: drop PDMAEMA / self-generate / broaden to Chris's charged 20-mers | open |
+| —          | **#1 Stage**: AA reference data delivered (PEO-20 200 ns + PSBMA-20 500 ns) | done (2026-07-07) |
+| —          | **#1 Stage**: more polymer AA data from collaborators (neutral library polymers + charged 20-mers) | open (requested) |
 | —          | **#1 Stage**: sampling-sufficiency check                   | not started |
-| —          | **#1 Stage**: build `scripts/aa_prep/` if no traj provided | contingency |
 | —          | **#2 Process**: classifier + dispatcher (`classify.py`, `dispatch.py`) | not started |
 | —          | **#2 Process**: Martini Mapper interactive-CLI wrapper     | not started |
 | —          | **#2 Process**: cold-start fallback chain (BRICS + naive)  | not started |
@@ -215,12 +242,13 @@ Section labels below map to the four ingredients above.
 | —          | **#3 Evaluation**: AA→CG projector (`project.py`)          | done (2026-06-09, extended 2026-06-30) |
 | —          | **#3 Evaluation**: scorer (`score.py`) — bonds + angles via Polyply `.itp` target | done (2026-06-30) |
 | —          | **#3 Evaluation**: Martini-rule checks (R/S/T sizing, Q-bead defaults) | not started |
+| —          | **#3 Evaluation**: recover+rank validation harness (perturb known-good mapping → R² drops → loop recovers) | not started |
 | —          | **#4 Loop**: mapping-edit verbs (`repair.py`) + Gaussianity-objective evaluator (`evaluate.py`) | done (2026-07-14, LLM-in-the-loop) |
 | —          | **#4 Loop**: QA acceptance gate + plateau/budget tracker (`qa.py`) | not started |
 | —          | **#4 Loop**: MCP server + skill packaging                  | not started |
 | —          | **#4 Loop**: portability check on second runtime           | not started |
-| —          | Demonstration on PDMAEMA + PEO-20 (depends on #1)          | not started |
-| —          | Move PMETAC + PSBMA fixtures under `tests/fixtures/known_failures/` | not started |
+| —          | **Benchmark**: library polymers (recover/rank) + charged 20-mers (repair) | not started |
+| —          | **Write-up**: sim-free agentic QA/repair of Martini 3 polymer mappings | not started |
 
 ---
 

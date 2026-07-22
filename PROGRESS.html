@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>autoMartiniAgent — Progress</title>
+<style>
+:root{
+  --bg:#0f1420; --panel:#171d2b; --panel2:#1e2637; --ink:#e7ecf5; --muted:#95a1b8;
+  --line:#2a3346; --accent:#5b8def;
+  --done:#39c07f; --wip:#e8b23a; --todo:#6b7688; --open:#4aa8d8; --sup:#5a6274; --cont:#a07bd6;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f4f6fb;--panel:#fff;--panel2:#f7f9fd;--ink:#1a2233;--muted:#5a6683;--line:#e2e7f0;}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+code{background:rgba(127,140,170,.18);padding:.05em .4em;border-radius:5px;
+  font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere;}
+del{color:var(--muted)}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 22px 80px}
+header.top{margin-bottom:26px}
+header.top h1{margin:0 0 6px;font-size:26px;letter-spacing:-.02em}
+header.top .goal{color:var(--muted);max-width:80ch;margin:0}
+.meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:13px}
+.meta b{color:var(--ink)}
+.pitch{margin:14px 0 0;padding:12px 16px;background:var(--panel);border:1px solid var(--line);
+  border-left:3px solid var(--accent);border-radius:10px;font-size:14.5px;max-width:88ch}
+ol.plan{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ol.plan li{display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start;
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 15px;font-size:13.5px}
+ol.plan li .step-num{width:26px;height:26px;border-radius:99px;background:var(--panel2);
+  border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center}
+ol.plan li.done .step-num{background:rgba(57,192,127,.15);color:var(--done);border-color:rgba(57,192,127,.4)}
+ol.plan li.done{border-left:3px solid var(--done)}
+h2.section{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);
+  margin:38px 0 14px;font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 16px 8px;min-width:0}
+.card-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.card-head .emoji{font-size:22px;line-height:1}
+.card-head h3{margin:2px 0 0;font-size:17px}
+.card-head .ing-num{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.05em}
+.card-head .sub{margin:2px 0 0;color:var(--muted);font-size:12.5px}
+.progress{height:7px;background:var(--panel2);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.progress .bar{height:100%;background:linear-gradient(90deg,var(--done),#59d69a)}
+.progress-label{font-size:11.5px;color:var(--muted);margin:5px 0 8px}
+ul.components{list-style:none;margin:0;padding:0}
+ul.components li{display:flex;gap:8px;align-items:baseline;padding:4px 0;font-size:13px;border-top:1px solid var(--line);min-width:0;overflow-wrap:anywhere}
+ul.components li:first-child{border-top:none}
+ul.components li.done{color:var(--ink)} ul.components li.todo,ul.components li.contingency{color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:99px;flex:none;position:relative;top:1px}
+.dot.done{background:var(--done)}.dot.wip{background:var(--wip)}.dot.todo{background:var(--todo)}
+.dot.open{background:var(--open)}.dot.contingency{background:var(--cont)}.dot.superseded{background:var(--sup)}.dot.info{background:var(--todo)}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:99px;
+  border:1px solid transparent;white-space:nowrap}
+.badge.done{background:rgba(57,192,127,.15);color:var(--done);border-color:rgba(57,192,127,.35)}
+.badge.wip{background:rgba(232,178,58,.15);color:var(--wip);border-color:rgba(232,178,58,.35)}
+.badge.todo{background:rgba(107,118,136,.15);color:var(--muted);border-color:rgba(107,118,136,.3)}
+.badge.open{background:rgba(74,168,216,.15);color:var(--open);border-color:rgba(74,168,216,.35)}
+.badge.contingency{background:rgba(160,123,214,.15);color:var(--cont);border-color:rgba(160,123,214,.35)}
+.badge.superseded{background:rgba(90,98,116,.12);color:var(--sup);border-color:rgba(90,98,116,.3)}
+.badge.info{background:rgba(107,118,136,.15);color:var(--muted)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.filters button{background:var(--panel);color:var(--muted);border:1px solid var(--line);
+  border-radius:99px;padding:5px 13px;font-size:12.5px;cursor:pointer}
+.filters button.active{color:var(--ink);border-color:var(--accent);background:var(--panel2)}
+ul.timeline{list-style:none;margin:0;padding:0;position:relative}
+ul.timeline:before{content:"";position:absolute;left:104px;top:6px;bottom:6px;width:2px;background:var(--line)}
+li.entry{display:grid;grid-template-columns:96px 1fr;gap:20px;padding:9px 0;position:relative}
+li.entry .entry-date{color:var(--muted);font-size:12.5px;text-align:right;padding-top:3px;font-variant-numeric:tabular-nums}
+li.entry .entry-body{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 14px;position:relative}
+li.entry .entry-body:before{content:"";position:absolute;left:-20px;top:14px;width:11px;height:11px;
+  border-radius:99px;background:var(--todo);border:2px solid var(--bg)}
+li.entry.status-done .entry-body:before{background:var(--done)}
+li.entry.status-wip .entry-body:before{background:var(--wip)}
+li.entry.status-open .entry-body:before{background:var(--open)}
+li.entry.status-superseded .entry-body:before{background:var(--sup)}
+li.entry.status-superseded{opacity:.62}
+.entry-top{margin-bottom:5px}
+.entry-text{font-size:13.5px}
+ul.roadmap{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+ul.roadmap li{display:flex;gap:11px;align-items:baseline;background:var(--panel);
+  border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:13.5px}
+.hidden{display:none!important}
+footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>autoMartiniAgent — Progress</h1>
+    <p class="goal">an agent-runnable workflow that takes AA simulation data + chemical structure (SMILES / mol / pdb) and produces a validated Martini 3 mapping — atom-index → bead, bead type, bead size — plus a score report and provenance log. The mapping is the deliverable. We do not run CG simulations. Validation is in-the-loop: project the AA trajectory through the proposed mapping and score bead-bead distance and angle distributions.</p>
+    <p class="pitch">an automated, <strong>simulation-free</strong> agent that reads <em>existing</em> AA polymer trajectories and produces + repairs Martini 3 mappings, using AA-projected bonded-distribution <strong>Gaussianity</strong> (R²) as the objective and Martini rules as constraints.</p>
+    <div class="meta">
+      <span>Last update <b>2026-07-21</b></span>
+      <span><b>40</b> milestones logged</span>
+      <span><b>36</b> done</span>
+      <span><b>13</b> items outstanding</span>
+    </div>
+  </header>
+
+  <h2 class="section">Pipeline — the four ingredients</h2>
+  <div class="cards">
+      <article class="card">
+        <div class="card-head">
+          <span class="emoji">🧪</span>
+          <div><span class="ing-num">#1</span><h3>Stage</h3><p class="sub">Atomistic reference data</p></div>
+        </div>
+        <div class="progress"><div class="bar" style="width:33%"></div></div>
+        <div class="progress-label">1/3 built</div>
+        <ul class="components"><li class="done"><span class="dot done"></span>AA reference data delivered</li>
+<li class="open"><span class="dot open"></span>more polymer AA data from collaborators</li>
+<li class="todo"><span class="dot todo"></span>sampling-sufficiency check</li></ul>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <span class="emoji">⚙️</span>
+          <div><span class="ing-num">#2</span><h3>Process</h3><p class="sub">Initial AA→CG mapping</p></div>
+        </div>
+        <div class="progress"><div class="bar" style="width:0%"></div></div>
+        <div class="progress-label">0/4 built</div>
+        <ul class="components"><li class="todo"><span class="dot todo"></span>classifier + dispatcher</li>
+<li class="todo"><span class="dot todo"></span>Martini Mapper interactive-CLI wrapper</li>
+<li class="todo"><span class="dot todo"></span>cold-start fallback chain</li>
+<li class="todo"><span class="dot todo"></span>Martini 3 rules table + lookup</li></ul>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <span class="emoji">📊</span>
+          <div><span class="ing-num">#3</span><h3>Evaluation</h3><p class="sub">Distribution scorer</p></div>
+        </div>
+        <div class="progress"><div class="bar" style="width:50%"></div></div>
+        <div class="progress-label">2/4 built</div>
+        <ul class="components"><li class="done"><span class="dot done"></span>AA→CG projector</li>
+<li class="done"><span class="dot done"></span>scorer — bonds + angles via Polyply .itp target</li>
+<li class="todo"><span class="dot todo"></span>Martini-rule checks</li>
+<li class="todo"><span class="dot todo"></span>recover+rank validation harness</li></ul>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <span class="emoji">🔁</span>
+          <div><span class="ing-num">#4</span><h3>Loop</h3><p class="sub">Iterative repair</p></div>
+        </div>
+        <div class="progress"><div class="bar" style="width:25%"></div></div>
+        <div class="progress-label">1/4 built</div>
+        <ul class="components"><li class="done"><span class="dot done"></span>mapping-edit verbs + Gaussianity-objective evaluator</li>
+<li class="todo"><span class="dot todo"></span>QA acceptance gate + plateau/budget tracker</li>
+<li class="todo"><span class="dot todo"></span>MCP server + skill packaging</li>
+<li class="todo"><span class="dot todo"></span>portability check on second runtime</li></ul>
+      </article></div>
+
+  <h2 class="section">Path to publication</h2>
+<ol class="plan"><li class="done"><span class="step-num">✓</span><div><strong>Engine — done.</strong> Projector (<code>project.py</code>) + Gaussianity scorer (<code>score.py</code>) + repair verbs &amp; objective (<code>repair.py</code>, <code>evaluate.py</code>). PSBMA repair demonstrated (0.0400 → 0.0352, −12 %).</div></li>
+<li class=""><span class="step-num">2</span><div><strong>Validation harness — next.</strong> <code>recover + rank</code> on existing data: perturb a known-good mapping → confirm R² drops → run the loop → confirm R² climbs back / recovers the accepted grouping. This is the core validation figure. The PSBMA rank demo is buildable now; library-polymer recovery lands when PS/PMMA AA data arrives.</div></li>
+<li class=""><span class="step-num">3</span><div><strong>Loop hardening.</strong> <code>qa.py</code> acceptance gate + plateau/budget tracker (clean termination) and the Martini <strong>rule checker</strong> (R/S/T sizing, functional-group integrity, Q-bead defaults) so &quot;rule-valid&quot; is <em>enforced</em>, not just observed.</div></li>
+<li class=""><span class="step-num">4</span><div><strong>Benchmark.</strong> Neutral library polymers (ground truth → recover/rank) + charged 20-mers (tool failures → repair). Per-molecule before/after per-term R² + scalar error vs. baselines.</div></li>
+<li class=""><span class="step-num">5</span><div><strong>Write-up.</strong> Method + benchmark; headline = simulation-free agentic QA/repair of Martini 3 polymer mappings.</div></li></ol>
+
+  <h2 class="section">Status timeline</h2>
+  <div class="filters"><button data-filter="all" class="active">All</button>
+<button data-filter="done">Done</button>
+<button data-filter="wip">In progress</button>
+<button data-filter="open">Open</button>
+<button data-filter="todo">Not started</button>
+<button data-filter="superseded">Superseded</button></div>
+  <ul class="timeline">
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-21</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>Scope &amp; plan locked — sim-free, polymer-focused, validate by library-recovery.</strong> Reflection to sharpen the publication story. <strong>(1) Simulation-free is now a hard boundary + selling point</strong>: the method only consumes <em>existing</em> AA trajectories; it never runs AA or CG sims (drops the <code>scripts/aa_prep/</code> self-generation idea — extra AA examples come from collaborators). <strong>(2) Headline = polymers</strong>; the small-molecule route (#2 backends) is deprioritized. Charged polymers (PSBMA, PMETAC, …) are back <strong>in scope as repair targets</strong> — cold-start tools mis-handle them (a #2 limit) but the #3/#4 projection→Gaussianity→repair loop is charge-agnostic. <strong>(3) Objective validation, also sim-free</strong>: recover / rank / repair against Martini-3 <strong>library mappings</strong> as ground truth (accepted mappings score high R²; perturbations score lower; the loop climbs back). New <strong>Scope &amp; framing</strong> and <strong>Path to publication</strong> sections added above. Next build: the recover+rank validation harness, then <code>qa.py</code> gate + Martini rule checker.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-14</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>#4 Loop — first cut: agent-driven mapping repair.</strong> Built the mapping-edit verbs (<code>agent/repair.py</code>: <code>reassign_atoms</code> / <code>merge_beads</code> / <code>split_bead</code> on a <code>MappingState</code>, each re-deriving masses + heavy-atom counts, maintaining the bead-bond graph, and emitting a parameter-free <code>.itp</code>) plus the loop evaluator (<code>agent/evaluate.py</code>: project → score → scalar <strong>Gaussianity objective</strong> = <code>mean(1−R²)</code> over all bonds + all bonded angles; content-hash cached; <code>frame_stride</code> for fast interactive eval — stride-25 ≈ 1000 frames in ~2 s vs ~47 s full). Driver = <strong>LLM-in-the-loop</strong> (agent reads the score report, proposes edits, re-evaluates, keeps improvements). Objective is deliberately <strong>target-free</strong> — pure distribution Gaussianity, matching &quot;make the measured CG distributions as Gaussian as possible&quot;, not Δ-vs-force-field. <strong>PSBMA-20 result</strong> (full 25 001 frames): baseline <strong>0.0400 → 0.0352 (−12 %)</strong> via a rule-valid edit that shifts each sidechain&#x27;s bead windows one carbon (ester → <code>-O-CH₂-CH₂-</code> = O2,C5,C6; ammonium → <code>N⁺(CH₃)₂-CH₂</code> = N,C7,C8,C9; propyl → C10,C11), re-centering the Q1 charge on N⁺: <code>Q1-TP2a</code> bond R² <strong>0.892→0.996</strong>, bimodal <code>SC1-Q1-TP2a</code> angle <strong>0.840→0.894</strong> (cost: <code>Q1-SC1 #2</code> bond 1.000→0.863, all beads stay ≤4 heavy). The <em>unconstrained</em> optimum (C9→ammonium only) hits 0.0337 (−19 %) but makes a 5-heavy Q1 bead → cleanly surfaces the <strong>Gaussianity-vs-Martini-sizing tension</strong> the rule checker (not yet built) will arbitrate. Deliverable at <code>derived/PSBMA20/repair/</code> (repaired mapping + itp, before/after PDFs, <code>repair_provenance.json</code>). New <code>tests/test_repair.py</code> (trajectory-free); <strong>26/26 pass</strong>. Still pending: <code>qa.py</code> plateau/budget + acceptance gate, force-field param regeneration for merged/split beads (downstream), MCP packaging.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-08</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong><code>end_exclude</code> default 2 → 0 (was silently dropping one monomer).</strong> Collaborator flagged PSBMA n_obs short by ~25000 (one instance/frame = one monomer). Cause: <code>_drop_end_excluded</code> trims by <strong>bead index</strong>, and <code>end_exclude=2</code> (calibrated for PEO where 1 bead = 1 monomer) excludes beads {0,1,118,119} — which for PSBMA&#x27;s 6-bead monomers chops a <em>different single monomer</em> off each term (monomer 1 for early-bead bonds, monomer 20 for late-bead bonds, both for backbone), giving inconsistent 18/19/20-per-frame counts. Changed default to 0 (keep all monomers — a validation tool shouldn&#x27;t silently drop ~5% of data); trimming stays opt-in via <code>--end-exclude</code>, with help noting it counts beads not monomers (use a multiple of beads-per-monomer to trim whole ends). Now intra-monomer terms = 20/frame (500020), backbone = 19/frame (475019, correct: 19 links between 20 monomers). PEO essentially unchanged by including its end monomers (bond μ 0.3301→0.3304, angle 129.86→129.72, R² flat), confirming the trim was costing data for no benefit. Test fixture pins <code>end_exclude=2</code> so PEO regression assertions are unaffected. 15/15 pass.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-08</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>Projector PBC bug fixed — spurious ~10° angle peak.</strong> All PSBMA angle distributions carried a small peak near 10° (three bonded beads can&#x27;t fold that sharply). Root cause: <code>agent/project.py</code> computed each bead&#x27;s <code>center_of_mass()</code> on <strong>raw coordinates</strong>, so a bead whose AA atoms straddle a periodic boundary collapsed to a garbage mid-box point — producing impossible ~2.5 nm &quot;bonds&quot; and fake small angles. It bit <strong>52.5%</strong> of frames (this 20-mer chain crosses the boundary constantly); the AA universe carries no bonds, so MDAnalysis <code>unwrap=True</code> was unavailable. Fix: <code>_bead_com()</code> shifts each atom to its minimum image relative to the bead&#x27;s first atom (via <code>minimize_vectors</code>, triclinic-safe) before the mass-weighted average — no bond info needed, no-op for whole beads. Re-projected PSBMA (47 s): spurious &lt;20° observations 1.9–4.6% → <strong>0.000%</strong>, every angle R² up (backbone 0.871→0.939, <code>Q1-SC1-Q1</code> 0.963→0.986), bonds cleaner too; the defined angle&#x27;s Δ moved −27.3°→−24.6° once the garbage tail was gone. The <code>SC1-Q1-TP2a</code> bimodality <strong>survived</strong> → it&#x27;s a real two-rotamer feature, not an artifact. PEO unaffected (its AA traj was pre-centred/whole). New <code>test_bead_com_unwraps_across_pbc</code>; 15/15 tests pass.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-07</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>Second molecule: PSBMA-20mer</strong> — AA data delivered at <code>reference/PSBMA_20mer/</code> (99 MB xtc gitignored; the ~50 KB solute-only gro stays tracked). <strong>25 001 frames over 500 ns @ 20 ps spacing</strong> — 250× denser than the PEO-20 baseline. Zwitterionic methacrylate polymer with <strong>6 beads per monomer</strong> (SC1 backbone + TN5a/TP2a esters + Q1± ammonium/sulfonate + SC1 propyl linker), 782 AA atoms, ATRP terminator (<code>BR1</code> on residue 20).</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-07</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>Scorer refactor — multi-type support</strong> at <code>agent/score.py</code>. Bonds now grouped by <code>(b0, kb)</code>, angles by <code>(θ0, kₐ)</code>, each group fit + scored independently. <code>.itp</code> parser also reads <code>[atoms]</code> so bead-type labels appear in each group&#x27;s title. PDFs go multi-panel (one panel per group). ScoreReport schema: <code>bond</code> → <code>bond_terms: list[TermStats]</code>, same for angles. PEO regression unchanged (μ_bond=0.3301, μ_angle=129.86). 12/12 tests pass.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-07</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>Mapping + topology builders for PSBMA-20mer</strong>: <code>scripts/build_psbma20_mapping.py</code> derives the 120-bead AA→CG mapping (static heavy-atom table from PSBA.itp SMILES annotations + spatial-nearest H assignment on frame 0; end groups H6/BR1 fold into their monomer&#x27;s bead 1). <code>scripts/build_psbma20_itp.py</code> tiles the single-monomer PSBA.itp × 20 + adds 19 inter-monomer SC1-SC1 backbone bonds (b0=0.27 nm, kb=7500 — Martini-3 methacrylate default). 782/782 AA atoms assigned; per-bead masses identical across mid-chain monomers.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-07</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>PSBMA-20mer first numbers</strong> (end_exclude=1, ~475k obs per bond group / ~450k per angle group). Bonds: all six groups fit clean Gaussians; Δ vs auto-martini target ranges from −0.036 nm (<code>TN5a-TP2a</code>) to +0.019 nm (<code>SC1-TN5a</code>). Backbone SC1-SC1 (our chosen default b0=0.27) came out at 0.255 nm, Δ=−0.001 — the default was well-picked. <strong>Angles: systematically off</strong>, Δ ranges from −32° (<code>SC1-Q1-SC1</code>) to +30° (<code>Q1-TP2a-SC1</code>), and several σ&#x27;s are 25-45° (i.e. bimodal / non-Gaussian). This is exactly the signal the tests/fixtures/psbma README flagged as &quot;surprise success (needs chemistry review)&quot; — auto-martiniM3&#x27;s angle parameterization for PSBMA doesn&#x27;t survive AA validation.</div>
+          </div>
+        </li>
+
+        <li class="entry status-superseded" data-status="superseded">
+          <div class="entry-date">2026-07-07</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge superseded">Superseded</span></div>
+            <div class="entry-text"><strong>Goodness-of-fit metric: RMSE → cross-entropy.</strong> Amplitude-domain RMSE scales with peak density, so it&#x27;s not comparable across terms (bond RMSE ~0.8 vs angle RMSE ~0.001 for the same PEO chemistry). Cross-entropy H(measured, fitted-Gaussian) in nats compares normalized probability distributions directly and puts a large penalty when measured has mass where the fitted Gaussian has near-zero density (bimodal / non-Gaussian). PEO baselines: H_bond=4.37, H_angle=4.24 (both near the minimum for our bin resolution). PSBMA bond H ranges 3.7–6.6; angle H ranges 4.8–6.1. Same numeric scale across all terms → per-group scoring is now cross-comparable.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-07</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>Goodness-of-fit metric: cross-entropy → KL → R².</strong> Cross-entropy carries the measured distribution&#x27;s own entropy H(P), so it&#x27;s neither comparable across groups nor binwidth-invariant; switched to forward KL (H − H(P)). But KL <em>inverted</em> vs visual fit quality on PSBMA: clean narrow peaks scored ~2 nats while broad bimodal blobs scored ~0.1. Root cause (verified): forward KL over the fixed [0,180°]/[0,0.8nm] window is dominated by eps-clipped tail bins — a narrow σ≈6° Gaussian leaves ~160 of 180 bins near-zero where the measured histogram still has trace mass, each contributing <code>p·log(p/eps)</code>. Every mass/overlap metric (KL, JS, Hellinger, Bhattacharyya) shares this flaw. <strong>Settled on R² in density space</strong> = &quot;how well the fitted curve traces the histogram&quot; — weights each bin&#x27;s residual equally, ignores rare tails, matches eye/physics. PSBMA angle ranking under R²: clean SC1-TN5a-TP2a 0.990, bimodal SC1-Q1-TP2a 0.787, worst broad blob 0.464. <code>TermStats.fit_r2</code> replaces <code>fit_cross_entropy</code>; plots/CLI/JSON all say R².</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-07</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>Angle scoring restricted to bonded angles + coverage audit.</strong> The auto-martiniM3 PSBMA <code>.itp</code> defines 10 angles/monomer but only <code>1-2-3</code> (SC1-TN5a-TP2a) is a classical bond-bond angle; the other 9 are non-adjacent &quot;structural&quot; restraints (vertex not bonded to both arms) that a single harmonic/Gaussian can&#x27;t model. <code>_group_angles</code> now filters to vertex-bonded-both-arms only → PSBMA drops 10→1 scored angle group (PEO unaffected: its consecutive angles all survive). <strong>Always-on <code>angle_coverage</code> audit</strong> (topology-only) added to <code>ScoreReport</code>: enumerates every consecutive-bond angle bead-type type and flags which the <code>.itp</code> defines vs omits — PSBMA reports &quot;6 types, itp defines 1, missing 5&quot;. New <code>--all-bonded-angles</code> mode measures the omitted ones from the AA-mapped reference (writes <code>*_all_angles.{json,pdf}</code>, canonical report untouched). Measured missing angles: most are good harmonic candidates (R² 0.87–0.96) except <code>SC1-Q1-TP2a</code>/3-4-5 (bimodal, 0.787); <code>Q1-TP2a-TN5a</code>/2-3-4 sits at 160.7° (near-linear, harmonic-risky). Even the one defined angle&#x27;s θ₀ is 25° off the AA reference (97.5° vs itp 122.2°) → the itp angle block needs review; deferred as parameter-fitting (out of scope). 14/14 tests pass.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-30</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>AA PEO-20 production data delivered</strong> — <code>reference/peo20_solu/namd/</code>: CHARMM-GUI Polymer Builder solvated box (12 208 atoms; same 142-atom S1P1/ETHOX polymer at indices 1-142 → <code>PEO20_mapping.json</code> works as-is), 200 NAMD production segments (<code>step5_{1..200}.dcd</code>, 10 frames @ 100 ps each), <strong>2000 frames over 200 ns = 200× the previous GROMACS dump</strong>. Closes the sampling gap from 2026-06-09.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-30</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">Projector CLI extended: <code>--aa-traj</code> is now <code>nargs=&#x27;+&#x27;</code> and natural-sorts a single quoted glob (<code>step5_2.dcd</code> before <code>step5_10.dcd</code>). Library signature widened to <code>Sequence[str|Path]</code>. Projected the full 200-segment NAMD trajectory → <code>derived/PEO20_solu/PEO20_cg.{xtc,gro}</code> (2000 frames × 20 beads).</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-30</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">Chris&#x27;s <code>peo_validation</code> branch (PR #1, <code>8f21c0a</code>) lifted into production at <strong><code>agent/score.py</code></strong> — Polyply <code>.itp</code> parser (bonds + angles + targets), Gaussian fitter, JSON report, PDFs. Reads canonical Martini target μ from <code>.itp</code>, emits Δ vs target per term. Bonds + angles only (per scope decision — torsions deferred as non-Gaussian). 6 new tests at <code>tests/test_score.py</code> (all green); 11/11 total.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-30</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>PEO-20 numbers on the full trajectory</strong> (<code>agent.score</code> against Polyply <code>.itp</code>, end-exclude 2): bond μ_fit = <strong>0.3301 nm</strong> (target 0.36, <strong>Δ = −0.033</strong>), σ_fit = 0.0114, RMSE = 0.79; angle μ_fit = <strong>129.86°</strong> (target 123, <strong>Δ = +7.8°</strong>), σ_fit = 13.07, RMSE = 0.0012. 30 000 bond obs, 28 000 angle obs. The 10-frame baseline (μ_bond=0.326, μ_angle=131.3) and 2000-frame production agree on the means within ~0.4%, so the original Δ signals are reproducible and the underlying chemistry — not the projector or the sampling — drives them.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-30</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">autom3 env additions: <code>mdtraj 1.10.3</code> (+ netCDF4 / cftime).</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-09</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>PEO-20 AA→CG mapping derived</strong> — 20 ETHOX residues → 20 SN3r beads (1:1, mass-weighted, end-groups fold into bead 1 / bead 20). Artifacts: <code>reference/polyply_PEO20/PEO20_mapping.json</code> (canonical, atom-index keyed) + <code>PEO20.map</code> (Martini-style mirror). Hand-derived from CHARMM36 ETHOX + Polyply&#x27;s <code>PEO20.itp</code> — <em>not</em> extracted from Polyply&#x27;s built-in <code>.mapping</code> library (which targets OPLS atom names, not CHARMM).</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-09</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">Helper scripts added: <code>scripts/build_peo20_mapping.py</code> (regenerate mapping deterministically from the two <code>.itp</code> files) + <code>scripts/check_peo20_mapping.py</code> (project <code>equil.gro</code> through mapping; assert per-bead mass sums; print 1-2 bond + 1-2-3 angle stats)</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-09</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">Single-frame sanity check on <code>equil.gro</code>: mean 1-2 bond 0.310 nm (Polyply r₀ = 0.36), mean 1-2-3 angle 118° (Polyply θ₀ = 123°). All 20 bead-mass sums match expected AA sums to 0.01 g/mol → atom-index grouping verified. Whether the 0.05 nm bond offset is mapping-driven or parameter-driven is the scorer&#x27;s call once the full xtc is projected.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-09</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">PROGRESS.md end-group description corrected — terminus is <code>-O-CH₂-CH₃</code> (ethyl-ether), not <code>-O-CH₂-CH₂-CH₃</code>. Off-by-one CH₂ in original note.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-09</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>#3 Evaluation — AA→CG projector landed</strong> at <code>agent/project.py</code>. Generic across any mapping JSON in our schema; CLI + library API. Reads AA top (<code>.tpr</code>/<code>.gro</code>) + AA traj (<code>.xtc</code>/...), writes CG <code>.xtc</code> + single-frame CG <code>.gro</code>. Mass-weighted COM via MDAnalysis AtomGroup; mass-sum validation guards against atom-index off-by-ones. Smoke tests at <code>tests/test_project.py</code> (5 pass) check shape + bit-exact agreement with from-scratch Python COM.</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-09</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">Projector exercised on <code>step5_200_center.xtc</code> → <code>derived/PEO20/PEO20_cg.{xtc,gro}</code>. 1-2 bond mean <strong>0.326 nm</strong> (Polyply r₀=0.36, Δ=-0.034) ; 1-2-3 angle mean <strong>131.3°</strong> (Polyply θ₀=123°, Δ=+8°). These are real signals the scorer will need to act on — <em>not</em> projector bugs (positions verified bit-exact vs Python COM).</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-09</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>Sampling gap</strong>: <code>step5_200_center.xtc</code> contains only <strong>10 frames</strong> (20 ns spacing for a 200 ns run). 190 bond + 180 angle observations is far below convergence for Gaussian-fit RMSE. Need a denser xtc — either re-<code>trjconv -dt</code> from Seonghan&#x27;s original or ask him for a higher-frequency dump. Pre-requisite to the scorer (#3 evaluation half).</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-06-09</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">autom3 env additions: <code>MDAnalysis 2.9.0</code>, <code>pytest 9.0.3</code> (+ transitive scipy/matplotlib).</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-05-19</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">AA PEO-20 inspected; end-group asymmetry (HO / CH₃) noted</div>
+          </div>
+        </li>
+
+        <li class="entry status-info" data-status="info">
+          <div class="entry-date">2026-05-19</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge info">Info</span></div>
+            <div class="entry-text">Chris back from vacation — archive lists charged 20-mers (PMETAC, PMPC, PSBMA, PNOMA, P2VPPS); no PDMAEMA monomer</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-05-15</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>AA PEO-20 delivered</strong> to <code>reference/gromacs/</code> (CHARMM36, TIP3P, 200 ns)</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-05-10</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">outline restructured around the four ingredients</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-05-10</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">scope tightened (neutral-only) per Seonghan&#x27;s testing update</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-05-10</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">acceptance criterion + modes (tight/loose) + action vocabulary locked</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-05-10</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">confirmed Seonghan&#x27;s pipeline is CG-only; AA data must come separately</div>
+          </div>
+        </li>
+
+        <li class="entry status-info" data-status="info">
+          <div class="entry-date">2026-05-10</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge info">Info</span></div>
+            <div class="entry-text">AA trajectories requested from Chris + Seonghan (octanol, PDMAEMA, PEO-20)</div>
+          </div>
+        </li>
+
+        <li class="entry status-info" data-status="info">
+          <div class="entry-date">2026-05-10</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge info">Info</span></div>
+            <div class="entry-text">Seonghan offered AA PEO-20 (single chain, water, no ions); ETA ~2026-05-15</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-05-10</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">Master TODO checklist added to Obsidian note</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-05-01</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><code>autom3</code> env + AutoMARTINI3 M3 fork installed</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-05-01</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">octanol golden fixture captured</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-05-01</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">PMETAC + PSBMA fixtures captured (behavior diverges from email)</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-04-30</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">repo created, plan synthesized from email chain</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-04-30</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">scope revised (drop CG sim; AA-projection scoring instead)</div>
+          </div>
+        </li>
+
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-04-30</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text">first-cut <code>program.md</code> drafted</div>
+          </div>
+        </li></ul>
+
+  <h2 class="section">Roadmap — outstanding</h2>
+  <ul class="roadmap"><li class="status-open" data-status="open"><span class="badge open">Open</span> <span><strong>#1 Stage</strong>: more polymer AA data from collaborators (neutral library polymers + charged 20-mers)</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#1 Stage</strong>: sampling-sufficiency check</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#2 Process</strong>: classifier + dispatcher (<code>classify.py</code>, <code>dispatch.py</code>)</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#2 Process</strong>: Martini Mapper interactive-CLI wrapper</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#2 Process</strong>: cold-start fallback chain (BRICS + naive)</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#2 Process</strong>: Martini 3 rules table + lookup</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#3 Evaluation</strong>: Martini-rule checks (R/S/T sizing, Q-bead defaults)</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#3 Evaluation</strong>: recover+rank validation harness (perturb known-good mapping → R² drops → loop recovers)</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#4 Loop</strong>: QA acceptance gate + plateau/budget tracker (<code>qa.py</code>)</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#4 Loop</strong>: MCP server + skill packaging</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#4 Loop</strong>: portability check on second runtime</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>Benchmark</strong>: library polymers (recover/rank) + charged 20-mers (repair)</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>Write-up</strong>: sim-free agentic QA/repair of Martini 3 polymer mappings</span></li></ul>
+
+  <footer>
+    Generated from <code>PROGRESS.md</code> by <code>scripts/build_progress_html.py</code>
+    — edit the markdown, then re-run the script to refresh this view.
+  </footer>
+</div>
+<script>
+const btns=document.querySelectorAll('.filters button');
+btns.forEach(b=>b.onclick=()=>{
+  btns.forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  const f=b.dataset.filter;
+  document.querySelectorAll('[data-status]').forEach(el=>{
+    el.classList.toggle('hidden', f!=='all' && el.dataset.status!==f);
+  });
+});
+</script>
+</body>
+</html>
