@@ -146,6 +146,17 @@ def test_run_loop_hillclimb_discards_regression(state):
         assert step.objective == 0.7                                # both scored 120->100 => reverted
 
 
+def test_run_loop_restarts_keeps_best(state):
+    seen = []
+    def make_policy():
+        seen.append(1)
+        return loop.ScriptedPolicy([loop.Action(ops=[{"op": "merge", "roles": [2, 3]}])])
+    best, result = loop.run_loop_restarts(state, make_policy, _fake_eval(_sq_dev),
+                                          restarts=3, max_iters=4)
+    assert len(seen) == 3                      # a fresh policy per restart
+    assert result.best_objective == 39.0 and best.n_beads == 100
+
+
 def test_run_loop_plateau_stops(state):
     # constant objective → every valid step is non-improving → plateau after K
     op = {"op": "reassign", "atom_names": ["C2"], "from_role": 1, "to_role": 2}

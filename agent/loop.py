@@ -533,6 +533,32 @@ def run_loop(
     return best_state, result
 
 
+def run_loop_restarts(
+    state: _repair.MappingState,
+    make_policy: Callable[[], Policy],
+    evaluate_fn: Callable[[_repair.MappingState], _EvalResult],
+    *,
+    restarts: int = 1,
+    on_restart: Callable[[int, LoopResult], None] | None = None,
+    **kw,
+) -> tuple[_repair.MappingState, LoopResult]:
+    """Run the loop ``restarts`` times (a fresh policy each) and keep the best.
+
+    Best-of-N over a stochastic policy: a single LLM pass may miss a good edit, so
+    N independent runs sharply raise the hit rate (use `temperature > 0` for
+    diversity). ``evaluate_fn`` is content-hash cached, so candidates repeated
+    across restarts are not re-projected.
+    """
+    best_state, best_result = state, None
+    for k in range(1, max(1, restarts) + 1):
+        s, r = run_loop(state, make_policy(), evaluate_fn, **kw)
+        if on_restart:
+            on_restart(k, r)
+        if best_result is None or r.best_objective < best_result.best_objective:
+            best_state, best_result = s, r
+    return best_state, best_result  # type: ignore[return-value]
+
+
 def write_trajectory(result: LoopResult, path: str | Path) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -562,6 +588,11 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--frame-stride", type=int, default=25)
     p.add_argument("--max-iters", type=int, default=12)
     p.add_argument("--plateau-k", type=int, default=4)
+    p.add_argument("--restarts", type=int, default=1,
+                   help="run the loop N times (fresh policy each) and keep the best "
+                        "— best-of-N to beat LLM sampling variance")
+    p.add_argument("--temperature", type=float, default=0.0,
+                   help="LLM sampling temperature; raise (e.g. 0.6) with --restarts for diversity")
     p.add_argument("--work-root", default=None)
     p.add_argument("--out", default=None, help="trajectory JSON output path")
     return p.parse_args(argv)
@@ -582,16 +613,21 @@ def main(argv: list[str] | None = None) -> None:
             molecule=mol, frame_stride=args.frame_stride,
         )
 
-    if args.policy == "scripted":
-        raw = json.loads(Path(args.scripted_ops).read_text())
-        policy: Policy = ScriptedPolicy([Action(**a) for a in raw])
-    else:
-        policy = LLMPolicy(model=args.model, base_url=args.base_url,
-                           api_key_env=args.api_key_env)
+    def make_policy() -> Policy:
+        if args.policy == "scripted":
+            raw = json.loads(Path(args.scripted_ops).read_text())
+            return ScriptedPolicy([Action(**a) for a in raw])
+        return LLMPolicy(model=args.model, base_url=args.base_url,
+                         api_key_env=args.api_key_env, temperature=args.temperature)
 
-    best_state, result = run_loop(
-        state, policy, evaluate_fn, ref_positions=ref,
-        max_iters=args.max_iters, plateau_k=args.plateau_k,
+    def on_restart(k: int, r: LoopResult) -> None:
+        print(f"  restart {k}/{args.restarts}: {r.initial_objective:.4f} -> "
+              f"{r.best_objective:.4f} ({r.stop_reason}, {r.n_iterations} steps)")
+
+    best_state, result = run_loop_restarts(
+        state, make_policy, evaluate_fn, restarts=args.restarts,
+        on_restart=on_restart if args.restarts > 1 else None,
+        ref_positions=ref, max_iters=args.max_iters, plateau_k=args.plateau_k,
     )
 
     print(f"loop finished ({result.stop_reason}) after {result.n_iterations} step(s)")
