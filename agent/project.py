@@ -35,6 +35,7 @@ from typing import Sequence
 
 import MDAnalysis as mda
 import numpy as np
+from MDAnalysis.lib.distances import minimize_vectors
 
 
 def _natural_key(s: str) -> list:
@@ -123,12 +124,34 @@ def _build_cg_universe(mapping: dict) -> mda.Universe:
     return cg_u
 
 
+def _bead_com(bead_group, box) -> np.ndarray:
+    """Mass-weighted center of mass of one bead, unwrapped across PBC.
+
+    MDAnalysis' ``center_of_mass()`` averages raw coordinates, so a bead whose
+    atoms straddle a periodic boundary collapses to a spurious point near the box
+    centre — which shows up downstream as impossible ~2.5 nm "bonds" and a fake
+    small-angle peak. We instead shift every atom to its minimum image relative
+    to the bead's first atom (a bead is far smaller than half the box, so any
+    atom is a safe anchor), making the bead whole before averaging. This needs no
+    bond information (the AA universe may carry none). ``box`` is the MDAnalysis
+    ``dimensions`` array (or None, e.g. a non-periodic system).
+    """
+    pos = bead_group.positions.astype(np.float64)
+    masses = bead_group.masses.astype(np.float64)
+    if box is not None and pos.shape[0] > 1:
+        anchor = pos[0]
+        disp = minimize_vectors((pos - anchor).astype(np.float32), box=box)
+        pos = anchor + np.asarray(disp, dtype=np.float64)
+    return (masses[:, None] * pos).sum(axis=0) / masses.sum()
+
+
 def project_trajectory(
     aa_top: str | Path,
     aa_traj: str | Path | Sequence[str | Path],
     mapping: dict | str | Path,
     out_traj: str | Path,
     out_struct: str | Path,
+    frame_stride: int = 1,
 ) -> ProjectionResult:
     """Project an AA trajectory through ``mapping`` into a CG trajectory.
 
@@ -168,10 +191,11 @@ def project_trajectory(
     n_beads = len(bead_groups)
 
     n_frames = 0
+    stride = max(1, int(frame_stride))
     with mda.Writer(str(out_traj), n_atoms=n_beads) as writer:
-        for ts in u.trajectory:
+        for ts in u.trajectory[::stride]:
             positions = np.vstack(
-                [bg.center_of_mass() for bg in bead_groups]
+                [_bead_com(bg, ts.dimensions) for bg in bead_groups]
             )
             cg_u.atoms.positions = positions
             if ts.dimensions is not None:
@@ -220,6 +244,11 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=None,
         help="override CG structure filename (default: <molecule>_cg.gro)",
     )
+    p.add_argument(
+        "--frame-stride", type=int, default=1,
+        help="keep every Nth AA frame (default 1 = all). Use >1 for a fast, "
+             "lower-resolution projection during the repair loop.",
+    )
     return p.parse_args(argv)
 
 
@@ -256,6 +285,7 @@ def main(argv: list[str] | None = None) -> None:
         mapping=mapping,
         out_traj=out_traj,
         out_struct=out_struct,
+        frame_stride=args.frame_stride,
     )
     print(
         f"projected {result.n_frames} frame(s) of {traj_label} "

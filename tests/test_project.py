@@ -17,6 +17,7 @@ import numpy as np
 import pytest
 
 from agent.project import (
+    _bead_com,
     _build_bead_groups,
     _build_cg_universe,
     load_mapping,
@@ -82,6 +83,31 @@ def _python_com(mapping: dict, coords: dict[int, dict]) -> list[tuple[float, flo
             mz += m * z
         out.append((mx / ms, my / ms, mz / ms))
     return out
+
+
+def test_bead_com_unwraps_across_pbc():
+    """A bead whose atoms straddle a periodic boundary must be made whole before
+    averaging. Two equal-mass atoms at x=9.8 and x=0.2 in a 10 Å box are really
+    0.4 Å apart across the boundary, so their COM is at x=10.0 (≡0.0), NOT the
+    naive mid-box x=5.0 that ``center_of_mass()`` would return. This is the bug
+    that produced the spurious ~2.5 nm bonds / 10° angle peak."""
+    from types import SimpleNamespace
+
+    box = np.array([10.0, 10.0, 10.0, 90.0, 90.0, 90.0], dtype=np.float32)
+    positions = np.array([[9.8, 5.0, 5.0], [0.2, 5.0, 5.0]], dtype=np.float32)
+    bg = SimpleNamespace(positions=positions, masses=np.array([1.0, 1.0]))
+
+    com = _bead_com(bg, box)
+    assert abs(com[0] - 10.0) < 1e-3      # true unwrapped midpoint at the boundary
+    assert abs(com[0] - 5.0) > 1.0        # and NOT the mid-box averaging artifact
+    np.testing.assert_allclose(com[1:], [5.0, 5.0], atol=1e-3)
+
+    # non-straddling bead: unwrap is a no-op, COM is the plain average
+    bg2 = SimpleNamespace(
+        positions=np.array([[4.8, 5.0, 5.0], [5.2, 5.0, 5.0]], dtype=np.float32),
+        masses=np.array([1.0, 1.0]),
+    )
+    np.testing.assert_allclose(_bead_com(bg2, box), [5.0, 5.0, 5.0], atol=1e-3)
 
 
 def test_load_mapping_has_expected_shape(mapping):

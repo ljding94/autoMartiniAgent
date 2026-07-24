@@ -2,29 +2,52 @@
   "molecule": "PEO20",
   "n_frames": 2000,
   "n_beads": 20,
-  "end_exclude": 2,
-  "bond": {
-    "n_members": 15,
-    "n_observations": 30000,
-    "measured_mu": 0.32729250000000004,
-    "measured_sigma": 0.015983317670308642,
-    "fit_mu": 0.33007123059802707,
-    "fit_sigma": 0.011379203766225176,
-    "fit_amp": 31.712971993586407,
-    "fit_rmse": 0.7898713650129822,
-    "target_mu": 0.36,
-    "delta_vs_target": -0.032707499999999945
-  },
-  "angle": {
-    "n_members": 14,
-    "n_observations": 28000,
-    "measured_mu": 130.82217857142857,
-    "measured_sigma": 15.97423218265138,
-    "fit_mu": 129.86359684643512,
-    "fit_sigma": 13.067781686663714,
-    "fit_amp": 0.028588384563694346,
-    "fit_rmse": 0.001245982982827338,
-    "target_mu": 123.0,
-    "delta_vs_target": 7.822178571428566
-  }
+  "end_exclude": 0,
+  "bond_terms": [
+    {
+      "group_id": 0,
+      "label": "SN3r-SN3r",
+      "bead_pattern": "SN3r-SN3r",
+      "n_members": 19,
+      "n_observations": 38000,
+      "measured_mu": 0.3277594473684211,
+      "measured_sigma": 0.015910881007393678,
+      "fit_mu": 0.3303717652375932,
+      "fit_sigma": 0.011482036424507375,
+      "fit_amp": 31.570805777020663,
+      "fit_r2": 0.9763672158081769,
+      "target_mu": 0.36,
+      "target_k": 7000.0,
+      "delta_vs_target": -0.03224055263157888
+    }
+  ],
+  "angle_terms": [
+    {
+      "group_id": 0,
+      "label": "SN3r-SN3r-SN3r",
+      "bead_pattern": "SN3r-SN3r-SN3r",
+      "n_members": 18,
+      "n_observations": 36000,
+      "measured_mu": 130.68886111111107,
+      "measured_sigma": 15.922509340645151,
+      "fit_mu": 129.72401349259368,
+      "fit_sigma": 13.030778968541574,
+      "fit_amp": 0.028693379402944367,
+      "fit_r2": 0.9809708884357825,
+      "target_mu": 123.0,
+      "target_k": 80.0,
+      "delta_vs_target": 7.688861111111066
+    }
+  ],
+  "angle_coverage": [
+    {
+      "bead_pattern": "SN3r-SN3r-SN3r",
+      "example_triple": [
+        1,
+        2,
+        3
+      ],
+      "in_itp": true
+    }
+  ]
 }

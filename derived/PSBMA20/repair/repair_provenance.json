@@ -1,0 +1,22 @@
+{
+  "molecule": "PSBMA20",
+  "objective_metric": "mean(1-R^2) over all bonds + all bonded angles",
+  "baseline_objective": 0.04,
+  "repaired_objective": 0.0352,
+  "delta": -0.0048,
+  "n_frames": 25001,
+  "edits": [
+    {
+      "verb": "reassign_atoms",
+      "atoms": "C9,H18,H19 (propyl->ammonium)",
+      "per_monomer": true
+    },
+    {
+      "verb": "reassign_atoms",
+      "atoms": "C6,H10,H11 (ammonium->ester)",
+      "per_monomer": true
+    }
+  ],
+  "rationale": "Shift sidechain bead windows by one carbon: ester bead -> -O-CH2-CH2- (O2,C5,C6); ammonium bead -> N+(CH3)2-CH2 (N,C7,C8,C9); propyl -> C10,C11. Re-centers the Q1 charge on N+ and tightens the Q1-TP2a bond (0.89->0.99). All beads stay <=4 heavy.",
+  "note": "Unconstrained optimum (C9->ammonium only) reaches 0.0337 (-19%) but makes a 5-heavy Q1 bead (Martini sizing violation); W2 is the best rule-valid mapping."
+}

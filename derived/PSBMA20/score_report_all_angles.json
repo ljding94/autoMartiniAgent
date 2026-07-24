@@ -1,0 +1,258 @@
+{
+  "molecule": "PSBMA20",
+  "n_frames": 25001,
+  "n_beads": 120,
+  "end_exclude": 0,
+  "bond_terms": [
+    {
+      "group_id": 0,
+      "label": "SC1-TN5a",
+      "bead_pattern": "SC1-TN5a",
+      "n_members": 20,
+      "n_observations": 500020,
+      "measured_mu": 0.25433036878524856,
+      "measured_sigma": 0.01073420854887147,
+      "fit_mu": 0.25345012937502354,
+      "fit_sigma": 0.008399910092056125,
+      "fit_amp": 46.25647354436003,
+      "fit_r2": 0.9981101191275427,
+      "target_mu": 0.24,
+      "target_k": 100000.0,
+      "delta_vs_target": 0.01433036878524857
+    },
+    {
+      "group_id": 1,
+      "label": "TN5a-TP2a",
+      "bead_pattern": "TN5a-TP2a",
+      "n_members": 20,
+      "n_observations": 500020,
+      "measured_mu": 0.1983630014799408,
+      "measured_sigma": 0.004845279722093911,
+      "fit_mu": 0.1981514004318752,
+      "fit_sigma": 0.004838338345350732,
+      "fit_amp": 82.42757154747649,
+      "fit_r2": 0.999150595941072,
+      "target_mu": 0.24,
+      "target_k": 25000.0,
+      "delta_vs_target": -0.0416369985200592
+    },
+    {
+      "group_id": 2,
+      "label": "Q1-SC1 #1",
+      "bead_pattern": "Q1-SC1",
+      "n_members": 20,
+      "n_observations": 500020,
+      "measured_mu": 0.27289479220831175,
+      "measured_sigma": 0.011633992731919058,
+      "fit_mu": 0.2700625964100429,
+      "fit_sigma": 0.006857403497231999,
+      "fit_amp": 53.84211694392062,
+      "fit_r2": 0.9929484259656303,
+      "target_mu": 0.26,
+      "target_k": 7000.0,
+      "delta_vs_target": 0.012894792208311745
+    },
+    {
+      "group_id": 3,
+      "label": "SC1-SC1",
+      "bead_pattern": "SC1-SC1",
+      "n_members": 19,
+      "n_observations": 475019,
+      "measured_mu": 0.2649171348935516,
+      "measured_sigma": 0.02759006632634708,
+      "fit_mu": 0.2548355951689834,
+      "fit_sigma": 0.01086598529194995,
+      "fit_amp": 31.783877242420857,
+      "fit_r2": 0.9522019925703681,
+      "target_mu": 0.27,
+      "target_k": 7500.0,
+      "delta_vs_target": -0.005082865106448398
+    },
+    {
+      "group_id": 4,
+      "label": "Q1-TP2a",
+      "bead_pattern": "Q1-TP2a",
+      "n_members": 20,
+      "n_observations": 500020,
+      "measured_mu": 0.28846384944602216,
+      "measured_sigma": 0.01836766991845298,
+      "fit_mu": 0.2944498284594949,
+      "fit_sigma": 0.009596169815042322,
+      "fit_amp": 32.150547509724866,
+      "fit_r2": 0.891900129102627,
+      "target_mu": 0.31,
+      "target_k": 5000.0,
+      "delta_vs_target": -0.02153615055397784
+    },
+    {
+      "group_id": 5,
+      "label": "Q1-SC1 #2",
+      "bead_pattern": "Q1-SC1",
+      "n_members": 20,
+      "n_observations": 500020,
+      "measured_mu": 0.3042302907883685,
+      "measured_sigma": 0.005722535463844099,
+      "fit_mu": 0.30450246023950306,
+      "fit_sigma": 0.005312509867150956,
+      "fit_amp": 74.1836824494172,
+      "fit_r2": 0.9996762177010519,
+      "target_mu": 0.33,
+      "target_k": 7000.0,
+      "delta_vs_target": -0.02576970921163152
+    }
+  ],
+  "angle_terms": [
+    {
+      "group_id": 0,
+      "label": "SC1-TN5a-TP2a",
+      "bead_pattern": "SC1-TN5a-TP2a",
+      "n_members": 20,
+      "n_observations": 500020,
+      "measured_mu": 97.54397424103036,
+      "measured_sigma": 6.145053272477594,
+      "fit_mu": 97.37990873507091,
+      "fit_sigma": 5.738681505056713,
+      "fit_amp": 0.06928020917862347,
+      "fit_r2": 0.9958673769129247,
+      "target_mu": 122.2,
+      "target_k": 45.0,
+      "delta_vs_target": -24.656025758969648
+    },
+    {
+      "group_id": 1,
+      "label": "Q1-SC1-Q1",
+      "bead_pattern": "Q1-SC1-Q1",
+      "n_members": 20,
+      "n_observations": 500020,
+      "measured_mu": 130.6706671733131,
+      "measured_sigma": 9.477832261582117,
+      "fit_mu": 129.1618713054378,
+      "fit_sigma": 7.243115518279107,
+      "fit_amp": 0.05106962409596939,
+      "fit_r2": 0.9863471291878995,
+      "target_mu": null,
+      "target_k": null,
+      "delta_vs_target": null
+    },
+    {
+      "group_id": 2,
+      "label": "Q1-TP2a-TN5a",
+      "bead_pattern": "Q1-TP2a-TN5a",
+      "n_members": 20,
+      "n_observations": 500020,
+      "measured_mu": 156.51350545978158,
+      "measured_sigma": 14.575206692505429,
+      "fit_mu": 160.9595768144645,
+      "fit_sigma": 12.092677398520657,
+      "fit_amp": 0.03310619706313896,
+      "fit_r2": 0.9732035550848075,
+      "target_mu": null,
+      "target_k": null,
+      "delta_vs_target": null
+    },
+    {
+      "group_id": 3,
+      "label": "SC1-Q1-TP2a",
+      "bead_pattern": "SC1-Q1-TP2a",
+      "n_members": 20,
+      "n_observations": 500020,
+      "measured_mu": 98.34699012039519,
+      "measured_sigma": 22.07115732354872,
+      "fit_mu": 86.27899949994567,
+      "fit_sigma": 9.095173526014934,
+      "fit_amp": 0.0328201363946064,
+      "fit_r2": 0.8402830283706109,
+      "target_mu": null,
+      "target_k": null,
+      "delta_vs_target": null
+    },
+    {
+      "group_id": 4,
+      "label": "SC1-SC1-SC1",
+      "bead_pattern": "SC1-SC1-SC1",
+      "n_members": 18,
+      "n_observations": 450018,
+      "measured_mu": 132.4862361061113,
+      "measured_sigma": 18.33705539729925,
+      "fit_mu": 139.48164207965735,
+      "fit_sigma": 9.261096654829412,
+      "fit_amp": 0.03515912666052962,
+      "fit_r2": 0.9310626998008042,
+      "target_mu": null,
+      "target_k": null,
+      "delta_vs_target": null
+    },
+    {
+      "group_id": 5,
+      "label": "SC1-SC1-TN5a",
+      "bead_pattern": "SC1-SC1-TN5a",
+      "n_members": 38,
+      "n_observations": 950038,
+      "measured_mu": 98.70619912045625,
+      "measured_sigma": 21.058611028749425,
+      "fit_mu": 93.99090371101606,
+      "fit_sigma": 15.443492951631649,
+      "fit_amp": 0.02360535755599633,
+      "fit_r2": 0.958989930704502,
+      "target_mu": null,
+      "target_k": null,
+      "delta_vs_target": null
+    }
+  ],
+  "angle_coverage": [
+    {
+      "bead_pattern": "SC1-TN5a-TP2a",
+      "example_triple": [
+        1,
+        2,
+        3
+      ],
+      "in_itp": true
+    },
+    {
+      "bead_pattern": "Q1-SC1-Q1",
+      "example_triple": [
+        4,
+        5,
+        6
+      ],
+      "in_itp": false
+    },
+    {
+      "bead_pattern": "Q1-TP2a-TN5a",
+      "example_triple": [
+        2,
+        3,
+        4
+      ],
+      "in_itp": false
+    },
+    {
+      "bead_pattern": "SC1-Q1-TP2a",
+      "example_triple": [
+        3,
+        4,
+        5
+      ],
+      "in_itp": false
+    },
+    {
+      "bead_pattern": "SC1-SC1-SC1",
+      "example_triple": [
+        1,
+        7,
+        13
+      ],
+      "in_itp": false
+    },
+    {
+      "bead_pattern": "SC1-SC1-TN5a",
+      "example_triple": [
+        1,
+        7,
+        8
+      ],
+      "in_itp": false
+    }
+  ]
+}
