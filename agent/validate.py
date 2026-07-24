@@ -180,6 +180,101 @@ def plot_rank(result: RankResult, out_path: str | Path,
     return out_path
 
 
+# ---------- recover experiment ----------
+
+
+def _atom_roles(state: _repair.MappingState) -> dict[int, int]:
+    """Map each AA atom index to its bead's role (1-based position within a monomer)."""
+    _, bpm = _loop._beads_per_monomer(state)
+    roles: dict[int, int] = {}
+    for b in state.beads:
+        role = ((b["bead_id"] - 1) % bpm) + 1
+        for a in b["atom_indices"]:
+            roles[a] = role
+    return roles
+
+
+def _grouping_match(good_roles: dict[int, int], other_roles: dict[int, int]) -> float:
+    """Fraction of atoms assigned to the same role as in the good mapping (1 = identical grouping)."""
+    if not good_roles:
+        return float("nan")
+    same = sum(1 for a, r in good_roles.items() if other_roles.get(a) == r)
+    return same / len(good_roles)
+
+
+@dataclass
+class RecoverRow:
+    label: str
+    good: float
+    degraded: float
+    recovered: float
+    recovery_fraction: float   # (degraded - recovered) / (degraded - good); 1 = back to good
+    grouping_match: float      # fraction of atoms back in their good-mapping role
+
+
+def run_recover(
+    state: _repair.MappingState,
+    make_policy,
+    evaluate_fn,
+    *,
+    ref_positions=None,
+    perturbations: dict[str, list[dict]] | None = NAMED_PERTURBATIONS_PSBMA,
+    restarts: int = 2,
+    max_iters: int = 8,
+    plateau_k: int = 4,
+    on_step=None,
+) -> list[RecoverRow]:
+    """For each perturbation: degrade the good mapping, run the loop, and measure how
+    far it climbs back (objective recovery + how much of the original grouping it
+    reconstructs)."""
+    good = float(evaluate_fn(state).objective)
+    good_roles = _atom_roles(state)
+    rows: list[RecoverRow] = []
+    for name, ops in (perturbations or {}).items():
+        degraded = _loop.apply_ops(state, ops, ref_positions=ref_positions)
+        deg = float(evaluate_fn(degraded).objective)
+        best, result = _loop.run_loop_restarts(
+            degraded, make_policy, evaluate_fn, restarts=restarts,
+            ref_positions=ref_positions, max_iters=max_iters, plateau_k=plateau_k,
+        )
+        rec = float(result.best_objective)
+        frac = (deg - rec) / (deg - good) if deg > good else float("nan")
+        row = RecoverRow(name, good, deg, rec, frac, _grouping_match(good_roles, _atom_roles(best)))
+        rows.append(row)
+        if on_step:
+            on_step(row)
+    return rows
+
+
+def plot_recover(rows: list[RecoverRow], good: float, out_path: str | Path) -> Path:
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots(figsize=(1.6 * len(rows) + 3, 4.8))
+    x = range(len(rows))
+    ax.axhline(good, color="tab:green", ls="--", lw=1.4, label=f"good mapping = {good:.4f}")
+    ax.bar([i - 0.2 for i in x], [r.degraded for r in rows], width=0.38,
+           color="tab:red", alpha=0.8, label="degraded")
+    ax.bar([i + 0.2 for i in x], [r.recovered for r in rows], width=0.38,
+           color="tab:blue", alpha=0.8, label="recovered by loop")
+    for i, r in enumerate(rows):
+        ax.annotate(f"{100*r.recovery_fraction:.0f}%\nrecovered\n(grp {100*r.grouping_match:.0f}%)",
+                    (i, r.recovered), textcoords="offset points", xytext=(0, 6),
+                    ha="center", va="bottom", fontsize=7.5)
+    ax.set_xticks(list(x))
+    ax.set_xticklabels([r.label for r in rows], rotation=25, ha="right", fontsize=8)
+    ax.set_ylabel("Gaussianity error  (mean 1 − R²)")
+    ax.set_title("Recover validation — the agent climbs damaged mappings back toward good")
+    ax.legend(fontsize=8, frameon=False)
+    plt.tight_layout()
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path)
+    plt.close(fig)
+    return out_path
+
+
 # ---------- CLI ----------
 
 
@@ -227,12 +322,62 @@ def _cmd_rank(args) -> None:
     print(f"  plot  : {plot}")
 
 
+def _add_llm_args(p: argparse.ArgumentParser) -> None:
+    p.add_argument("--model", default="anthropic/claude-opus-4.8",
+                   help="OpenRouter/OpenAI-compatible model slug")
+    p.add_argument("--base-url", default=None)
+    p.add_argument("--api-key-env", default="OPENROUTER_API_KEY")
+    p.add_argument("--temperature", type=float, default=0.6)
+    p.add_argument("--restarts", type=int, default=2)
+    p.add_argument("--max-iters", type=int, default=8)
+    p.add_argument("--plateau-k", type=int, default=4)
+
+
+def _cmd_recover(args) -> None:
+    from agent.loop import LLMPolicy
+    state = _repair.load_state(args.mapping, args.itp)
+    ref = _repair.load_ref_positions(args.cg_struct) if args.cg_struct else None
+    evaluate_fn, mol = _evaluate_fn(args, state)
+
+    def make_policy():
+        return LLMPolicy(model=args.model, base_url=args.base_url,
+                         api_key_env=args.api_key_env, temperature=args.temperature)
+
+    print(f"recover validation for {mol}  (model={args.model}, restarts={args.restarts})\n")
+
+    def on_step(r: RecoverRow) -> None:
+        print(f"  {r.label:<20} degraded {r.degraded:.4f} -> recovered {r.recovered:.4f}  "
+              f"({100*r.recovery_fraction:.0f}% of the gap closed, grouping {100*r.grouping_match:.0f}%)")
+
+    rows = run_recover(state, make_policy, evaluate_fn, ref_positions=ref,
+                       restarts=args.restarts, max_iters=args.max_iters,
+                       plateau_k=args.plateau_k, on_step=on_step)
+    good = rows[0].good if rows else float("nan")
+    from dataclasses import asdict
+    out_dir = Path(args.out_dir or f"derived/{mol}")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "recover_report.json").write_text(
+        json.dumps({"good": good, "rows": [asdict(r) for r in rows]}, indent=2))
+    plot = plot_recover(rows, good, out_dir / "recover_validation.pdf")
+    mean_frac = sum(r.recovery_fraction for r in rows) / len(rows) if rows else float("nan")
+    print(f"\n  mean recovery: {100*mean_frac:.0f}% of the degradation gap closed")
+    print(f"  report: {out_dir / 'recover_report.json'}")
+    print(f"  plot  : {plot}")
+
+
 def main(argv: list[str] | None = None) -> None:
     p = argparse.ArgumentParser(description="Validation harness for the mapping objective")
     sub = p.add_subparsers(dest="cmd", required=True)
+
     rank = sub.add_parser("rank", help="perturb a good mapping, show the objective degrades")
     _add_common(rank)
     rank.set_defaults(func=_cmd_rank)
+
+    recover = sub.add_parser("recover", help="degrade a good mapping, run the loop, show it climbs back")
+    _add_common(recover)
+    _add_llm_args(recover)
+    recover.set_defaults(func=_cmd_recover)
+
     args = p.parse_args(argv)
     args.func(args)
 

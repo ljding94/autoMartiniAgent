@@ -1,0 +1,37 @@
+{
+  "good": 0.04168625504271503,
+  "rows": [
+    {
+      "label": "split_sulfonate",
+      "good": 0.04168625504271503,
+      "degraded": 0.08973292040893216,
+      "recovered": 0.0369801905204352,
+      "recovery_fraction": 1.0979477865198277,
+      "grouping_match": 0.8465473145780051
+    },
+    {
+      "label": "split_ammonium",
+      "good": 0.04168625504271503,
+      "degraded": 0.10903910344838354,
+      "recovered": 0.0369801905204352,
+      "recovery_fraction": 1.0698717965710232,
+      "grouping_match": 0.8465473145780051
+    },
+    {
+      "label": "split_ester_OCH2",
+      "good": 0.04168625504271503,
+      "degraded": 0.048687013600297015,
+      "recovered": 0.043264968752144035,
+      "recovery_fraction": 0.7744939071325034,
+      "grouping_match": 0.7698209718670077
+    },
+    {
+      "label": "mislabel_backbone",
+      "good": 0.04168625504271503,
+      "degraded": 0.055390636982271944,
+      "recovered": 0.0369801905204352,
+      "recovery_fraction": 1.3433985234092205,
+      "grouping_match": 0.8465473145780051
+    }
+  ]
+}
