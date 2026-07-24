@@ -212,6 +212,11 @@ def format_observation(
             heavy = [nm for i, nm in zip(b["atom_indices"], b["atom_names"])
                      if i in state.heavy_atoms]
             lines.append(f"    role {r}: {b['bead_type']:<5} heavy_atoms={heavy}")
+        intra = sorted({(min(bd.i, bd.j), max(bd.i, bd.j)) for bd in state.bonds
+                        if bd.i <= bpm and bd.j <= bpm})
+        if intra:
+            lines.append("  bonded role pairs (reassign/merge only work between bonded "
+                         "roles): " + ", ".join(f"{i}-{j}" for i, j in intra))
     except ValueError:
         lines.append(f"(irregular monomer structure: {state.n_beads} beads)")
     return "\n".join(lines)
@@ -259,8 +264,11 @@ Physical intuition:
 buried inside a bead or split awkwardly across a bead boundary. Fix it by moving \
 the boundary atom(s) to a neighbouring bead, or by merging/splitting so the \
 rotatable bond becomes a clean inter-bead bond.
-- Re-centring a charged bead on its charged atom, or balancing atom counts across \
-a boundary, usually tightens the distribution.
+- Re-centring a charged bead on its charged atom often needs a COUPLED SWAP in one \
+atomic edit: push one substituent OUT to a neighbour and pull an atom from the OTHER \
+neighbour IN, so the bead stays <= 4 heavy but its centroid shifts onto the charge. \
+Consider every bonded boundary, including the aliphatic linker/tail beads, not just \
+the polar groups.
 
 Hard constraints (Martini): no bead may exceed 4 heavy atoms; do not split a \
 chemical functional group (ester, sulfonate, ammonium) across beads. Rule-breaking \
