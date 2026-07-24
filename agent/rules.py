@@ -25,11 +25,23 @@ need only the mapping.
 
 from __future__ import annotations
 
+from collections import defaultdict
 from dataclasses import dataclass
 
 from agent import repair as _repair
 
 _EXPECTED_HEAVY = {"T": 2, "S": 3, "R": 4}
+
+# Functional groups that must NOT be split across beads, by AA atom NAME (checked
+# per monomer). For PSBMA the unambiguous cases are the two charged groups — the
+# sulfonate (S + its three O) and the ammonium core (N⁺ + its two methyls). The
+# ester is deliberately *excluded*: the accepted auto-martini mapping already
+# splits the carbonyl (role 2) from the ester O (role 3), so it is not a
+# must-not-split group here. (Generic detection would use RDKit SMARTS.)
+FUNCTIONAL_GROUPS_PSBMA: dict[str, set[str]] = {
+    "sulfonate": {"S", "O3", "O4", "O5"},
+    "ammonium": {"N", "C7", "C8"},
+}
 
 
 def size_class(bead_type: str) -> str:
@@ -53,9 +65,43 @@ class Violation:
     bead_id: int | None = None
 
 
-def check_rules(state: _repair.MappingState) -> list[Violation]:
-    """All Martini-rule violations in ``state`` (errors first, then warnings)."""
-    v: list[Violation] = []
+def fg_violations(
+    state: _repair.MappingState,
+    functional_groups: dict[str, set[str]] | None,
+) -> list[Violation]:
+    """One error per functional group whose atoms land in >1 bead (per monomer).
+
+    A split functional group (e.g. a sulfonate whose S and O's end up in different
+    beads) is chemically invalid even if it lowers the Gaussianity objective — this
+    is what stops a blind optimizer from gaming the objective.
+    """
+    if not functional_groups:
+        return []
+    atom_bead = {a: b["bead_id"] for b in state.beads for a in b["atom_indices"]}
+    atom_monomer = {a: b.get("aa_residue") for b in state.beads for a in b["atom_indices"]}
+    by_mono: dict[object, list[int]] = defaultdict(list)
+    for a, m in atom_monomer.items():
+        by_mono[m].append(a)
+    out: list[Violation] = []
+    for m, atoms in by_mono.items():
+        for fgname, fgnames in functional_groups.items():
+            beads = {atom_bead[a] for a in atoms if state.atom_name[a] in fgnames}
+            if len(beads) > 1:
+                out.append(Violation("fg_split", "error",
+                                     f"{fgname} of monomer {m} split across beads {sorted(beads)}"))
+    return out
+
+
+def check_rules(
+    state: _repair.MappingState,
+    functional_groups: dict[str, set[str]] | None = None,
+) -> list[Violation]:
+    """All Martini-rule violations in ``state`` (errors first, then warnings).
+
+    Pass ``functional_groups`` (name → AA atom-name set, per monomer) to also
+    enforce functional-group integrity.
+    """
+    v: list[Violation] = list(fg_violations(state, functional_groups))
     total_heavy = 0
     for b in state.beads:
         bid, btype, n = b["bead_id"], b["bead_type"], b["heavy_atom_count"]
@@ -97,10 +143,14 @@ def check_rules(state: _repair.MappingState) -> list[Violation]:
     return v
 
 
-def hard_violations(state: _repair.MappingState) -> list[str]:
+def hard_violations(
+    state: _repair.MappingState,
+    functional_groups: dict[str, set[str]] | None = None,
+) -> list[str]:
     """Error-severity messages only — the loop's hard constraint (rejects edits that
-    make an unphysical mapping, while leaving relabel-fixable sizing to the agent)."""
-    return [x.message for x in check_rules(state) if x.severity == "error"]
+    make an unphysical mapping, while leaving relabel-fixable sizing to the agent).
+    Pass ``functional_groups`` to also forbid splitting them."""
+    return [x.message for x in check_rules(state, functional_groups) if x.severity == "error"]
 
 
 def relabel_to_fit(state: _repair.MappingState) -> _repair.MappingState:

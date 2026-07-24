@@ -56,6 +56,19 @@ def test_relabel_to_fit_clears_sizing_warnings_objective_neutrally(state):
     assert [b["atom_indices"] for b in fixed.beads] == [b["atom_indices"] for b in state.beads]
 
 
+def test_fg_integrity_flags_split_sulfonate(state, ref):
+    # the good mapping keeps functional groups intact; moving a sulfonate O out of
+    # the SO3 bead splits the group (this is exactly greedy's objective-gaming edit)
+    assert rules.fg_violations(state, rules.FUNCTIONAL_GROUPS_PSBMA) == []
+    split = loop.apply_ops(state, [{"op": "reassign", "atom_names": ["O3"],
+                                    "from_role": 6, "to_role": 5}], ref_positions=ref)
+    bad = rules.fg_violations(split, rules.FUNCTIONAL_GROUPS_PSBMA)
+    assert bad and all(v.kind == "fg_split" and v.severity == "error" for v in bad)
+    assert any("sulfonate" in v.message for v in bad)
+    # and it becomes a hard-constraint error when FGs are supplied
+    assert rules.hard_violations(split, rules.FUNCTIONAL_GROUPS_PSBMA)
+
+
 def test_charge_on_non_q_bead_is_an_error(state):
     bad = repair._clone(state)
     bad.bead(2)["charge"] = 1                           # TN5a is not a Q-type

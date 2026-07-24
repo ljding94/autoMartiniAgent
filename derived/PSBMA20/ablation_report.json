@@ -1,0 +1,27 @@
+{
+  "baseline": 0.04168625504271503,
+  "target": 0.0375,
+  "rows": [
+    {
+      "method": "greedy (objective-only)",
+      "best_objective": 0.02170689816871414,
+      "n_evaluations": 79,
+      "found_target": true,
+      "fg_valid": false
+    },
+    {
+      "method": "greedy (chem-constrained)",
+      "best_objective": 0.04168625504271503,
+      "n_evaluations": 10,
+      "found_target": false,
+      "fg_valid": true
+    },
+    {
+      "method": "agent (LLM, no FG rule)",
+      "best_objective": 0.0369801905204352,
+      "n_evaluations": 8,
+      "found_target": true,
+      "fg_valid": true
+    }
+  ]
+}
