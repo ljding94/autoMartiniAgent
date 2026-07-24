@@ -3,6 +3,7 @@
 > **Version**: 0.3 (draft, 2026-05-01) · uncalibrated thresholds, see §Calibration TODOs
 > **Audience**: any MCP-aware agent (Claude Code, Codex CLI, OpenCode, Cursor, Continue, …) with the `auto-martini-agent` MCP server mounted and the skill (`SKILL.md` / `AGENTS.md`) loaded.
 > **Pattern**: agent-runnable autoresearch *program* in Karpathy's `program.md` lineage — one file, fully self-contained, end-to-end. Agent-agnostic: tools resolve through MCP, no Claude-Code-specific syntax.
+> **Implementation note (2026-07-24)**: this MCP / any-agent protocol is the **portability layer**. The **reference implementation** is a minimal Python loop (`agent/loop.py`, SWE-agent style) with the LLM in the loop — a curated verb action space (`reassign_atoms` / `merge_beads` / `split_bead`) + `evaluate` feedback, keep-best-valid, Martini rules as hard constraints, budget/plateau/`submit` termination, full trajectory log. The tool names below map onto that Python API; this file lets any MCP-aware agent (Pi, OpenCode, Claude Code) drive the same tools. The `repair_mapping` step is realised as the swappable **policy** (LLM policy = agentic; a deterministic policy = the ablation baseline).
 
 ## Goal
 
