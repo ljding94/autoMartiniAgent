@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Results notebook — evidence for the paper</title><style>
+:root{--bg:#0f1420;--panel:#171d2b;--panel2:#1e2637;--ink:#e7ecf5;--muted:#95a1b8;
+  --line:#2a3346;--accent:#5b8def;--good:#39c07f;}
+@media (prefers-color-scheme:light){:root{--bg:#f4f6fb;--panel:#fff;--panel2:#f7f9fd;
+  --ink:#1a2233;--muted:#5a6683;--line:#e2e7f0;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+code{background:rgba(127,140,170,.18);padding:.05em .4em;border-radius:5px;
+  font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.wrap{max-width:1000px;margin:0 auto;padding:34px 22px 80px}
+header h1{margin:0 0 8px;font-size:26px;letter-spacing:-.02em}
+header .intro{color:var(--muted);max-width:82ch}
+header .intro p{margin:.4em 0}
+.result{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:20px 22px;margin:20px 0}
+.result h2{margin:0 0 10px;font-size:19px}
+.claim{font-size:16px;font-weight:600;margin:.2em 0 14px;padding-left:12px;
+  border-left:3px solid var(--accent)}
+.figs{display:grid;gap:14px;margin:12px 0}
+.fig{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel2)}
+.fig object{width:100%;height:440px;display:block;border:0}
+.fig img{width:100%;display:block}
+.fig figcaption{font-size:11.5px;color:var(--muted);padding:6px 10px;border-top:1px solid var(--line)}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:12px 0}
+dl dt{color:var(--muted);font-weight:600;font-size:13px}
+dl dd{margin:0;font-size:14px}
+.for-paper{margin-top:12px;padding:11px 14px;background:rgba(91,141,239,.10);
+  border:1px solid rgba(91,141,239,.28);border-radius:10px;font-size:13.5px}
+.for-paper .tag{display:inline-block;font-size:10.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--accent);margin-right:8px}
+.result.plain ul{margin:.4em 0;padding-left:1.1em}
+.result.plain li{margin:.4em 0;font-size:14px}
+h2.section{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);
+  margin:34px 0 4px;font-weight:600}
+footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head><body><div class="wrap">
+<header><h1>Results notebook — evidence for the paper</h1><div class="intro"><p>A running log of paper-worthy findings as we build. This is the source of truth</p>
+<p>for <a href="result_note.html"><code>result_note.html</code></a> (generated via</p>
+<p><code>python scripts/build_result_note.py</code>). Add an entry whenever a result lands.</p>
+<p>Each entry: the <strong>claim</strong> (one line, paper-ready), the <strong>figure(s)</strong>, the key</p>
+<p><strong>numbers</strong>, the <strong>finding</strong>, and <strong>for the paper</strong> (where/how it&#x27;s used).</p>
+<p><strong>Scope so far</strong>: PSBMA-20 (zwitterionic methacrylate; 6 beads/monomer; 25 001 AA</p>
+<p>frames). Everything is <strong>simulation-free</strong> — we project the <em>existing</em> AA trajectory</p>
+<p>through the mapping; no AA or CG simulation is run.</p></div>
+<p class="section">4 results logged · figures embedded from <code>derived/</code></p></header>
+<article class="result"><h2>R1 · The agent autonomously repairs a CG mapping</h2>
+<p class="claim">Given only a simulation-free Gaussianity objective and a curated action space, an LLM agent autonomously discovers a chemically-motivated mapping repair.</p>
+<div class="figs"><figure class="fig"><a href="derived/PSBMA20/repair/bond_hists_compare.pdf"><img src="derived/PSBMA20/repair/bond_hists_compare.png" alt="bond_hists_compare.pdf" loading="lazy"></a><figcaption><a href="derived/PSBMA20/repair/bond_hists_compare.pdf">bond_hists_compare.pdf (PDF)</a></figcaption></figure><figure class="fig"><a href="derived/PSBMA20/repair/angle_hists_compare.pdf"><img src="derived/PSBMA20/repair/angle_hists_compare.png" alt="angle_hists_compare.pdf" loading="lazy"></a><figcaption><a href="derived/PSBMA20/repair/angle_hists_compare.pdf">angle_hists_compare.pdf (PDF)</a></figcaption></figure></div>
+<dl><dt>Numbers</dt><dd>objective <code>0.0400 → 0.0352</code> (−12 %, full 25 001 frames). <code>Q1-TP2a</code> bond R² 0.892→0.996; the bimodal <code>SC1-Q1-TP2a</code> angle 0.840→0.894. Every bead stays ≤4 heavy (rule-valid).</dd><dt>Finding</dt><dd>opus-4.8 (via OpenRouter), reasoning explicitly about re-centering the ammonium charge on N⁺, proposes the coupled edit <code>C6→ester + C9→ammonium</code> — the same repair we had found by hand. Found reliably with best-of-3.</dd></dl>
+<div class="for-paper"><span class="tag">for the paper</span> the headline &quot;the method works&quot; result. The model&#x27;s reasoning trace (re-centring the charge) is worth quoting verbatim.</div>
+</article>
+<article class="result"><h2>R2 · The objective orders mappings by quality (rank)</h2>
+<p class="claim">AA-projected bonded-distribution Gaussianity is a valid mapping-quality signal — it degrades monotonically as a good mapping is chemically degraded.</p>
+<div class="figs"><figure class="fig"><a href="derived/PSBMA20/rank_validation.pdf"><img src="derived/PSBMA20/rank_validation.png" alt="rank_validation.pdf" loading="lazy"></a><figcaption><a href="derived/PSBMA20/rank_validation.pdf">rank_validation.pdf (PDF)</a></figcaption></figure></div>
+<dl><dt>Numbers</dt><dd>good mapping <code>0.0417</code>; random-scramble severity ×{1,2,4,8} means <code>0.058 / 0.067 / 0.118 / 0.194</code> (monotonic); every functional-group split scores worse (split_ammonium +0.067, split_sulfonate +0.048); 34/36 perturbations worse than the good mapping.</dd><dt>Finding</dt><dd>perturbing the good mapping (named functional-group splits + a random-scramble ladder, fixed bead count) monotonically raises the objective.</dd></dl>
+<div class="for-paper"><span class="tag">for the paper</span> validation figure 1 — answers the reviewer&#x27;s core objection, &quot;is the objective a valid target?&quot;, using the good mapping as a relative ground truth (no simulation).</div>
+</article>
+<article class="result"><h2>R3 · The agent recovers damaged mappings (recover)</h2>
+<p class="claim">The objective does not just <em>rank</em> mappings — it <em>guides</em> the agent back to good ones from deliberate damage.</p>
+<div class="figs"><figure class="fig"><a href="derived/PSBMA20/recover_validation.pdf"><img src="derived/PSBMA20/recover_validation.png" alt="recover_validation.pdf" loading="lazy"></a><figcaption><a href="derived/PSBMA20/recover_validation.pdf">recover_validation.pdf (PDF)</a></figcaption></figure></div>
+<dl><dt>Numbers</dt><dd>mean <strong>107 %</strong> of the degradation gap closed; every functional-group split recovered; 3/4 over-recover to the W2 optimum; grouping match 77–85 %.</dd><dt>Finding</dt><dd>degrade the good mapping (functional-group split), run the loop, and it climbs back — often past the good baseline to the W2 optimum.</dd></dl>
+<div class="for-paper"><span class="tag">for the paper</span> validation figure 2 — &quot;the objective&#x27;s landscape leads to good mappings.&quot; Pairs with R2 to complete the sim-free validation.</div>
+</article>
+<article class="result"><h2>R4 · Chemical reasoning keeps the search honest (ablation)</h2>
+<p class="claim">The Gaussianity objective is <em>exploitable</em>; the LLM&#x27;s chemical reasoning supplies validity that a blind optimizer needs explicit rules to match.</p>
+<div class="figs"><figure class="fig"><a href="derived/PSBMA20/ablation.pdf"><img src="derived/PSBMA20/ablation.png" alt="ablation.pdf" loading="lazy"></a><figcaption><a href="derived/PSBMA20/ablation.pdf">ablation.pdf (PDF)</a></figcaption></figure></div>
+<dl><dt>Numbers</dt><dd>greedy (objective-only) <code>0.0217</code> but <strong>INVALID</strong> (splits the sulfonate); greedy (chem-constrained) <code>0.0417</code>, <strong>stuck</strong>; LLM (no FG rule) <code>0.0370</code>, <strong>valid</strong>, <strong>8 evals</strong> (vs greedy&#x27;s 79).</dd><dt>Finding</dt><dd>steepest-ascent single-move greedy games the objective by splitting the sulfonate (S in one bead, its three O&#x27;s in another) — chemically nonsensical. Constrained by functional-group integrity it can&#x27;t improve at all. The LLM finds the valid W2 repair <em>without being given the FG rule</em>, and far more evaluation-efficiently.</dd></dl>
+<div class="for-paper"><span class="tag">for the paper</span> the &quot;why an LLM, not a hill-climber&quot; figure — three wins at once (validity for free, capability, efficiency) plus a cautionary result that pure objective optimization is exploitable (this motivated the rule checker).</div>
+</article>
+<article class="result plain"><h2>Methods notes (rigor — for the Methods section)</h2><ul><li><strong>PBC projection fix</strong>: computing each bead&#x27;s COM on raw coordinates collapses beads whose atoms straddle the periodic boundary → spurious ~2.5 nm &quot;bonds&quot; and a fake ~10° angle peak (hit 52.5 % of PSBMA frames). Fixed with a minimum-image unwrap (<code>minimize_vectors</code>) before the mass-weighted average. Essential caveat for anyone projecting AA→CG.</li><li><strong>Goodness-of-fit = R² in density space</strong>: RMSE is not comparable across terms (scales with peak density); KL / JS / cross-entropy <em>invert</em> vs. visual fit quality (dominated by ε-clipped tail bins). R² weights every bin&#x27;s residual equally, so it tracks the eye and the physics.</li><li><strong>Simulation-free</strong>: the method never runs AA or CG simulations — it only projects existing AA trajectories through the candidate mapping. This is both a scope boundary and a selling point.</li></ul></article>
+<footer>Generated from <code>RESULTS.md</code> by <code>scripts/build_result_note.py</code>.
+Figures are embedded PDFs — open this file in a browser with the repo checked out. </footer>
+</div></body></html>
