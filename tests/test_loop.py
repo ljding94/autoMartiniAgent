@@ -129,6 +129,23 @@ def test_run_loop_rejects_rule_violation_keeps_best(state):
     assert result.stop_reason == "submit"            # scripted policy then submits
 
 
+def test_run_loop_hillclimb_discards_regression(state):
+    # objective worsens as beads shrink, so a merge (120->100) is non-improving.
+    # hill-climb must DISCARD it and propose the next edit from the pristine 120-bead
+    # state — so step 2's merge again scores the 120->100 value (0.7), not 100->80 (0.9).
+    obj = _fake_eval(lambda st: {120: 0.5, 100: 0.7, 80: 0.9}.get(st.n_beads, 1.0))
+    policy = loop.ScriptedPolicy([
+        loop.Action(ops=[{"op": "merge", "roles": [2, 3]}]),
+        loop.Action(ops=[{"op": "merge", "roles": [2, 3]}]),
+    ])
+    best, result = loop.run_loop(state, policy, obj, max_iters=6, plateau_k=2)
+    assert result.best_objective == 0.5 and best.n_beads == 120     # never left the best
+    assert result.stop_reason == "plateau" and result.n_iterations == 2
+    for step in result.trajectory:
+        assert step.accepted is False and step.improved is False    # discarded, not adopted
+        assert step.objective == 0.7                                # both scored 120->100 => reverted
+
+
 def test_run_loop_plateau_stops(state):
     # constant objective → every valid step is non-improving → plateau after K
     op = {"op": "reassign", "atom_names": ["C2"], "from_role": 1, "to_role": 2}

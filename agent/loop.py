@@ -25,10 +25,12 @@ deterministic baseline). Same controller, swap the policy → the
 agentic-vs-deterministic ablation falls out for free.
 
 Design choices (see PROGRESS.md §4):
-  - **keep-best-valid, not hard-greedy**: the working mapping advances on every
-    rule-valid action (temporary regressions allowed, so multi-step plans like
-    PSBMA's two coupled moves are reachable); the best *valid* mapping seen is
-    returned.
+  - **hill-climb from best**: an edit that lowers the objective is adopted; a
+    rule-valid edit that does not is evaluated (shown to the policy as feedback)
+    then discarded, so the next proposal always starts from the best mapping — no
+    steps wasted on manual reverts. Coupled multi-move plans stay reachable because
+    a single action can carry several ops applied atomically. The best valid
+    mapping is returned.
   - **Martini rules as hard constraints**: an edit that breaks a rule (or the
     atom partition) is rejected and the *reason* is fed back as the next
     observation — SWE-agent's lint-error trick — so the agent self-corrects.
@@ -273,9 +275,12 @@ edit_mapping call; they apply atomically, so a two-move swap that keeps every be
 <= 4 heavy is allowed even if either move alone would break the rule — this is often \
 how to re-centre a charged bead (move one heavy atom in and another out together).
 
-There is NO undo: every valid edit is kept and the working mapping advances. The \
-best valid mapping seen is saved automatically and returned at the end, so never \
-spend a step reverting — keep improving from the current state, or submit.
+You ALWAYS work from the best mapping found so far. An edit that lowers the \
+objective is kept; an edit that does NOT is automatically discarded (you still see \
+its score as feedback, then you are back at the best mapping). So never revert by \
+hand, and never repeat an edit that just failed — each turn propose a genuinely \
+different idea (a different bead boundary, a coupled two-move swap, a merge or \
+split), or submit when you have run out of chemically-motivated moves.
 
 Each turn: reason briefly, then call edit_mapping with one or more ops, or submit \
 when no further chemically-motivated improvement is available. Prefer small, \
@@ -456,7 +461,7 @@ def run_loop(
     """
     working = state
     working_ev = evaluate_fn(working)
-    best_state, best_obj = working, working_ev.objective
+    best_state, best_obj, best_ev = working, working_ev.objective, working_ev
     initial_obj = working_ev.objective
     traj: list[TrajectoryStep] = []
     last_result: str | None = None
@@ -493,18 +498,20 @@ def run_loop(
             continue
 
         cand_ev = evaluate_fn(cand)
-        working, working_ev = cand, cand_ev          # advance (regressions allowed)
         improved = cand_ev.objective < best_obj - 1e-12
         if improved:
-            best_state, best_obj = cand, cand_ev.objective
+            best_state, best_obj, best_ev = cand, cand_ev.objective, cand_ev
+            working, working_ev = cand, cand_ev
             iters_since_improve = 0
-            last_result = f"ACCEPTED, new best objective {cand_ev.objective:.4f} " \
-                          f"(Δ {cand_ev.objective - initial_obj:+.4f} vs start)"
+            last_result = (f"ACCEPTED, new best objective {cand_ev.objective:.4f} "
+                           f"(Δ {cand_ev.objective - initial_obj:+.4f} vs start)")
         else:
+            # hill-climb: discard the non-improving edit; keep proposing from best
+            working, working_ev = best_state, best_ev
             iters_since_improve += 1
-            last_result = f"applied, objective {cand_ev.objective:.4f} " \
-                          f"(no improvement on best {best_obj:.4f})"
-        traj.append(TrajectoryStep(it, action.thought, action.ops, True, improved,
+            last_result = (f"DISCARDED: objective {cand_ev.objective:.4f} did not beat best "
+                           f"{best_obj:.4f}; reverted to best — try a different edit")
+        traj.append(TrajectoryStep(it, action.thought, action.ops, improved, improved,
                                    cand_ev.objective, best_obj, last_result))
 
         if iters_since_improve >= plateau_k:
