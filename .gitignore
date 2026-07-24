@@ -32,3 +32,9 @@ reference/peo20_solu/namd/*
 !reference/peo20_solu/namd/step5_production.inp
 !reference/peo20_solu/namd/step5_run.inp
 !reference/peo20_solu/namd/restraints/
+
+# Repair-loop / evaluator run artifacts (regeneratable). Keep the committed
+# deliverables (derived/*/repair/*.json|pdf|itp) but drop per-run outputs and
+# the content-hash cache dirs.
+derived/*/loop/
+derived/*/repair/*/
