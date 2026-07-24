@@ -39,3 +39,4 @@ reference/peo20_solu/namd/*
 derived/*/loop/
 derived/*/repair/*/
 derived/*/validate/
+derived/*/ablation/
