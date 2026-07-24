@@ -1,0 +1,9 @@
+[
+  {
+    "thought": "W2 repair: shift each sidechain's bead windows one carbon - C9 (first propyl carbon) into the ammonium bead and C6 (ammonium CH2) into the ester bead, re-centering the Q1 charge on N+. Named atoms are heavy atoms only; their hydrogens auto-carry. Applied atomically, so the ammonium bead passes through 5-heavy mid-op but ends at 4-heavy (rule-valid). Reproduces objective 0.0417 -> 0.0370 at stride 25 (0.0400 -> 0.0352 at full resolution).",
+    "ops": [
+      {"op": "reassign", "atom_names": ["C9"], "from_role": 5, "to_role": 4},
+      {"op": "reassign", "atom_names": ["C6"], "from_role": 4, "to_role": 3}
+    ]
+  }
+]
