@@ -1,0 +1,221 @@
+{
+  "baseline": 0.04168625504271503,
+  "rows": [
+    {
+      "label": "split_sulfonate",
+      "severity": null,
+      "objective": 0.08973292040893216,
+      "delta": 0.04804666536621713
+    },
+    {
+      "label": "split_ammonium",
+      "severity": null,
+      "objective": 0.10903910344838354,
+      "delta": 0.0673528484056685
+    },
+    {
+      "label": "split_ester_OCH2",
+      "severity": null,
+      "objective": 0.048687013600297015,
+      "delta": 0.007000758557581983
+    },
+    {
+      "label": "mislabel_backbone",
+      "severity": null,
+      "objective": 0.055390636982271944,
+      "delta": 0.013704381939556913
+    },
+    {
+      "label": "scramble\u00d71",
+      "severity": 1,
+      "objective": 0.12063279508527754,
+      "delta": 0.0789465400425625
+    },
+    {
+      "label": "scramble\u00d71",
+      "severity": 1,
+      "objective": 0.044837498536312,
+      "delta": 0.003151243493596967
+    },
+    {
+      "label": "scramble\u00d71",
+      "severity": 1,
+      "objective": 0.058608998742475604,
+      "delta": 0.016922743699760573
+    },
+    {
+      "label": "scramble\u00d71",
+      "severity": 1,
+      "objective": 0.044837498536312,
+      "delta": 0.003151243493596967
+    },
+    {
+      "label": "scramble\u00d71",
+      "severity": 1,
+      "objective": 0.04613249808032258,
+      "delta": 0.0044462430376075515
+    },
+    {
+      "label": "scramble\u00d71",
+      "severity": 1,
+      "objective": 0.04260352498550238,
+      "delta": 0.0009172699427873465
+    },
+    {
+      "label": "scramble\u00d71",
+      "severity": 1,
+      "objective": 0.04321472490891573,
+      "delta": 0.001528469866200699
+    },
+    {
+      "label": "scramble\u00d71",
+      "severity": 1,
+      "objective": 0.061619498214074614,
+      "delta": 0.019933243171359583
+    },
+    {
+      "label": "scramble\u00d72",
+      "severity": 2,
+      "objective": 0.04168625504271503,
+      "delta": 0.0
+    },
+    {
+      "label": "scramble\u00d72",
+      "severity": 2,
+      "objective": 0.05014162339674195,
+      "delta": 0.008455368354026917
+    },
+    {
+      "label": "scramble\u00d72",
+      "severity": 2,
+      "objective": 0.08049871294949275,
+      "delta": 0.03881245790677772
+    },
+    {
+      "label": "scramble\u00d72",
+      "severity": 2,
+      "objective": 0.04463159742025774,
+      "delta": 0.002945342377542709
+    },
+    {
+      "label": "scramble\u00d72",
+      "severity": 2,
+      "objective": 0.09036658005099231,
+      "delta": 0.04868032500827728
+    },
+    {
+      "label": "scramble\u00d72",
+      "severity": 2,
+      "objective": 0.1190092139612975,
+      "delta": 0.07732295891858247
+    },
+    {
+      "label": "scramble\u00d72",
+      "severity": 2,
+      "objective": 0.05015284353068192,
+      "delta": 0.008466588487966886
+    },
+    {
+      "label": "scramble\u00d72",
+      "severity": 2,
+      "objective": 0.06196944903989674,
+      "delta": 0.02028319399718171
+    },
+    {
+      "label": "scramble\u00d74",
+      "severity": 4,
+      "objective": 0.1312651722564289,
+      "delta": 0.08957891721371386
+    },
+    {
+      "label": "scramble\u00d74",
+      "severity": 4,
+      "objective": 0.21639105630772767,
+      "delta": 0.17470480126501264
+    },
+    {
+      "label": "scramble\u00d74",
+      "severity": 4,
+      "objective": 0.06001039736640177,
+      "delta": 0.01832414232368674
+    },
+    {
+      "label": "scramble\u00d74",
+      "severity": 4,
+      "objective": 0.04222767871638625,
+      "delta": 0.0005414236736712152
+    },
+    {
+      "label": "scramble\u00d74",
+      "severity": 4,
+      "objective": 0.19120205668139148,
+      "delta": 0.14951580163867645
+    },
+    {
+      "label": "scramble\u00d74",
+      "severity": 4,
+      "objective": 0.12982955630044632,
+      "delta": 0.08814330125773129
+    },
+    {
+      "label": "scramble\u00d74",
+      "severity": 4,
+      "objective": 0.11682289033661987,
+      "delta": 0.07513663529390484
+    },
+    {
+      "label": "scramble\u00d74",
+      "severity": 4,
+      "objective": 0.05376085821660536,
+      "delta": 0.012074603173890329
+    },
+    {
+      "label": "scramble\u00d78",
+      "severity": 8,
+      "objective": 0.16408746119582865,
+      "delta": 0.12240120615311362
+    },
+    {
+      "label": "scramble\u00d78",
+      "severity": 8,
+      "objective": 0.3907898347082437,
+      "delta": 0.34910357966552863
+    },
+    {
+      "label": "scramble\u00d78",
+      "severity": 8,
+      "objective": 0.08523494672386613,
+      "delta": 0.043548691681151094
+    },
+    {
+      "label": "scramble\u00d78",
+      "severity": 8,
+      "objective": 0.03481727293703824,
+      "delta": -0.006868982105676789
+    },
+    {
+      "label": "scramble\u00d78",
+      "severity": 8,
+      "objective": 0.15400312916421124,
+      "delta": 0.11231687412149621
+    },
+    {
+      "label": "scramble\u00d78",
+      "severity": 8,
+      "objective": 0.2320596443444122,
+      "delta": 0.19037338930169717
+    },
+    {
+      "label": "scramble\u00d78",
+      "severity": 8,
+      "objective": 0.4370169088069307,
+      "delta": 0.3953306537642157
+    },
+    {
+      "label": "scramble\u00d78",
+      "severity": 8,
+      "objective": 0.051236305033637054,
+      "delta": 0.009550049990922023
+    }
+  ]
+}

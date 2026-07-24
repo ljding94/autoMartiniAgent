@@ -38,3 +38,4 @@ reference/peo20_solu/namd/*
 # the content-hash cache dirs.
 derived/*/loop/
 derived/*/repair/*/
+derived/*/validate/
