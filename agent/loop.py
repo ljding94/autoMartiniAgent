@@ -163,19 +163,14 @@ def apply_ops(
 
 
 def default_rule_check(state: _repair.MappingState) -> list[str]:
-    """v1 Martini hard constraints: no bead over 4 heavy atoms (regular-bead max).
-
-    (Empty beads and a broken atom partition are already rejected inside the
-    ``repair`` verbs.) Functional-group integrity + R/S/T exact sizing land with
-    the dedicated rule checker (#3); this is the constraint that guards the loop
-    from the size-violating Gaussianity optimum, e.g. the 5-heavy PSBMA case.
-    """
-    bad = []
-    for b in state.beads:
-        n = b["heavy_atom_count"]
-        if n > 4:
-            bad.append(f"bead {b['bead_id']} ({b.get('bead_name')}) has {n} heavy atoms (>4)")
-    return bad
+    """The loop's hard constraint = the error-severity subset of the full Martini
+    rule checker (``agent.rules``): a bead over 4 heavy atoms, an empty bead, or a
+    charged non-Q-type bead. Relabel-fixable *sizing* warnings (heavy count vs
+    size-class prefix) are intentionally NOT hard constraints — they must not block
+    a size-changing repair like PSBMA's W2 (which leaves a 3-heavy T-bead that a
+    relabel, not an atom move, fixes)."""
+    from agent.rules import hard_violations
+    return hard_violations(state)
 
 
 # ---------- observation ----------

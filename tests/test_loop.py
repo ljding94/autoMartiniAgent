@@ -95,7 +95,7 @@ def test_rule_check_flags_oversized_bead(state):
     over = loop.apply_ops(state, [{"op": "reassign", "atom_names": ["C9", "H18", "H19"],
                                    "from_role": 5, "to_role": 4}])
     bad = loop.default_rule_check(over)
-    assert len(bad) == 20 and "heavy atoms (>4)" in bad[0]
+    assert len(bad) == 20 and "> 4" in bad[0]          # 5-heavy bead per monomer
 
 
 # ---------- controller ----------
