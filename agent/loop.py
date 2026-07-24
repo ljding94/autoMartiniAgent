@@ -75,6 +75,35 @@ def _beads_per_monomer(state: _repair.MappingState) -> tuple[int, int]:
     return n_mon, state.n_beads // n_mon
 
 
+def _d2(a: tuple[float, float, float], b: tuple[float, float, float]) -> float:
+    return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2
+
+
+def _atoms_for_names(state, bead, names, ref_positions) -> list[int]:
+    """Resolve heavy-atom ``names`` in ``bead`` to indices, **auto-carrying each
+    heavy atom's hydrogens** — a hydrogen follows if its nearest in-bead heavy atom
+    (by the reference frame) is one of the named atoms. So the policy names only
+    heavy atoms and moves whole CHₙ groups. Falls back to exactly the named atoms
+    when no reference positions are supplied; explicitly-named atoms always move.
+    """
+    idx_name = dict(zip(bead["atom_indices"], bead["atom_names"]))
+    named = [i for i in bead["atom_indices"] if idx_name[i] in names]
+    result = set(named)
+    heavy_named = [i for i in named if i in state.heavy_atoms]
+    if ref_positions and heavy_named:
+        heavy_in_bead = [i for i in bead["atom_indices"] if i in state.heavy_atoms]
+        for i in bead["atom_indices"]:
+            if i in state.heavy_atoms or i in result:
+                continue
+            pi = ref_positions.get(i)
+            if pi is None:
+                continue
+            nearest = min(heavy_in_bead, key=lambda h: _d2(pi, ref_positions.get(h, pi)))
+            if nearest in heavy_named:
+                result.add(i)
+    return sorted(result)
+
+
 def apply_ops(
     state: _repair.MappingState,
     ops: list[dict],
@@ -104,7 +133,7 @@ def apply_ops(
             _check_role(to, bpm)
             for m in range(n_mon):
                 bead = cur.bead(m * bpm + fr)
-                atoms = [i for i, nm in zip(bead["atom_indices"], bead["atom_names"]) if nm in names]
+                atoms = _atoms_for_names(cur, bead, names, ref_positions)
                 if atoms:
                     cur = _repair.reassign_atoms(cur, atoms, m * bpm + to)
         elif kind == "merge":
@@ -121,7 +150,7 @@ def apply_ops(
             _check_role(role, bpm)
             for m in range(n_mon - 1, -1, -1):
                 bead = cur.bead(m * bpm + role)
-                ga = [i for i, nm in zip(bead["atom_indices"], bead["atom_names"]) if nm in names]
+                ga = _atoms_for_names(cur, bead, names, ref_positions)
                 cur = _repair.split_bead(cur, m * bpm + role, ga, ref_positions=ref_positions)
         else:
             raise ValueError(f"unknown op {kind!r} (expected reassign/merge/split)")
@@ -174,13 +203,13 @@ def format_observation(
             lines.append(f"    {t.kind:<5} {t.label:<18} R²={t.r2:.3f}  err={t.error:.3f}")
     try:
         n_mon, bpm = _beads_per_monomer(state)
-        lines.append(f"bead layout (one of {n_mon} identical monomers; roles 1..{bpm}):")
+        lines.append(f"bead layout (one of {n_mon} identical monomers; roles 1..{bpm}; "
+                     f"heavy atoms only — their H's move with them):")
         for r in range(1, bpm + 1):
             b = state.bead(r)
-            lines.append(
-                f"    role {r}: {b['bead_type']:<5} heavy={b['heavy_atom_count']} "
-                f"atoms={b['atom_names']}"
-            )
+            heavy = [nm for i, nm in zip(b["atom_indices"], b["atom_names"])
+                     if i in state.heavy_atoms]
+            lines.append(f"    role {r}: {b['bead_type']:<5} heavy_atoms={heavy}")
     except ValueError:
         lines.append(f"(irregular monomer structure: {state.n_beads} beads)")
     return "\n".join(lines)
@@ -235,10 +264,18 @@ Hard constraints (Martini): no bead may exceed 4 heavy atoms; do not split a \
 chemical functional group (ester, sulfonate, ammonium) across beads. Rule-breaking \
 edits are rejected and returned to you — fix and retry.
 
-Every op is TILED automatically across all identical monomers: specify roles \
-within ONE monomer (1-based) and atom names. You may pass several ops in one \
-edit_mapping call; they apply atomically, so a two-move swap that keeps all beads \
-<= 4 heavy is allowed even if either move alone would violate a rule.
+Name ONLY heavy atoms (C, N, O, S); each heavy atom's hydrogens move with it \
+automatically. The bead layout lists heavy atoms only.
+
+Every op is TILED automatically across all identical monomers: give roles within \
+ONE monomer (1-based) and heavy-atom names. You may pass several ops in one \
+edit_mapping call; they apply atomically, so a two-move swap that keeps every bead \
+<= 4 heavy is allowed even if either move alone would break the rule — this is often \
+how to re-centre a charged bead (move one heavy atom in and another out together).
+
+There is NO undo: every valid edit is kept and the working mapping advances. The \
+best valid mapping seen is saved automatically and returned at the end, so never \
+spend a step reverting — keep improving from the current state, or submit.
 
 Each turn: reason briefly, then call edit_mapping with one or more ops, or submit \
 when no further chemically-motivated improvement is available. Prefer small, \

@@ -69,6 +69,23 @@ def test_apply_ops_rejects_bad_role(state):
                                 "from_role": 5, "to_role": 99}])
 
 
+def test_apply_ops_auto_carries_hydrogens(state):
+    ref = repair.load_ref_positions(REPO / "reference/PSBMA_20mer/PSBMA_20mer_no_water.gro")
+    base_n3 = len(state.bead(3)["atom_indices"])          # ester bead: O2,C5,H8,H9 (4)
+    # name only the heavy carbon C6 (a CH2); its 2 hydrogens should follow via ref
+    out = loop.apply_ops(state, [{"op": "reassign", "atom_names": ["C6"],
+                                  "from_role": 4, "to_role": 3}], ref_positions=ref)
+    b3 = out.bead(3)
+    assert "C6" in b3["atom_names"] and b3["heavy_atom_count"] == 3   # O2,C5,C6
+    assert len(b3["atom_indices"]) == base_n3 + 3                     # C6 + its 2 H
+    assert out.bead(4)["heavy_atom_count"] == 3                       # N,C7,C8 left
+    assert sum(len(b["atom_indices"]) for b in out.beads) == 782      # partition intact
+    # without a reference frame, only the named atom moves (no auto-carry)
+    bare = loop.apply_ops(state, [{"op": "reassign", "atom_names": ["C6"],
+                                   "from_role": 4, "to_role": 3}])
+    assert len(bare.bead(3)["atom_indices"]) == base_n3 + 1           # just C6
+
+
 # ---------- rule check ----------
 
 
