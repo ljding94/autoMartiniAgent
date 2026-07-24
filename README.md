@@ -44,11 +44,15 @@ See [`PROGRESS.md`](PROGRESS.md) for the full plan and status log.
 
 What's **not** built yet: the molecule classifier and backend dispatcher
 (#2), the Martini-rule checks (R/S/T sizing, Q-bead defaults) that would
-let the loop *auto-reject* size-violating edits (#3), the QA acceptance
-gate + plateau/budget tracker (`qa.py`, #4), the MCP server, and the skill
-packaging. The repair loop's edit verbs and Gaussianity objective (#4) now
-exist and are driven **LLM-in-the-loop** (the agent proposes edits by hand,
-guided by the score report).
+let the loop *auto-reject* size-violating edits (#3), the autonomous loop
+controller (`agent/loop.py`, #4), and the MCP + skill packaging
+(portability layer). The repair loop's edit verbs and Gaussianity objective
+(#4) now exist and are driven **LLM-in-the-loop**. Next is `agent/loop.py`:
+a minimal, **SWE-agent-style** Python controller — the `repair.py` verbs are
+the curated action space, the `evaluate.py` score report is the feedback
+observation, and a swappable policy (LLM now, a deterministic baseline for
+the agentic-vs-deterministic ablation) drives keep-best-valid iteration until
+a budget/plateau/`submit` stop. See [`PROGRESS.md`](PROGRESS.md) §4.
 
 ## Try it (PEO-20, end-to-end)
 

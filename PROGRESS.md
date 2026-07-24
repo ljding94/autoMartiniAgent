@@ -1,10 +1,22 @@
 # autoMartiniAgent — Project Outline
 
+> 📊 **Human-friendly view**: open [`PROGRESS.html`](PROGRESS.html) in a browser. It is generated from this file — after editing here, run `python scripts/build_progress_html.py` to refresh it.
+
 **Goal**: an agent-runnable workflow that takes AA simulation data + chemical structure (SMILES / mol / pdb) and produces a validated Martini 3 mapping — atom-index → bead, bead type, bead size — plus a score report and provenance log. The mapping is the deliverable. We do not run CG simulations. Validation is in-the-loop: project the AA trajectory through the proposed mapping and score bead-bead distance and angle distributions.
 
 Collaborators (ORNL): Lijie Ding (driver, dingl1@ornl.gov), Seonghan Kim (kimsn@ornl.gov), Chris Walker (walkercc@ornl.gov), Jan Michael Carrillo (carrillojy@ornl.gov).
 
 ---
+
+## Scope & framing (locked 2026-07-21)
+
+**One-line pitch**: an automated, **simulation-free** agent that reads *existing* AA polymer trajectories and produces + repairs Martini 3 mappings, using AA-projected bonded-distribution **Gaussianity** (R²) as the objective and Martini rules as constraints.
+
+- **Simulation-free — hard boundary + selling point.** The method consumes AA trajectories that already exist; it never runs AA *or* CG simulations. (This supersedes the earlier `scripts/aa_prep/` self-generation idea — extra AA data comes from collaborators.)
+- **Polymer-focused.** The headline is polymers; more AA polymer data is incoming. The small-molecule route (#2 backends) is deprioritized, not deleted.
+- **Charged polymers are in scope as repair targets.** Cold-start tools mis-handle them (a #2 limitation), but the #3/#4 projection→Gaussianity→repair loop is charge-agnostic (it works on AA-projected distributions), so charged polymers become the tool-failure story the loop fixes.
+- **Objective validation — also sim-free.** Validate "high Gaussianity = good mapping" against Martini-3 **library mappings** as ground truth: (a) **recover** the accepted mapping from a degraded/tool guess, (b) **rank** (accepted scores high R², perturbed groupings lower), (c) **repair** the charged failures. Martini rule constraints close the "Gaussian-but-degenerately-over-coarsened" sufficiency gap.
+- **Benchmark for the paper**: neutral library polymers (PEO/PS/PMMA/PE/PVA/PDMS/PSS — ground truth) + charged 20-mers (PSBMA ✓; PMETAC/PMPC/PNOMA/P2VPPS — repair).
 
 ## The four ingredients
 
@@ -34,13 +46,15 @@ The substrate the agent reasons over.
 
 **Sampling-sufficiency check** is part of this ingredient: trajectory must show converged second moments before the scorer (#3) is allowed to call rule violations. Under-sampled AA looks spuriously non-Gaussian.
 
-**Fallback if no AA trajectories arrive**: build a thin AA-prep pipeline ourselves (SMILES → LigParGen → GROMACS solvate with TIP3P → NPT eq → NVT production) under `scripts/aa_prep/`. Adds scope but makes the project self-contained.
+**AA data comes from collaborators, not from us** (per the sim-free scope locked 2026-07-21): we do *not* run AA (or CG) simulations, so the earlier `scripts/aa_prep/` self-generation idea is **dropped**. Additional polymer AA trajectories (neutral library polymers for ground truth + the charged 20-mers) are requested from collaborators as the benchmark grows.
 
 ### 2. Process — initial AA→CG mapping generation
 
 The cold start: chemical structure → first-cut mapping, before any AA-driven scoring.
 
-**v1 scope** (per Seonghan 2026-05-10): **neutral small molecules + polymers in the Polyply built-in library** only. Charged / zwitterionic molecules drop from v1 — both small-molecule backends fail on them (AutoMARTINI3 rejects via ALOGPS; Martini Mapper silently mis-types because it has no Q-bead dictionary, which is dangerous in an automated pipeline).
+**v1 scope** (per Seonghan 2026-05-10): **neutral small molecules + polymers in the Polyply built-in library** only. Charged / zwitterionic molecules drop from v1 *for the cold-start generator* — both small-molecule backends fail on them (AutoMARTINI3 rejects via ALOGPS; Martini Mapper silently mis-types because it has no Q-bead dictionary, which is dangerous in an automated pipeline).
+
+**Update (2026-07-21, headline scope):** the paper focuses on **polymers**, and charged polymers are back **in scope as #3/#4 repair targets** — the loop is charge-agnostic (it scores AA-projected distributions, not the charge). The cold-start-generator limitation above is a #2 concern only; for the repair story we can start from a hand-built or degraded mapping. The small-molecule route (#2 backends) is deprioritized for the headline.
 
 **Small-molecule backends — two, run in parallel for v1**:
 - **AutoMARTINI3** (M3 fork, `vendor/Automartini_M3` @ `1fff05a`). logP-based strategy. ≤25 heavy atoms. Fully CLI. **Always invoke with `--fpred`**.
@@ -97,52 +111,68 @@ The signal the agent optimizes against. Replaces the CG-simulation validation st
 
 Closure of the loop: score report → mapping revision → re-score, until acceptance criteria met or budget exhausted.
 
-**Two modes, selected via CLI flag at runtime** (per Lijie 2026-05-10):
-- `--mode tight` — deterministic repair only (verbs: `relabel_size_class`, `merge_beads`, `split_bead`). LLM acts as referee on ties / on parsing the score report into a repair choice. Reproducible.
-- `--mode loose` — adds LLM-driven structural verbs (`change_bead_type`, `reassign_atom`). The agent reads the score report + AA-derived chemistry context + Martini-rule prose and proposes structured edits. Higher flexibility, lower reproducibility.
+**Orchestration — settled 2026-07-24.** The loop ships as a **minimal Python script with the LLM in the loop, SWE-agent style** — *not* a heavy framework (LangGraph) and *not* a coding-agent runtime (OpenCode / Pi) as the product backbone. Framed after the SWE-agent *Agent-Computer Interface* lesson: the intelligence is in the curated action space + feedback observations, not the loop. Both hard parts already exist — the **action space (ACI)** is the verbs in `agent/repair.py`, the **feedback observation** is the score report from `agent/evaluate.py` (per-term R² + the Gaussianity objective) — so the controller (`agent/loop.py`, to build) is a ~100-line `while`:
 
-**Action vocabulary** (loose mode = full set, tight mode = first three only):
-- `relabel_size_class(bead_id, R|S|T)` — fix R/S/T sizing without changing bead count.
-- `merge_beads(bead_ids[])` — combine adjacent under-filled beads.
-- `split_bead(bead_id, into=[{atoms[]}, ...])` — split an over-loaded bead.
-- `change_bead_type(bead_id, new_type)` — adjudicate bead-type conflict (the dominant verb when the two backends disagreed in #2; e.g., PDMAEMA case).
-- `reassign_atom(atom_id, from_bead, to_bead)` — move an atom between beads.
+```
+obs = evaluate(mapping)
+while budget left and not converged:
+    thought, action = policy(obs, history)   # propose ONE edit
+    mapping' = apply(action)                  # repair.py; reject invalid → feed reason back
+    obs = evaluate(mapping'); keep_best_valid(mapping')
+    log(trajectory)                           # thought/action/obs/objective
+```
 
-Each verb emits a structured JSON edit logged to a provenance trail.
+- **Policy is swappable** (this replaces the old tight/loose *modes*): the **LLM policy** is the agentic driver; a **deterministic policy** (greedy / random over the same verbs) is the baseline. Same controller, swap the policy → the **agentic-vs-deterministic ablation** (the figure that shows the chemical reasoning adds value) falls out for free.
+- **Keep-best-valid, not hard-greedy.** The winning PSBMA edit was two *coupled* moves, so the controller lets the LLM plan multi-step and keeps the best *valid* mapping seen (temporary regressions allowed).
+- **Martini rules as hard constraints.** Invalid edits (>4-heavy bead, split functional group) are rejected and the *reason* returned as an observation — SWE-agent's lint-error trick — so the agent self-corrects (plugs into the #3 rule checker).
+- **Termination**: budget (max iters) ∨ plateau (no improvement over K) ∨ the LLM calling `submit`. The full trajectory log is both the provenance trail and the reproducibility artifact.
 
-**QA + repair** (not yet written):
-- `agent/qa.py` — interpret the score report; decide accept / repair / escalate. Includes the plateau detector and budget tracker.
-- `agent/repair.py` — chooses + applies action verbs based on score report; tight mode picks deterministically, loose mode delegates to LLM with structured-JSON output guard.
-- Stall / crash recovery handled in #2 (cold-start fallback chain), not here.
+**Action vocabulary** (the curated ACI):
+- `reassign_atoms(atoms[], to_bead)` — move atoms between bonded beads (built).
+- `merge_beads(bead_ids[])` — combine beads (built).
+- `split_bead(bead_id, group_a[])` — split a bead into two (built).
+- `relabel_size_class` / `change_bead_type` — label-only verbs for Martini-rule fixes (don't change the projected distribution; added with the rule checker).
 
-**Packaging** (not yet written):
-- `mcp_server/` — Python MCP server (stdio), runs in `autom3` env. Exposes: `classify`, `propose_mapping`, `project_trajectory`, `score_mapping`, `repair_mapping`, `martini_rules.lookup`. Large data passed by path.
-- `skill/SKILL.md` (Claude Code) + `skill/AGENTS.md` (mirror for Codex / OpenCode / Cursor / Continue) — same content, two filenames. When and how to invoke the tools, decision rules, recovery strategies.
-- `program.md` (already drafted) — agent-agnostic protocol that drives the loop end-to-end. References MCP tool names only; no agent-specific syntax.
+**Dev + dissemination (secondary, not the product).** For *development/testing*, drive the same tools from an interactive coding-agent IDE — **Pi** (minimal) or OpenCode / Claude Code. For *dissemination*, the MCP server + skill (`SKILL.md` / `AGENTS.md`) + `program.md` are the **portability layer** so the same tool set runs in any agent — a supporting "agent-agnostic" claim, *not* a second result.
 
 **Headline demonstration**: drop a new monomer + AA trajectory + `program.md` into any MCP-aware agent with the skill loaded → agent autonomously produces a validated Martini 3 mapping, no human in the loop.
 
 ---
 
+## Path to publication
+
+Ordered steps, all **sim-free** (existing AA data only):
+
+1. **Engine — done.** Projector (`project.py`) + Gaussianity scorer (`score.py`) + repair verbs & objective (`repair.py`, `evaluate.py`). PSBMA repair demonstrated (0.0400 → 0.0352, −12 %).
+2. **Validation harness — next.** `recover + rank` on existing data: perturb a known-good mapping → confirm R² drops → run the loop → confirm R² climbs back / recovers the accepted grouping. This is the core validation figure. The PSBMA rank demo is buildable now; library-polymer recovery lands when PS/PMMA AA data arrives.
+3. **Autonomous loop.** Build `agent/loop.py` — the SWE-agent-style controller: curated verb action space + `evaluate` feedback + keep-best-valid + Martini rules as hard constraints (rejections fed back) + budget/plateau/`submit` termination + full trajectory logging; policy swappable (LLM now). Plus the Martini **rule checker** (#3) so "rule-valid" is *enforced*, not just observed.
+4. **Benchmark + ablation.** Neutral library polymers (recover/rank) + charged 20-mers (repair); **and the agentic-vs-deterministic ablation** (LLM policy vs. greedy/random over the same verbs, same loop) to show the reasoning adds value. Per-molecule before/after per-term R² + scalar error vs. baselines.
+5. **Write-up.** Method + benchmark; headline = simulation-free agentic QA/repair of Martini 3 polymer mappings.
+
+**Deferred / out of headline scope**: small-molecule route (#2 backends, classifier/dispatcher), MCP + skill packaging (portability/dissemination, not results), and any CG-sim forward check (violates the sim-free boundary — collaborators supply extra AA examples for validation instead). The **orchestrator choice is a Methods detail, not a result**: the Python loop generates the reported results; Pi/OpenCode is a dev IDE + optional portability footnote; framework-vs-framework is never a figure — the second results axis is agentic-vs-deterministic.
+
 ## Architecture
 
-Three portable layers:
+**Primary product = the minimal Python loop** (`agent/`), reproducible and paper-facing. The MCP + skill layers below are the **portability/dissemination layer** (secondary) that lets the same tools run inside any agent.
 
 ```
 autoMartiniAgent/
-├── mcp_server/         # Python MCP server (stdio), runs inside autom3 conda env
-│   ├── pyproject.toml
+├── agent/              # PRIMARY: sim-free science + loop (Python, autom3 env)
+│   ├── project.py      #   AA→CG projector
+│   ├── score.py        #   Gaussianity scorer
+│   ├── repair.py       #   mapping-edit verbs = the action space / ACI
+│   ├── evaluate.py     #   project→score→objective = the feedback observation
+│   └── loop.py         #   SWE-agent-style controller + swappable policy (to build)
+├── mcp_server/         # PORTABILITY: MCP server (stdio) exposing the tools to any agent
 │   └── src/auto_martini_mcp/
-├── skill/
-│   ├── SKILL.md        # Claude Code skill format
-│   ├── AGENTS.md       # cross-agent mirror
-│   └── scripts/        # deterministic helpers callable without an LLM
-├── program.md          # the autoresearch protocol
-├── tests/fixtures/
-└── PROGRESS.md
+├── skill/              # PORTABILITY: SKILL.md (Claude Code) + AGENTS.md (Pi/OpenCode/…)
+├── program.md          # PORTABILITY: agent-agnostic protocol (MCP tool names only)
+├── scripts/            # helpers (mapping/itp builders, build_progress_html.py)
+├── derived/  tests/  reference/
+└── PROGRESS.md  (→ PROGRESS.html)
 ```
 
-Portability invariant: nothing in `skill/` or `program.md` may reference Claude-Code-specific syntax, agent built-ins, or non-MCP tool names.
+Portability invariant (dissemination layer only): nothing in `skill/` or `program.md` may reference Claude-Code-specific syntax, agent built-ins, or non-MCP tool names.
 
 ---
 
@@ -203,11 +233,13 @@ Section labels below map to the four ingredients above.
 | 2026-07-07 | **Goodness-of-fit metric: cross-entropy → KL → R².** Cross-entropy carries the measured distribution's own entropy H(P), so it's neither comparable across groups nor binwidth-invariant; switched to forward KL (H − H(P)). But KL *inverted* vs visual fit quality on PSBMA: clean narrow peaks scored ~2 nats while broad bimodal blobs scored ~0.1. Root cause (verified): forward KL over the fixed [0,180°]/[0,0.8nm] window is dominated by eps-clipped tail bins — a narrow σ≈6° Gaussian leaves ~160 of 180 bins near-zero where the measured histogram still has trace mass, each contributing `p·log(p/eps)`. Every mass/overlap metric (KL, JS, Hellinger, Bhattacharyya) shares this flaw. **Settled on R² in density space** = "how well the fitted curve traces the histogram" — weights each bin's residual equally, ignores rare tails, matches eye/physics. PSBMA angle ranking under R²: clean SC1-TN5a-TP2a 0.990, bimodal SC1-Q1-TP2a 0.787, worst broad blob 0.464. `TermStats.fit_r2` replaces `fit_cross_entropy`; plots/CLI/JSON all say R². | done |
 | 2026-07-08 | **`end_exclude` default 2 → 0 (was silently dropping one monomer).** Collaborator flagged PSBMA n_obs short by ~25000 (one instance/frame = one monomer). Cause: `_drop_end_excluded` trims by **bead index**, and `end_exclude=2` (calibrated for PEO where 1 bead = 1 monomer) excludes beads {0,1,118,119} — which for PSBMA's 6-bead monomers chops a *different single monomer* off each term (monomer 1 for early-bead bonds, monomer 20 for late-bead bonds, both for backbone), giving inconsistent 18/19/20-per-frame counts. Changed default to 0 (keep all monomers — a validation tool shouldn't silently drop ~5% of data); trimming stays opt-in via `--end-exclude`, with help noting it counts beads not monomers (use a multiple of beads-per-monomer to trim whole ends). Now intra-monomer terms = 20/frame (500020), backbone = 19/frame (475019, correct: 19 links between 20 monomers). PEO essentially unchanged by including its end monomers (bond μ 0.3301→0.3304, angle 129.86→129.72, R² flat), confirming the trim was costing data for no benefit. Test fixture pins `end_exclude=2` so PEO regression assertions are unaffected. 15/15 pass. | done |
 | 2026-07-08 | **Projector PBC bug fixed — spurious ~10° angle peak.** All PSBMA angle distributions carried a small peak near 10° (three bonded beads can't fold that sharply). Root cause: `agent/project.py` computed each bead's `center_of_mass()` on **raw coordinates**, so a bead whose AA atoms straddle a periodic boundary collapsed to a garbage mid-box point — producing impossible ~2.5 nm "bonds" and fake small angles. It bit **52.5%** of frames (this 20-mer chain crosses the boundary constantly); the AA universe carries no bonds, so MDAnalysis `unwrap=True` was unavailable. Fix: `_bead_com()` shifts each atom to its minimum image relative to the bead's first atom (via `minimize_vectors`, triclinic-safe) before the mass-weighted average — no bond info needed, no-op for whole beads. Re-projected PSBMA (47 s): spurious <20° observations 1.9–4.6% → **0.000%**, every angle R² up (backbone 0.871→0.939, `Q1-SC1-Q1` 0.963→0.986), bonds cleaner too; the defined angle's Δ moved −27.3°→−24.6° once the garbage tail was gone. The `SC1-Q1-TP2a` bimodality **survived** → it's a real two-rotamer feature, not an artifact. PEO unaffected (its AA traj was pre-centred/whole). New `test_bead_com_unwraps_across_pbc`; 15/15 tests pass. | done |
+| 2026-07-24 | **Orchestration decided — minimal Python loop, LLM-in-the-loop (SWE-agent style).** The improvement loop ships as a ~100-line Python controller (`agent/loop.py`) with the LLM in the loop — *not* LangGraph, and *not* a coding-agent runtime (OpenCode / Pi) as the product backbone. Framed after the SWE-agent **Agent-Computer Interface** lesson: the two hard parts already exist — the **action space** is the `repair.py` verbs, the **feedback observation** is the `evaluate.py` score report — so the loop itself is trivial. **Policy is swappable** (supersedes the old tight/loose modes): LLM policy = agentic driver, deterministic policy = baseline → the **agentic-vs-deterministic ablation** (the figure proving the chemical reasoning adds value) comes for free. Controller = keep-best-*valid* (multi-step plans allowed — the PSBMA win was two coupled moves), Martini rules as hard constraints (rejections fed back like SWE-agent lint errors), terminate on budget ∨ plateau ∨ `submit`, log the full trajectory (= provenance + reproducibility). **Pi** (or OpenCode / Claude Code) is the interactive **dev/testing IDE** and an optional portability footnote; MCP + skill is the dissemination layer, not a result. **Paper framing**: one method, one results story (the Python loop generates them); framework-vs-framework is *not* a result. Updated `### 4. Agent loop`, `## Architecture`, `## Path to publication`. | done |
+| 2026-07-21 | **Scope & plan locked — sim-free, polymer-focused, validate by library-recovery.** Reflection to sharpen the publication story. **(1) Simulation-free is now a hard boundary + selling point**: the method only consumes *existing* AA trajectories; it never runs AA or CG sims (drops the `scripts/aa_prep/` self-generation idea — extra AA examples come from collaborators). **(2) Headline = polymers**; the small-molecule route (#2 backends) is deprioritized. Charged polymers (PSBMA, PMETAC, …) are back **in scope as repair targets** — cold-start tools mis-handle them (a #2 limit) but the #3/#4 projection→Gaussianity→repair loop is charge-agnostic. **(3) Objective validation, also sim-free**: recover / rank / repair against Martini-3 **library mappings** as ground truth (accepted mappings score high R²; perturbations score lower; the loop climbs back). New **Scope & framing** and **Path to publication** sections added above. Next build: the recover+rank validation harness, then `qa.py` gate + Martini rule checker. | done |
 | 2026-07-14 | **#4 Loop — first cut: agent-driven mapping repair.** Built the mapping-edit verbs (`agent/repair.py`: `reassign_atoms` / `merge_beads` / `split_bead` on a `MappingState`, each re-deriving masses + heavy-atom counts, maintaining the bead-bond graph, and emitting a parameter-free `.itp`) plus the loop evaluator (`agent/evaluate.py`: project → score → scalar **Gaussianity objective** = `mean(1−R²)` over all bonds + all bonded angles; content-hash cached; `frame_stride` for fast interactive eval — stride-25 ≈ 1000 frames in ~2 s vs ~47 s full). Driver = **LLM-in-the-loop** (agent reads the score report, proposes edits, re-evaluates, keeps improvements). Objective is deliberately **target-free** — pure distribution Gaussianity, matching "make the measured CG distributions as Gaussian as possible", not Δ-vs-force-field. **PSBMA-20 result** (full 25 001 frames): baseline **0.0400 → 0.0352 (−12 %)** via a rule-valid edit that shifts each sidechain's bead windows one carbon (ester → `-O-CH₂-CH₂-` = O2,C5,C6; ammonium → `N⁺(CH₃)₂-CH₂` = N,C7,C8,C9; propyl → C10,C11), re-centering the Q1 charge on N⁺: `Q1-TP2a` bond R² **0.892→0.996**, bimodal `SC1-Q1-TP2a` angle **0.840→0.894** (cost: `Q1-SC1 #2` bond 1.000→0.863, all beads stay ≤4 heavy). The *unconstrained* optimum (C9→ammonium only) hits 0.0337 (−19 %) but makes a 5-heavy Q1 bead → cleanly surfaces the **Gaussianity-vs-Martini-sizing tension** the rule checker (not yet built) will arbitrate. Deliverable at `derived/PSBMA20/repair/` (repaired mapping + itp, before/after PDFs, `repair_provenance.json`). New `tests/test_repair.py` (trajectory-free); **26/26 pass**. Still pending: `qa.py` plateau/budget + acceptance gate, force-field param regeneration for merged/split beads (downstream), MCP packaging. | done |
 | 2026-07-07 | **Angle scoring restricted to bonded angles + coverage audit.** The auto-martiniM3 PSBMA `.itp` defines 10 angles/monomer but only `1-2-3` (SC1-TN5a-TP2a) is a classical bond-bond angle; the other 9 are non-adjacent "structural" restraints (vertex not bonded to both arms) that a single harmonic/Gaussian can't model. `_group_angles` now filters to vertex-bonded-both-arms only → PSBMA drops 10→1 scored angle group (PEO unaffected: its consecutive angles all survive). **Always-on `angle_coverage` audit** (topology-only) added to `ScoreReport`: enumerates every consecutive-bond angle bead-type type and flags which the `.itp` defines vs omits — PSBMA reports "6 types, itp defines 1, missing 5". New `--all-bonded-angles` mode measures the omitted ones from the AA-mapped reference (writes `*_all_angles.{json,pdf}`, canonical report untouched). Measured missing angles: most are good harmonic candidates (R² 0.87–0.96) except `SC1-Q1-TP2a`/3-4-5 (bimodal, 0.787); `Q1-TP2a-TN5a`/2-3-4 sits at 160.7° (near-linear, harmonic-risky). Even the one defined angle's θ₀ is 25° off the AA reference (97.5° vs itp 122.2°) → the itp angle block needs review; deferred as parameter-fitting (out of scope). 14/14 tests pass. | done |
-| —          | **Scope decision**: drop PDMAEMA / self-generate / broaden to Chris's charged 20-mers | open |
+| —          | **#1 Stage**: AA reference data delivered (PEO-20 200 ns + PSBMA-20 500 ns) | done (2026-07-07) |
+| —          | **#1 Stage**: more polymer AA data from collaborators (neutral library polymers + charged 20-mers) | open (requested) |
 | —          | **#1 Stage**: sampling-sufficiency check                   | not started |
-| —          | **#1 Stage**: build `scripts/aa_prep/` if no traj provided | contingency |
 | —          | **#2 Process**: classifier + dispatcher (`classify.py`, `dispatch.py`) | not started |
 | —          | **#2 Process**: Martini Mapper interactive-CLI wrapper     | not started |
 | —          | **#2 Process**: cold-start fallback chain (BRICS + naive)  | not started |
@@ -215,12 +247,14 @@ Section labels below map to the four ingredients above.
 | —          | **#3 Evaluation**: AA→CG projector (`project.py`)          | done (2026-06-09, extended 2026-06-30) |
 | —          | **#3 Evaluation**: scorer (`score.py`) — bonds + angles via Polyply `.itp` target | done (2026-06-30) |
 | —          | **#3 Evaluation**: Martini-rule checks (R/S/T sizing, Q-bead defaults) | not started |
+| —          | **#3 Evaluation**: recover+rank validation harness (perturb known-good mapping → R² drops → loop recovers) | not started |
 | —          | **#4 Loop**: mapping-edit verbs (`repair.py`) + Gaussianity-objective evaluator (`evaluate.py`) | done (2026-07-14, LLM-in-the-loop) |
-| —          | **#4 Loop**: QA acceptance gate + plateau/budget tracker (`qa.py`) | not started |
-| —          | **#4 Loop**: MCP server + skill packaging                  | not started |
-| —          | **#4 Loop**: portability check on second runtime           | not started |
-| —          | Demonstration on PDMAEMA + PEO-20 (depends on #1)          | not started |
-| —          | Move PMETAC + PSBMA fixtures under `tests/fixtures/known_failures/` | not started |
+| —          | **#4 Loop**: SWE-agent-style controller (`agent/loop.py`) — verb action space + evaluate feedback + keep-best-valid + budget/plateau/submit | not started |
+| —          | **#4 Loop**: deterministic-policy baseline + agentic-vs-deterministic ablation | not started |
+| —          | **#4 Loop**: MCP server + skill packaging (portability/dissemination layer) | not started |
+| —          | **#4 Loop**: portability demo — same tools via Pi / OpenCode / Claude Code | not started |
+| —          | **Benchmark**: library polymers (recover/rank) + charged 20-mers (repair) | not started |
+| —          | **Write-up**: sim-free agentic QA/repair of Martini 3 polymer mappings | not started |
 
 ---
 
