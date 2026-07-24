@@ -97,9 +97,9 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
     <p class="pitch">an automated, <strong>simulation-free</strong> agent that reads <em>existing</em> AA polymer trajectories and produces + repairs Martini 3 mappings, using AA-projected bonded-distribution <strong>Gaussianity</strong> (R²) as the objective and Martini rules as constraints.</p>
     <div class="meta">
       <span>Last update <b>2026-07-24</b></span>
-      <span><b>41</b> milestones logged</span>
-      <span><b>37</b> done</span>
-      <span><b>14</b> items outstanding</span>
+      <span><b>42</b> milestones logged</span>
+      <span><b>38</b> done</span>
+      <span><b>13</b> items outstanding</span>
     </div>
   </header>
 
@@ -135,12 +135,12 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
           <span class="emoji">📊</span>
           <div><span class="ing-num">#3</span><h3>Evaluation</h3><p class="sub">Distribution scorer</p></div>
         </div>
-        <div class="progress"><div class="bar" style="width:50%"></div></div>
-        <div class="progress-label">2/4 built</div>
+        <div class="progress"><div class="bar" style="width:75%"></div></div>
+        <div class="progress-label">3/4 built</div>
         <ul class="components"><li class="done"><span class="dot done"></span>AA→CG projector</li>
 <li class="done"><span class="dot done"></span>scorer — bonds + angles via Polyply .itp target</li>
 <li class="todo"><span class="dot todo"></span>Martini-rule checks</li>
-<li class="todo"><span class="dot todo"></span>recover+rank validation harness</li></ul>
+<li class="done"><span class="dot done"></span>recover+rank validation harness</li></ul>
       </article>
 
       <article class="card">
@@ -159,7 +159,7 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
 
   <h2 class="section">Path to publication</h2>
 <ol class="plan"><li class="done"><span class="step-num">✓</span><div><strong>Engine — done.</strong> Projector (<code>project.py</code>) + Gaussianity scorer (<code>score.py</code>) + repair verbs &amp; objective (<code>repair.py</code>, <code>evaluate.py</code>). PSBMA repair demonstrated (0.0400 → 0.0352, −12 %).</div></li>
-<li class=""><span class="step-num">2</span><div><strong>Validation harness — next.</strong> <code>recover + rank</code> on existing data: perturb a known-good mapping → confirm R² drops → run the loop → confirm R² climbs back / recovers the accepted grouping. This is the core validation figure. The PSBMA rank demo is buildable now; library-polymer recovery lands when PS/PMMA AA data arrives.</div></li>
+<li class="done"><span class="step-num">✓</span><div><strong>Validation harness — done</strong> (<code>agent/validate.py</code>). <code>rank</code>: perturb a good mapping and show the objective degrades monotonically (random-scramble ladder + functional-group splits). <code>recover</code>: degrade → run the loop → climb back. Core validation figures at <code>derived/PSBMA20/{rank,recover}_validation.pdf</code>. Reruns on PS/PMMA library polymers for the gold-standard version once that AA data arrives.</div></li>
 <li class=""><span class="step-num">3</span><div><strong>Autonomous loop.</strong> Build <code>agent/loop.py</code> — the SWE-agent-style controller: curated verb action space + <code>evaluate</code> feedback + keep-best-valid + Martini rules as hard constraints (rejections fed back) + budget/plateau/<code>submit</code> termination + full trajectory logging; policy swappable (LLM now). Plus the Martini <strong>rule checker</strong> (#3) so &quot;rule-valid&quot; is <em>enforced</em>, not just observed.</div></li>
 <li class=""><span class="step-num">4</span><div><strong>Benchmark + ablation.</strong> Neutral library polymers (recover/rank) + charged 20-mers (repair); <strong>and the agentic-vs-deterministic ablation</strong> (LLM policy vs. greedy/random over the same verbs, same loop) to show the reasoning adds value. Per-molecule before/after per-term R² + scalar error vs. baselines.</div></li>
 <li class=""><span class="step-num">5</span><div><strong>Write-up.</strong> Method + benchmark; headline = simulation-free agentic QA/repair of Martini 3 polymer mappings.</div></li></ol>
@@ -172,6 +172,14 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
 <button data-filter="todo">Not started</button>
 <button data-filter="superseded">Superseded</button></div>
   <ul class="timeline">
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-24</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>#4 loop shipped + #3 recover/rank validation complete (all on <code>main</code>).</strong> <code>agent/loop.py</code> — SWE-agent controller + <code>LLMPolicy</code> (OpenAI-compatible via <code>requests</code>; <strong>OpenRouter</strong>, <code>OPENROUTER_API_KEY</code>; opus-4.8 / sonnet-4.6). Verbs tiled per-monomer; hydrogens auto-carry; hill-climb-from-best; Martini ≤4-heavy as a hard constraint (rejection fed back); best-of-N <code>--restarts</code> + <code>--temperature</code>. <strong>Key unlock: showing bead connectivity in the observation</strong> → opus <strong>autonomously rediscovers the W2 PSBMA repair</strong> (0.0417→0.0370, −11%, the C6/C9 coupled swap) best-of-3. Then <code>agent/validate.py</code> — the sim-free validation: <strong>rank</strong> (perturb a good mapping → objective degrades monotonically; scramble×{1,2,4,8} means 0.058/0.067/0.118/0.194; every functional-group split worse; 34/36 perturbations worse) and <strong>recover</strong> (degrade → run loop → mean <strong>107 % of the degradation gap closed</strong>, every split recovered, 3/4 over-recover to the W2 optimum, grouping 77–85 %). Figures: <code>derived/PSBMA20/{rank,recover}_validation.pdf</code>. 43 tests. Branches consolidated onto <code>main</code> (PRs #2–#4 merged); <code>.gitignore</code> drops loop/repair/validate run artifacts.</div>
+          </div>
+        </li>
+
         <li class="entry status-done" data-status="done">
           <div class="entry-date">2026-07-24</div>
           <div class="entry-body">
@@ -508,7 +516,6 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
 <li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#2 Process</strong>: cold-start fallback chain (BRICS + naive)</span></li>
 <li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#2 Process</strong>: Martini 3 rules table + lookup</span></li>
 <li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#3 Evaluation</strong>: Martini-rule checks (R/S/T sizing, Q-bead defaults)</span></li>
-<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#3 Evaluation</strong>: recover+rank validation harness (perturb known-good mapping → R² drops → loop recovers)</span></li>
 <li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#4 Loop</strong>: SWE-agent-style controller (<code>agent/loop.py</code>) — verb action space + evaluate feedback + keep-best-valid + budget/plateau/submit</span></li>
 <li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#4 Loop</strong>: deterministic-policy baseline + agentic-vs-deterministic ablation</span></li>
 <li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#4 Loop</strong>: MCP server + skill packaging (portability/dissemination layer)</span></li>
