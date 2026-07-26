@@ -68,8 +68,10 @@ def status_kind(status: str) -> str:
     s = status.lower()
     if "superseded" in s or "deprecated" in s:
         return "superseded"
-    if "resolved" in s or s.startswith("done"):
+    if "resolved" in s or s.startswith("done"):   # "done" wins even if a sub-part is deferred
         return "done"
+    if "deferred" in s or "out of scope" in s or "out of headline" in s:
+        return "deferred"
     if "not started" in s:
         return "todo"
     if "progress" in s or "partial" in s or "wip" in s:
@@ -84,7 +86,7 @@ def status_kind(status: str) -> str:
 KIND_LABEL = {
     "done": "Done", "wip": "In progress", "todo": "Not started",
     "contingency": "Contingency", "open": "Open", "superseded": "Superseded",
-    "info": "Info",
+    "deferred": "Deferred", "info": "Info",
 }
 
 
@@ -157,13 +159,18 @@ def render_cards(roadmap: list[tuple[str, str, str]]) -> str:
     cards = []
     for num, short, desc, emoji in INGREDIENTS:
         items = by_ing[num]
-        done = sum(1 for _d, k in items if k == "done")
-        total = len(items) or 1
-        pct = round(100 * done / total)
+        active = [(d, k) for d, k in items if k != "deferred"]   # deferred ≠ pending work
+        n_def = len(items) - len(active)
+        done = sum(1 for _d, k in active if k == "done")
+        total = len(active)
+        pct = round(100 * done / total) if total else 0
         li = "\n".join(
             f'<li class="{k}"><span class="dot {k}"></span>{inline_md(d)}</li>'
             for d, k in items
         ) or '<li class="info"><span class="dot info"></span>—</li>'
+        label = (f"{done}/{total} built" if total else "—")
+        if n_def:
+            label += f" · {n_def} deferred"
         cards.append(f"""
       <article class="card">
         <div class="card-head">
@@ -171,7 +178,7 @@ def render_cards(roadmap: list[tuple[str, str, str]]) -> str:
           <div><span class="ing-num">#{num}</span><h3>{short}</h3><p class="sub">{html.escape(desc)}</p></div>
         </div>
         <div class="progress"><div class="bar" style="width:{pct}%"></div></div>
-        <div class="progress-label">{done}/{len(items)} built</div>
+        <div class="progress-label">{label}</div>
         <ul class="components">{li}</ul>
       </article>""")
     return "\n".join(cards)
@@ -258,9 +265,11 @@ ul.components{list-style:none;margin:0;padding:0}
 ul.components li{display:flex;gap:8px;align-items:baseline;padding:4px 0;font-size:13px;border-top:1px solid var(--line);min-width:0;overflow-wrap:anywhere}
 ul.components li:first-child{border-top:none}
 ul.components li.done{color:var(--ink)} ul.components li.todo,ul.components li.contingency{color:var(--muted)}
+ul.components li.deferred{color:var(--muted);opacity:.7;font-style:italic}
 .dot{width:8px;height:8px;border-radius:99px;flex:none;position:relative;top:1px}
 .dot.done{background:var(--done)}.dot.wip{background:var(--wip)}.dot.todo{background:var(--todo)}
 .dot.open{background:var(--open)}.dot.contingency{background:var(--cont)}.dot.superseded{background:var(--sup)}.dot.info{background:var(--todo)}
+.dot.deferred{background:transparent;box-shadow:inset 0 0 0 1.5px var(--sup)}
 .badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:99px;
   border:1px solid transparent;white-space:nowrap}
 .badge.done{background:rgba(57,192,127,.15);color:var(--done);border-color:rgba(57,192,127,.35)}
@@ -270,6 +279,7 @@ ul.components li.done{color:var(--ink)} ul.components li.todo,ul.components li.c
 .badge.contingency{background:rgba(160,123,214,.15);color:var(--cont);border-color:rgba(160,123,214,.35)}
 .badge.superseded{background:rgba(90,98,116,.12);color:var(--sup);border-color:rgba(90,98,116,.3)}
 .badge.info{background:rgba(107,118,136,.15);color:var(--muted)}
+.badge.deferred{background:rgba(90,98,116,.1);color:var(--sup);border:1px dashed rgba(90,98,116,.45)}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .filters button{background:var(--panel);color:var(--muted);border:1px solid var(--line);
   border-radius:99px;padding:5px 13px;font-size:12.5px;cursor:pointer}

@@ -52,9 +52,11 @@ ul.components{list-style:none;margin:0;padding:0}
 ul.components li{display:flex;gap:8px;align-items:baseline;padding:4px 0;font-size:13px;border-top:1px solid var(--line);min-width:0;overflow-wrap:anywhere}
 ul.components li:first-child{border-top:none}
 ul.components li.done{color:var(--ink)} ul.components li.todo,ul.components li.contingency{color:var(--muted)}
+ul.components li.deferred{color:var(--muted);opacity:.7;font-style:italic}
 .dot{width:8px;height:8px;border-radius:99px;flex:none;position:relative;top:1px}
 .dot.done{background:var(--done)}.dot.wip{background:var(--wip)}.dot.todo{background:var(--todo)}
 .dot.open{background:var(--open)}.dot.contingency{background:var(--cont)}.dot.superseded{background:var(--sup)}.dot.info{background:var(--todo)}
+.dot.deferred{background:transparent;box-shadow:inset 0 0 0 1.5px var(--sup)}
 .badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:99px;
   border:1px solid transparent;white-space:nowrap}
 .badge.done{background:rgba(57,192,127,.15);color:var(--done);border-color:rgba(57,192,127,.35)}
@@ -64,6 +66,7 @@ ul.components li.done{color:var(--ink)} ul.components li.todo,ul.components li.c
 .badge.contingency{background:rgba(160,123,214,.15);color:var(--cont);border-color:rgba(160,123,214,.35)}
 .badge.superseded{background:rgba(90,98,116,.12);color:var(--sup);border-color:rgba(90,98,116,.3)}
 .badge.info{background:rgba(107,118,136,.15);color:var(--muted)}
+.badge.deferred{background:rgba(90,98,116,.1);color:var(--sup);border:1px dashed rgba(90,98,116,.45)}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .filters button{background:var(--panel);color:var(--muted);border:1px solid var(--line);
   border-radius:99px;padding:5px 13px;font-size:12.5px;cursor:pointer}
@@ -96,10 +99,10 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
     <p class="goal">an agent-runnable workflow that takes AA simulation data + chemical structure (SMILES / mol / pdb) and produces a validated Martini 3 mapping — atom-index → bead, bead type, bead size — plus a score report and provenance log. The mapping is the deliverable. We do not run CG simulations. Validation is in-the-loop: project the AA trajectory through the proposed mapping and score bead-bead distance and angle distributions.</p>
     <p class="pitch">an automated, <strong>simulation-free</strong> agent that reads <em>existing</em> AA polymer trajectories and produces + repairs Martini 3 mappings, using AA-projected bonded-distribution <strong>Gaussianity</strong> (R²) as the objective and Martini rules as constraints.</p>
     <div class="meta">
-      <span>Last update <b>2026-07-24</b></span>
-      <span><b>43</b> milestones logged</span>
-      <span><b>39</b> done</span>
-      <span><b>12</b> items outstanding</span>
+      <span>Last update <b>2026-07-26</b></span>
+      <span><b>44</b> milestones logged</span>
+      <span><b>40</b> done</span>
+      <span><b>10</b> items outstanding</span>
     </div>
   </header>
 
@@ -113,7 +116,7 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
         <div class="progress"><div class="bar" style="width:33%"></div></div>
         <div class="progress-label">1/3 built</div>
         <ul class="components"><li class="done"><span class="dot done"></span>AA reference data delivered</li>
-<li class="open"><span class="dot open"></span>more polymer AA data from collaborators</li>
+<li class="wip"><span class="dot wip"></span>8-polymer benchmark from Seonghan — PEO/PP/PMMA/PLA/PS/PVP/PSBMA/PNOMA @ N=20, 200 ns; systems built, sims ~3–5 days out</li>
 <li class="todo"><span class="dot todo"></span>sampling-sufficiency check</li></ul>
       </article>
 
@@ -123,11 +126,11 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
           <div><span class="ing-num">#2</span><h3>Process</h3><p class="sub">Initial AA→CG mapping</p></div>
         </div>
         <div class="progress"><div class="bar" style="width:0%"></div></div>
-        <div class="progress-label">0/4 built</div>
-        <ul class="components"><li class="todo"><span class="dot todo"></span>classifier + dispatcher</li>
-<li class="todo"><span class="dot todo"></span>Martini Mapper interactive-CLI wrapper</li>
-<li class="todo"><span class="dot todo"></span>cold-start fallback chain</li>
-<li class="todo"><span class="dot todo"></span>Martini 3 rules table + lookup</li></ul>
+        <div class="progress-label">— · 4 deferred</div>
+        <ul class="components"><li class="deferred"><span class="dot deferred"></span>classifier + dispatcher — small-molecule cold-start</li>
+<li class="deferred"><span class="dot deferred"></span>Martini Mapper interactive-CLI wrapper — small-molecule backend</li>
+<li class="deferred"><span class="dot deferred"></span>cold-start fallback chain — small-molecule</li>
+<li class="deferred"><span class="dot deferred"></span>Martini 3 fragment→type lookup — small-molecule cold-start</li></ul>
       </article>
 
       <article class="card">
@@ -148,12 +151,11 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
           <span class="emoji">🔁</span>
           <div><span class="ing-num">#4</span><h3>Loop</h3><p class="sub">Iterative repair</p></div>
         </div>
-        <div class="progress"><div class="bar" style="width:33%"></div></div>
-        <div class="progress-label">2/6 built</div>
+        <div class="progress"><div class="bar" style="width:60%"></div></div>
+        <div class="progress-label">3/5 built</div>
         <ul class="components"><li class="done"><span class="dot done"></span>agentic-vs-deterministic ablation</li>
 <li class="done"><span class="dot done"></span>mapping-edit verbs + Gaussianity-objective evaluator</li>
-<li class="todo"><span class="dot todo"></span>SWE-agent-style controller — verb action space + evaluate feedback + keep-best-valid + budget/plateau/submit</li>
-<li class="todo"><span class="dot todo"></span>deterministic-policy baseline + agentic-vs-deterministic ablation</li>
+<li class="done"><span class="dot done"></span>SWE-agent-style controller — verb action space + evaluate feedback + hill-climb-from-best + rules-as-constraints + budget/plateau/submit + best-of-N restarts + OpenRouter LLM policy</li>
 <li class="todo"><span class="dot todo"></span>MCP server + skill packaging</li>
 <li class="todo"><span class="dot todo"></span>portability demo — same tools via Pi / OpenCode / Claude Code</li></ul>
       </article></div>
@@ -173,6 +175,14 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
 <button data-filter="todo">Not started</button>
 <button data-filter="superseded">Superseded</button></div>
   <ul class="timeline">
+        <li class="entry status-done" data-status="done">
+          <div class="entry-date">2026-07-26</div>
+          <div class="entry-body">
+            <div class="entry-top"><span class="badge done">Done</span></div>
+            <div class="entry-text"><strong>Benchmark test set delivered (Seonghan) — <code>docs/TEST_SET.md</code>.</strong> 8 polymers on a graded 2×2×2 stress ladder (Easy/Medium/Hard/Extreme × Validation/Novel): PEO/PP (easy), PMMA/PLA (medium), PS/PVP (hard — rings), PSBMA/PNOMA (extreme — zwitterion). Validation cases (PEO, PMMA, PS) have Martini-3 references: <strong>PMMA is the clean library ground truth we needed for rank/recover</strong>, and <strong>PS&#x27;s published params are provisional (M2 bonded terms, under revision) → the flagship &quot;does the QA loop flag a questionable target?&quot; case</strong>. All-atom systems built (CHARMM-GUI Polymer Builder for the 6 standard ones; PSBMA/PNOMA in-house by Seonghan); N=20, single chain in an 8 nm water box; <strong>sims running, ~3–5 days to 200 ns</strong>. Unblocks Path-to-publication step 4 (benchmark) once the trajectories land.</div>
+          </div>
+        </li>
+
         <li class="entry status-done" data-status="done">
           <div class="entry-date">2026-07-24</div>
           <div class="entry-body">
@@ -518,17 +528,15 @@ footer{margin-top:44px;color:var(--muted);font-size:12px;border-top:1px solid va
         </li></ul>
 
   <h2 class="section">Roadmap — outstanding</h2>
-  <ul class="roadmap"><li class="status-open" data-status="open"><span class="badge open">Open</span> <span><strong>#1 Stage</strong>: more polymer AA data from collaborators (neutral library polymers + charged 20-mers)</span></li>
+  <ul class="roadmap"><li class="status-wip" data-status="wip"><span class="badge wip">In progress</span> <span><strong>#1 Stage</strong>: 8-polymer benchmark from Seonghan (<code>docs/TEST_SET.md</code>) — PEO/PP/PMMA/PLA/PS/PVP/PSBMA/PNOMA @ N=20, 200 ns; systems built, sims ~3–5 days out</span></li>
 <li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#1 Stage</strong>: sampling-sufficiency check</span></li>
-<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#2 Process</strong>: classifier + dispatcher (<code>classify.py</code>, <code>dispatch.py</code>)</span></li>
-<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#2 Process</strong>: Martini Mapper interactive-CLI wrapper</span></li>
-<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#2 Process</strong>: cold-start fallback chain (BRICS + naive)</span></li>
-<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#2 Process</strong>: Martini 3 rules table + lookup</span></li>
-<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#4 Loop</strong>: SWE-agent-style controller (<code>agent/loop.py</code>) — verb action space + evaluate feedback + keep-best-valid + budget/plateau/submit</span></li>
-<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#4 Loop</strong>: deterministic-policy baseline + agentic-vs-deterministic ablation</span></li>
+<li class="status-deferred" data-status="deferred"><span class="badge deferred">Deferred</span> <span><strong>#2 Process</strong>: classifier + dispatcher (<code>classify.py</code>, <code>dispatch.py</code>) — small-molecule cold-start</span></li>
+<li class="status-deferred" data-status="deferred"><span class="badge deferred">Deferred</span> <span><strong>#2 Process</strong>: Martini Mapper interactive-CLI wrapper — small-molecule backend</span></li>
+<li class="status-deferred" data-status="deferred"><span class="badge deferred">Deferred</span> <span><strong>#2 Process</strong>: cold-start fallback chain (BRICS + naive) — small-molecule</span></li>
+<li class="status-deferred" data-status="deferred"><span class="badge deferred">Deferred</span> <span><strong>#2 Process</strong>: Martini 3 fragment→type lookup — small-molecule cold-start</span></li>
 <li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#4 Loop</strong>: MCP server + skill packaging (portability/dissemination layer)</span></li>
 <li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>#4 Loop</strong>: portability demo — same tools via Pi / OpenCode / Claude Code</span></li>
-<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>Benchmark</strong>: library polymers (recover/rank) + charged 20-mers (repair)</span></li>
+<li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>Benchmark</strong>: run rank/recover/repair across the 8-polymer test set — PMMA (library ground truth), PS (catch the provisional model), + novel &amp; charged cases</span></li>
 <li class="status-todo" data-status="todo"><span class="badge todo">Not started</span> <span><strong>Write-up</strong>: sim-free agentic QA/repair of Martini 3 polymer mappings</span></li></ul>
 
   <footer>
