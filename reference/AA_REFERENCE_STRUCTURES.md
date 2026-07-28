@@ -34,11 +34,32 @@ across periodic boundaries via a bond-graph unwrap using the `!NBOND` list from
 `step3_input.psf`, then shifted so its centre of geometry sits inside the primary
 cell. Bond lengths were verified to stay within 1.1–1.7 Å in every frame.
 
-The matching 200 ns water-free trajectories (2000 frames, `.xtc`, ~15 MB total) are
-on T9 at `backup_research_onrl/systems/combined_nowat/`, alongside the converter
-(`dcd2gmx.py`) and a README. They are kept local, consistent with how
-`PSBMA_20mer_no_water_skip10.xtc` is handled in `.gitignore`. Pull them in when
-fitting bonded distributions — the single frames here are not sufficient for that.
+## Trajectories
+
+The full 200 ns water-free trajectories are committed alongside each structure as
+multi-frame `.gro`, since the single frames above are not sufficient for fitting
+bonded distributions:
+
+| File | Frames | Spacing | Size |
+|---|---|---|---|
+| `pp/pp_no_water_1-200ns.gro` | 2000 | 100 ps | 16 MB |
+| `pla/pla_no_water_1-200ns.gro` | 2000 | 100 ps | 16 MB |
+| `ps/ps_no_water_1-200ns.gro` | 2000 | 100 ps | 28 MB |
+| `pvp/pvp_no_water_1-200ns.gro` | 2000 | 100 ps | 29 MB |
+| `pmma/pmma_no_water_1-200ns.gro` | 2000 | 100 ps | 26 MB |
+
+Frame *i* is at *i* x 100 ps, so the span is 100 ps -> 200000 ps. Coordinate
+precision is 0.001 nm.
+
+> **Note on format choice.** These total ~115 MB; the identical data as `.xtc` is
+> ~15 MB, an 8x saving at the same 0.001 nm precision, and the repo's `.gitignore`
+> otherwise keeps bulk MD trajectories out of git (see its "Bulk MD trajectories"
+> section and `PSBMA_20mer_no_water_skip10.xtc`). The `.gro` form was committed by
+> explicit request. If repo size becomes a problem the `.xtc` equivalents are on T9
+> at `backup_research_onrl/systems/combined_nowat/` and are drop-in replacements --
+> `gmx` and MDAnalysis read either.
+
+The converter (`dcd2gmx.py`) and its own README are on T9 in that same directory.
 
 ## Notes for the mapping pipeline
 
